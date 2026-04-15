@@ -147,7 +147,7 @@ export default function DecouvrirPage() {
 
               {/* Text */}
               <div className="w-full md:w-1/2 flex flex-col gap-5">
-                <h2 className="font-heading text-3xl md:text-4xl text-tulipe-bordeaux">
+                <h2 className="font-heading text-3xl md:text-4xl text-tulipe-royal">
                   {section.title}
                 </h2>
                 <p className="font-body text-gray-700 leading-relaxed">
@@ -170,7 +170,7 @@ export default function DecouvrirPage() {
       ))}
 
       {/* CTA */}
-      <section className="bg-tulipe-bordeaux py-12 px-4 text-center">
+      <section className="bg-tulipe-royal py-12 px-4 text-center">
         <p className="font-heading text-2xl text-white mb-2">
           Waldighoffen — au cœur du Sundgau
         </p>

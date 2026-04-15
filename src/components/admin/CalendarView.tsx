@@ -242,7 +242,7 @@ export default function CalendarView() {
           >
             <ChevronLeft size={18} />
           </button>
-          <h2 className="text-lg font-semibold text-gray-900 min-w-[180px] text-center">
+          <h2 className="text-lg font-semibold text-tulipe-royal min-w-[180px] text-center">
             {MONTH_NAMES[month]} {year}
           </h2>
           <button
@@ -420,7 +420,7 @@ export default function CalendarView() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-gray-900">Réservation</h3>
+              <h3 className="font-semibold text-tulipe-royal">Réservation</h3>
               <button
                 onClick={() => setSelectedReservation(null)}
                 className="p-1 rounded hover:bg-gray-100"
@@ -486,7 +486,9 @@ export default function CalendarView() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-gray-900">Bloquer des dates</h3>
+              <h3 className="font-semibold text-tulipe-royal">
+                Bloquer des dates
+              </h3>
               <button
                 onClick={() => setShowBlockModal(false)}
                 className="p-1 rounded hover:bg-gray-100"

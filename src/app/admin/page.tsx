@@ -137,7 +137,7 @@ export default async function AdminDashboardPage() {
     <div className="space-y-8 max-w-5xl mx-auto">
       {/* Header card */}
       <div className="bg-white rounded-2xl px-8 py-7 shadow-sm border border-gray-100">
-        <h1 className="text-3xl font-heading font-bold text-tulipe-bordeaux">
+        <h1 className="text-3xl font-heading font-bold text-tulipe-royal">
           Bonjour !
         </h1>
         <p className="text-lg text-gray-500 mt-1 capitalize">{dateJour}</p>
@@ -174,7 +174,7 @@ export default async function AdminDashboardPage() {
       {/* Recent reservations */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100">
-          <h2 className="font-heading text-2xl font-bold text-tulipe-bordeaux">
+          <h2 className="font-heading text-2xl font-bold text-tulipe-royal">
             Dernières réservations
           </h2>
           <Link
@@ -221,7 +221,7 @@ export default async function AdminDashboardPage() {
                   className="bg-[#FAF8F5] rounded-2xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4 border border-gray-100"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-xl font-bold text-gray-900 truncate">
+                    <p className="text-xl font-bold text-tulipe-royal truncate">
                       {r.guestName}
                     </p>
                     <p className="text-base text-gray-600 mt-1">

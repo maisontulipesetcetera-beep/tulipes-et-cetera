@@ -114,7 +114,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-bordeaux py-16 px-4 text-center">
+      <section className="bg-tulipe-royal py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Les Chambres
         </h1>
@@ -144,7 +144,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
 
               {/* Content */}
               <div className="md:w-3/5 p-8 flex flex-col gap-4 justify-center">
-                <h2 className="font-heading text-2xl md:text-3xl text-tulipe-bordeaux">
+                <h2 className="font-heading text-2xl md:text-3xl text-tulipe-royal">
                   {chambre.name}
                 </h2>
                 <p className="font-body text-gray-700 leading-relaxed">
@@ -183,7 +183,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
         </p>
         <Link
           href={`/${lang}/reservation`}
-          className="inline-block px-8 py-3 bg-tulipe-bordeaux hover:bg-tulipe-bordeaux/80 text-white font-body font-semibold rounded-[10px] transition-colors"
+          className="inline-block px-8 py-3 bg-tulipe-royal hover:bg-tulipe-royal/80 text-white font-body font-semibold rounded-[10px] transition-colors"
         >
           Voir les tarifs & disponibilités
         </Link>

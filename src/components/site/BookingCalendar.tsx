@@ -117,9 +117,9 @@ export default function BookingCalendar({
           className="p-2 rounded-lg hover:bg-tulipe-green/10 disabled:opacity-30 disabled:pointer-events-none transition-colors"
           aria-label="Mois précédent"
         >
-          <ChevronLeft className="size-5 text-tulipe-bordeaux" />
+          <ChevronLeft className="size-5 text-tulipe-royal" />
         </button>
-        <span className="font-heading text-lg text-tulipe-bordeaux capitalize">
+        <span className="font-heading text-lg text-tulipe-royal capitalize">
           {format(currentMonth, "MMMM yyyy", { locale: fr })}
         </span>
         <button
@@ -127,7 +127,7 @@ export default function BookingCalendar({
           className="p-2 rounded-lg hover:bg-tulipe-green/10 transition-colors"
           aria-label="Mois suivant"
         >
-          <ChevronRight className="size-5 text-tulipe-bordeaux" />
+          <ChevronRight className="size-5 text-tulipe-royal" />
         </button>
       </div>
 
@@ -177,7 +177,7 @@ export default function BookingCalendar({
                   inSelection &&
                     !isStart &&
                     !isEnd &&
-                    "bg-tulipe-green/20 text-tulipe-bordeaux rounded-none",
+                    "bg-tulipe-green/20 text-tulipe-royal rounded-none",
                   (isStart || isEnd) &&
                     "bg-tulipe-green text-white font-semibold",
                   isStart && "rounded-l-lg",

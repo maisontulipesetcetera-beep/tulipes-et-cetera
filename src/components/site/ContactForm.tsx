@@ -79,7 +79,7 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div className="rounded-2xl bg-tulipe-green/10 border border-tulipe-green/30 p-8 text-center">
-        <p className="font-heading text-xl text-tulipe-bordeaux mb-2">
+        <p className="font-heading text-xl text-tulipe-royal mb-2">
           Message envoyé !
         </p>
         <p className="font-body text-gray-600">
@@ -168,7 +168,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-3 px-6 bg-tulipe-bordeaux hover:bg-tulipe-bordeaux/90 disabled:opacity-60 disabled:cursor-not-allowed text-white font-body font-semibold rounded-xl transition-colors"
+        className="w-full py-3 px-6 bg-tulipe-green hover:bg-tulipe-green-dark disabled:opacity-60 disabled:cursor-not-allowed text-white font-body font-semibold rounded-xl transition-colors"
       >
         {status === "loading" ? "Envoi en cours…" : "Envoyer"}
       </button>

@@ -432,7 +432,7 @@ export default function SettingsForm() {
           <button
             type="submit"
             disabled={changingPw}
-            className="flex items-center gap-2 px-4 py-2 bg-tulipe-bordeaux text-white text-sm rounded-lg hover:opacity-90 disabled:opacity-50 transition-opacity"
+            className="flex items-center gap-2 px-4 py-2 bg-tulipe-green hover:bg-tulipe-green-dark text-white text-sm rounded-lg disabled:opacity-50 transition-colors"
           >
             {changingPw && <Loader2 size={14} className="animate-spin" />}
             Modifier le mot de passe

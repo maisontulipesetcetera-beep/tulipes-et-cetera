@@ -45,7 +45,7 @@ export default function BlogPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-bordeaux py-16 px-4 text-center">
+      <section className="bg-tulipe-royal py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Le Blog
         </h1>
@@ -80,7 +80,7 @@ export default function BlogPage() {
                   <span>·</span>
                   <span>{article.readTime} de lecture</span>
                 </div>
-                <h2 className="font-heading text-xl md:text-2xl text-tulipe-bordeaux">
+                <h2 className="font-heading text-xl md:text-2xl text-tulipe-royal">
                   {article.title}
                 </h2>
                 <p className="font-body text-gray-600 text-sm leading-relaxed">
@@ -102,7 +102,7 @@ export default function BlogPage() {
 
       {/* Newsletter placeholder */}
       <section className="py-12 px-4 bg-tulipe-beige text-center">
-        <h2 className="font-heading text-2xl text-tulipe-bordeaux mb-3">
+        <h2 className="font-heading text-2xl text-tulipe-royal mb-3">
           Restez informé
         </h2>
         <p className="font-body text-gray-600 mb-6">

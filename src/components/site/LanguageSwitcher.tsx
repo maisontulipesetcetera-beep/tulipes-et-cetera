@@ -37,7 +37,7 @@ export default function LanguageSwitcher({
           className={`flex items-center gap-1 px-2 py-1 text-sm rounded transition-colors ${
             locale === currentLocale
               ? "bg-tulipe-green text-white font-semibold"
-              : "text-gray-600 hover:text-tulipe-bordeaux hover:bg-tulipe-beige"
+              : "text-gray-600 hover:text-tulipe-royal hover:bg-tulipe-beige"
           }`}
           aria-label={`Switch to ${localeNames[locale]}`}
           aria-current={locale === currentLocale ? "true" : undefined}

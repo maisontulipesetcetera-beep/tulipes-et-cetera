@@ -27,7 +27,7 @@ export default function AdminLayout({
           {/* TopBar desktop */}
           <header className="hidden lg:flex items-center justify-between px-8 py-4 bg-white border-b border-gray-100 shadow-sm">
             <div className="flex items-center gap-3">
-              <span className="font-heading text-xl font-bold text-tulipe-bordeaux">
+              <span className="font-heading text-xl font-bold text-tulipe-royal">
                 Mon espace
               </span>
             </div>
@@ -42,7 +42,7 @@ export default function AdminLayout({
 
           {/* TopBar mobile */}
           <header className="lg:hidden flex items-center justify-between px-4 py-4 bg-white border-b border-gray-100 shadow-sm">
-            <span className="font-heading text-lg font-bold text-tulipe-bordeaux">
+            <span className="font-heading text-lg font-bold text-tulipe-royal">
               Mon espace
             </span>
             <a

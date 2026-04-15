@@ -128,7 +128,7 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Mini gallery */}
       <section className="bg-tulipe-beige py-20 md:py-28 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-5xl text-tulipe-bordeaux text-center mb-12">
+          <h2 className="font-heading text-3xl md:text-5xl text-tulipe-royal text-center mb-12">
             Quelques instants chez nous
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -153,7 +153,7 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Testimonials */}
       <section className="bg-tulipe-cream py-20 md:py-28 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-5xl text-tulipe-bordeaux text-center mb-12">
+          <h2 className="font-heading text-3xl md:text-5xl text-tulipe-royal text-center mb-12">
             Ce que disent nos hôtes
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -165,7 +165,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 <p className="font-body text-gray-700 italic text-xl leading-relaxed">
                   &ldquo;{t.text}&rdquo; 🌷
                 </p>
-                <footer className="font-body text-tulipe-bordeaux font-semibold text-sm">
+                <footer className="font-body text-tulipe-royal font-semibold text-sm">
                   — {t.author}
                 </footer>
               </blockquote>
@@ -175,7 +175,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* CTA final */}
-      <section className="bg-tulipe-bordeaux py-20 md:py-28 px-4 text-center">
+      <section className="bg-tulipe-royal py-20 md:py-28 px-4 text-center">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-6">
           <h2 className="font-heading text-3xl md:text-5xl text-white">
             Prêt pour une escapade en Alsace ?

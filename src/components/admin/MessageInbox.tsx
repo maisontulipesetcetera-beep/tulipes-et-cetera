@@ -180,7 +180,7 @@ export default function MessageInbox() {
           <div className="px-7 py-6 border-b border-gray-100 flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-3 mb-1">
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-tulipe-royal">
                   {selected.name}
                 </h2>
                 <span
@@ -229,7 +229,7 @@ export default function MessageInbox() {
             {/* Formulaire de réponse */}
             {replying ? (
               <form onSubmit={sendReply} className="space-y-5">
-                <p className="text-xl font-bold text-tulipe-bordeaux">
+                <p className="text-xl font-bold text-tulipe-royal">
                   📧 Écrire une réponse
                 </p>
 
@@ -319,7 +319,7 @@ export default function MessageInbox() {
                   setError("");
                   setSuccess("");
                 }}
-                className="flex items-center gap-3 px-8 py-4 bg-tulipe-bordeaux text-white text-xl font-bold rounded-xl hover:bg-tulipe-bordeaux/90 transition-colors shadow-sm min-h-[60px]"
+                className="flex items-center gap-3 px-8 py-4 bg-tulipe-green text-white text-xl font-bold rounded-xl hover:bg-tulipe-green-dark transition-colors shadow-sm min-h-[60px]"
               >
                 📧 Répondre à ce message
               </button>
@@ -336,7 +336,7 @@ export default function MessageInbox() {
       {/* En-tête */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-7 py-5 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
-          <h2 className="text-2xl font-bold text-tulipe-bordeaux">
+          <h2 className="text-2xl font-bold text-tulipe-royal">
             Boîte de réception
           </h2>
           {unreadCount > 0 && (
@@ -373,7 +373,7 @@ export default function MessageInbox() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-3 mb-1">
-                      <p className="text-xl font-bold text-gray-900">
+                      <p className="text-xl font-bold text-tulipe-royal">
                         {contact.name}
                       </p>
                       <span

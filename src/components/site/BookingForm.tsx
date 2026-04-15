@@ -107,7 +107,7 @@ export default function BookingForm() {
   if (status === "success") {
     return (
       <div className="rounded-2xl bg-tulipe-green/10 border border-tulipe-green/30 p-8 text-center">
-        <p className="font-heading text-xl text-tulipe-bordeaux mb-2">
+        <p className="font-heading text-xl text-tulipe-royal mb-2">
           Demande envoyée !
         </p>
         <p className="font-body text-gray-600">

@@ -56,7 +56,7 @@ export default function ReservationsPage() {
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* En-tête */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-sm flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-3xl font-heading font-bold text-tulipe-bordeaux">
+        <h1 className="text-3xl font-heading font-bold text-tulipe-royal">
           📋 Réservations
         </h1>
         <button

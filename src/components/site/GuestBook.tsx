@@ -106,7 +106,7 @@ function FormPage({ onSuccess }: FormPageProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="mt-auto w-full py-2.5 bg-[#5C1A1A] hover:bg-[#7a2323] text-[#f5e6c8] font-semibold rounded transition-colors disabled:opacity-60 cursor-pointer"
+          className="mt-auto w-full py-2.5 bg-tulipe-royal hover:bg-tulipe-royal-dark text-white font-semibold rounded transition-colors disabled:opacity-60 cursor-pointer"
           style={{ fontFamily: "'Caveat', cursive", fontSize: "18px" }}
         >
           {submitting ? "Envoi..." : "Signer le livre d'or 🌷"}
@@ -135,7 +135,7 @@ function EntryCard({ entry }: { entry: GuestbookEntry }) {
       </p>
       <div className="mt-auto pt-2 border-t border-[#e8dcc8]/50">
         <p
-          className="text-[#7a2323] font-semibold text-base"
+          className="text-tulipe-royal font-semibold text-base"
           style={{ fontFamily: "'Caveat', cursive" }}
         >
           — {entry.author}
@@ -526,7 +526,7 @@ export default function GuestBook() {
         <button
           onClick={goPrev}
           disabled={currentPage === 0 || isAnimating}
-          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-[#5C1A1A] hover:bg-[#5C1A1A] hover:text-[#f5e6c8] transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-tulipe-royal hover:bg-tulipe-royal hover:text-white transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
           aria-label="Page précédente"
         >
           ← Précédent
@@ -539,7 +539,7 @@ export default function GuestBook() {
               key={i}
               className={`rounded-full transition-all ${
                 i === currentPage
-                  ? "w-2.5 h-2.5 bg-[#5C1A1A]"
+                  ? "w-2.5 h-2.5 bg-tulipe-royal"
                   : "w-1.5 h-1.5 bg-[#c5a55a]/35"
               }`}
             />
@@ -549,7 +549,7 @@ export default function GuestBook() {
         <button
           onClick={goNext}
           disabled={currentPage === lastPage || isAnimating}
-          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-[#5C1A1A] hover:bg-[#5C1A1A] hover:text-[#f5e6c8] transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-tulipe-royal hover:bg-tulipe-royal hover:text-white transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
           aria-label="Page suivante"
         >
           Suivant →
