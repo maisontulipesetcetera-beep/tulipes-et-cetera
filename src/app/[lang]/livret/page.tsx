@@ -1,3 +1,5 @@
+const LIVRET_URL = "https://tulipes-et-cetera.fr/fr/livret";
+
 export default function LivretPage() {
   return (
     <>
@@ -162,6 +164,27 @@ export default function LivretPage() {
             </a>
             <p className="font-body text-xs text-gray-400">
               Nous sommes disponibles de 8h à 21h
+            </p>
+          </div>
+
+          {/* QR Code — à imprimer */}
+          <div className="flex flex-col gap-4 p-6 rounded-xl bg-tulipe-cream border border-tulipe-beige text-center items-center">
+            <h2 className="font-heading text-xl text-tulipe-bordeaux flex items-center gap-2">
+              <span>📲</span> Accès rapide au livret
+            </h2>
+            <p className="font-body text-sm text-gray-500">
+              Scannez ce QR code pour accéder au livret depuis votre smartphone
+            </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/api/qrcode?url=${encodeURIComponent(LIVRET_URL)}&size=220`}
+              alt="QR code vers le livret d'accueil"
+              width={220}
+              height={220}
+              className="rounded-lg border border-tulipe-beige shadow-sm"
+            />
+            <p className="font-body text-xs text-gray-400">
+              tulipes-et-cetera.fr/fr/livret
             </p>
           </div>
         </div>
