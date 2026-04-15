@@ -31,7 +31,7 @@ async function main() {
     update: {},
     create: {
       id: "main",
-      propertyName: "Tulipes Et Cetera",
+      propertyName: "Tulipes EtCetera",
       address: "2 Rue des Tulipes, 68640 Waldighoffen",
       phone: "+33389400290",
       email: "",

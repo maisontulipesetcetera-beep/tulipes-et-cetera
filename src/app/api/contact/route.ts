@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     if (ownerEmail) {
       await sendEmail({
         to: ownerEmail,
-        subject: `Nouveau message de ${data.name} — Tulipes Et Cetera`,
+        subject: `Nouveau message de ${data.name} — Tulipes EtCetera`,
         html: `
           <h2>Nouveau message de contact</h2>
           <p><strong>Nom :</strong> ${data.name}</p>

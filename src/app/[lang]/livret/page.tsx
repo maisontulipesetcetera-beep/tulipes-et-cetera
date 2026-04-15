@@ -9,7 +9,7 @@ export default function LivretPage() {
           Livret d&apos;accueil
         </h1>
         <p className="font-body text-gray-500 text-sm">
-          Tulipes Et Cetera — Waldighoffen
+          Tulipes EtCetera — Waldighoffen
         </p>
       </section>
 

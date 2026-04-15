@@ -318,7 +318,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
             <div className="absolute inset-0 z-10">
               <Image
                 src="/images/hero-facade.jpg"
-                alt="Tulipes Et Cetera — chargement"
+                alt="Tulipes EtCetera — chargement"
                 fill
                 className="object-cover"
                 priority
@@ -367,7 +367,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-heading text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05]"
               style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
             >
-              Tulipes Et Cetera
+              Tulipes EtCetera
             </h1>
           </div>
 
@@ -503,7 +503,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
         <section className="relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden">
           <Image
             src="/images/hero-facade.jpg"
-            alt="Tulipes Et Cetera — Cottage de Charme en Alsace"
+            alt="Tulipes EtCetera — Cottage de Charme en Alsace"
             fill
             className="object-cover"
             priority
@@ -520,7 +520,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-heading text-5xl text-white leading-tight"
               style={{ textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}
             >
-              Tulipes Et Cetera
+              Tulipes EtCetera
             </h1>
           </div>
         </section>

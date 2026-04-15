@@ -100,7 +100,7 @@ model GuestbookEntry {
 
 model Settings {
   id                 String   @id @default("main")
-  propertyName       String   @default("Tulipes Et Cetera")
+  propertyName       String   @default("Tulipes EtCetera")
   address            String   @default("2 Rue des Tulipes, 68640 Waldighoffen")
   phone              String   @default("+33389400290")
   email              String   @default("")

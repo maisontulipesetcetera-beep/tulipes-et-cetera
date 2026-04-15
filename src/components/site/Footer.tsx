@@ -22,13 +22,13 @@ export default function Footer({ lang }: FooterProps) {
             <div className="flex items-center gap-3 mb-2">
               <Image
                 src="/images/logo.jpg"
-                alt="Tulipes Et Cetera"
+                alt="Tulipes EtCetera"
                 height={40}
                 width={40}
                 className="rounded-md object-cover"
               />
               <span className="font-heading text-base text-white">
-                Tulipes Et Cetera
+                Tulipes EtCetera
               </span>
             </div>
             <p className="text-sm text-white/80 font-body leading-relaxed">
@@ -91,7 +91,7 @@ export default function Footer({ lang }: FooterProps) {
 
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 font-body">
-          <p>© 2026 Tulipes Et Cetera — {t("footer.rights")}</p>
+          <p>© 2026 Tulipes EtCetera — {t("footer.rights")}</p>
           <div className="flex items-center gap-4">
             <Link
               href={`/${lang}/mentions-legales`}

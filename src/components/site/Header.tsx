@@ -71,7 +71,7 @@ export default function Header({ lang }: HeaderProps) {
           <Link href={`/${lang}`} className="flex items-center gap-3 shrink-0">
             <Image
               src="/images/logo.jpg"
-              alt="Tulipes Et Cetera"
+              alt="Tulipes EtCetera"
               height={56}
               width={56}
               className="rounded-md object-cover h-12 w-12 md:h-14 md:w-14"

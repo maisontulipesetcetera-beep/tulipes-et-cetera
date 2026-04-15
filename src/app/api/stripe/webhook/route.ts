@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       // Send confirmation email to guest
       await sendEmail({
         to: reservation.guestEmail,
-        subject: "Confirmation de réservation — Tulipes Et Cetera",
+        subject: "Confirmation de réservation — Tulipes EtCetera",
         html: `
           <h2>Votre réservation est confirmée !</h2>
           <p>Bonjour ${reservation.guestName},</p>
@@ -61,8 +61,8 @@ export async function POST(req: NextRequest) {
             <li><strong>Départ :</strong> ${reservation.checkOut.toLocaleDateString("fr-FR")}</li>
             <li><strong>Voyageurs :</strong> ${reservation.guests}</li>
           </ul>
-          <p>Nous nous réjouissons de vous accueillir à Tulipes Et Cetera !</p>
-          <p>À bientôt,<br>L'équipe Tulipes Et Cetera</p>
+          <p>Nous nous réjouissons de vous accueillir à Tulipes EtCetera !</p>
+          <p>À bientôt,<br>L'équipe Tulipes EtCetera</p>
         `,
       }).catch(console.error);
     }

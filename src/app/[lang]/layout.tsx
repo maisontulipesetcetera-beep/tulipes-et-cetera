@@ -37,7 +37,7 @@ export async function generateMetadata({
   const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
 
   return {
-    title: "Tulipes Et Cetera — Cottage de Charme en Alsace",
+    title: "Tulipes EtCetera — Cottage de Charme en Alsace",
     description: descriptionByLocale[locale],
   };
 }
@@ -49,7 +49,7 @@ export function generateStaticParams() {
 const schemaOrgLodgingBusiness = {
   "@context": "https://schema.org",
   "@type": "LodgingBusiness",
-  name: "Tulipes Et Cetera",
+  name: "Tulipes EtCetera",
   description: "Cottage de Charme en Alsace",
   address: {
     "@type": "PostalAddress",

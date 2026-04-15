@@ -15,7 +15,7 @@ export default function MentionsLegalesPage() {
               Éditeur du site
             </h2>
             <p className="leading-relaxed">
-              <strong>Tulipes Et Cetera</strong>
+              <strong>Tulipes EtCetera</strong>
               <br />
               Cottage de Charme
               <br />
@@ -58,7 +58,7 @@ export default function MentionsLegalesPage() {
             <p className="leading-relaxed">
               L&apos;ensemble du contenu de ce site (textes, images,
               photographies, illustrations) est la propriété exclusive de
-              Tulipes Et Cetera, sauf mention contraire. Toute reproduction,
+              Tulipes EtCetera, sauf mention contraire. Toute reproduction,
               représentation ou diffusion, en tout ou partie, est interdite sans
               autorisation préalable écrite de l&apos;éditeur.
             </p>
@@ -124,10 +124,10 @@ export default function MentionsLegalesPage() {
               Limitation de responsabilité
             </h2>
             <p className="leading-relaxed">
-              Tulipes Et Cetera s&apos;efforce d&apos;assurer l&apos;exactitude
+              Tulipes EtCetera s&apos;efforce d&apos;assurer l&apos;exactitude
               et la mise à jour des informations diffusées sur ce site, et se
               réserve le droit de corriger le contenu à tout moment sans
-              préavis. Tulipes Et Cetera décline toute responsabilité pour les
+              préavis. Tulipes EtCetera décline toute responsabilité pour les
               dommages directs ou indirects pouvant résulter de l&apos;accès au
               site ou de l&apos;utilisation des informations qu&apos;il
               contient.

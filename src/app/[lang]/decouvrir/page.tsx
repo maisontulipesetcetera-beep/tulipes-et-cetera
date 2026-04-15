@@ -6,17 +6,17 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Découvrir le Sundgau — Tulipes Et Cetera",
+    title: "Découvrir le Sundgau — Tulipes EtCetera",
     description:
       "Explorez l'Alsace du Sud : villages, gastronomie, randonnées, Ferrette, carpes frites.",
   },
   de: {
-    title: "Den Sundgau entdecken — Tulipes Et Cetera",
+    title: "Den Sundgau entdecken — Tulipes EtCetera",
     description:
       "Entdecken Sie das südliche Elsass: Dörfer, Gastronomie, Wanderwege, Ferrette, Karpfen.",
   },
   en: {
-    title: "Discover the Sundgau — Tulipes Et Cetera",
+    title: "Discover the Sundgau — Tulipes EtCetera",
     description:
       "Explore southern Alsace: villages, gastronomy, hiking, Ferrette, fried carp.",
   },

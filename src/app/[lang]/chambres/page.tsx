@@ -7,17 +7,17 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Nos Chambres — Tulipes Et Cetera",
+    title: "Nos Chambres — Tulipes EtCetera",
     description:
       "3 chambres de charme avec literie haut de gamme, salle de bains balnéo. Chambre Tulipe, Lavande et Cigogne.",
   },
   de: {
-    title: "Unsere Zimmer — Tulipes Et Cetera",
+    title: "Unsere Zimmer — Tulipes EtCetera",
     description:
       "3 charmante Zimmer mit hochwertiger Bettwäsche und Whirlpool-Badezimmer. Zimmer Tulpe, Lavendel und Storch.",
   },
   en: {
-    title: "Our Rooms — Tulipes Et Cetera",
+    title: "Our Rooms — Tulipes EtCetera",
     description:
       "3 charming rooms with premium bedding and spa bathroom. Tulipe, Lavande and Cigogne rooms.",
   },

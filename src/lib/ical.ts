@@ -99,7 +99,7 @@ export function generateIcal(
   const lines: string[] = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Tulipes Et Cetera//FR",
+    "PRODID:-//Tulipes EtCetera//FR",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
   ];

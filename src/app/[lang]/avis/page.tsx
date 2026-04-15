@@ -6,17 +6,17 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Avis clients — Tulipes Et Cetera",
+    title: "Avis clients — Tulipes EtCetera",
     description:
       "Note 9.9/10 sur Booking. Découvrez les témoignages de nos hôtes.",
   },
   de: {
-    title: "Gästebewertungen — Tulipes Et Cetera",
+    title: "Gästebewertungen — Tulipes EtCetera",
     description:
       "Bewertung 9,9/10 auf Booking. Lesen Sie die Erfahrungsberichte unserer Gäste.",
   },
   en: {
-    title: "Guest Reviews — Tulipes Et Cetera",
+    title: "Guest Reviews — Tulipes EtCetera",
     description: "Rated 9.9/10 on Booking. Read our guests' testimonials.",
   },
 };
@@ -74,7 +74,7 @@ const reviewsSchema = {
         "La réalité dépasse ce qu'on attendait. Un petit quelque chose indéfinissable qui fait qu'on se sent vraiment chez soi, dans un cadre magnifique.",
       itemReviewed: {
         "@type": "LodgingBusiness",
-        name: "Tulipes Et Cetera",
+        name: "Tulipes EtCetera",
       },
     },
     {
@@ -90,7 +90,7 @@ const reviewsSchema = {
         "Endroit magnifique, literie exceptionnelle, accueil au top ! Nous reviendrons sans hésiter. Le jardin est un vrai paradis.",
       itemReviewed: {
         "@type": "LodgingBusiness",
-        name: "Tulipes Et Cetera",
+        name: "Tulipes EtCetera",
       },
     },
     {
@@ -106,7 +106,7 @@ const reviewsSchema = {
         "On y est restés une semaine alors qu'on avait prévu 2 nuits. Impossible de partir ! Le calme, la nature, la maison… tout est parfait.",
       itemReviewed: {
         "@type": "LodgingBusiness",
-        name: "Tulipes Et Cetera",
+        name: "Tulipes EtCetera",
       },
     },
     {
@@ -122,7 +122,7 @@ const reviewsSchema = {
         "Le petit-déjeuner est incroyable, tout est frais et local. Le kougelhopf maison est à tomber. Mention spéciale pour l'accueil chaleureux.",
       itemReviewed: {
         "@type": "LodgingBusiness",
-        name: "Tulipes Et Cetera",
+        name: "Tulipes EtCetera",
       },
     },
     {
@@ -138,7 +138,7 @@ const reviewsSchema = {
         "Un vrai Home Sweet Home. On reviendra ! La baignoire balnéo et le brasero dans le jardin, on ne demande rien de plus.",
       itemReviewed: {
         "@type": "LodgingBusiness",
-        name: "Tulipes Et Cetera",
+        name: "Tulipes EtCetera",
       },
     },
   ],
