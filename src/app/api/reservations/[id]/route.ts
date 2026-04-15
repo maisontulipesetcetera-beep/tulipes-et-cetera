@@ -125,12 +125,31 @@ export async function PATCH(
             <p>— L'équipe Tulipes Et Cetera</p>
           `,
         });
-      } catch (emailErr) {
+      } catch (emailErr: any) {
         console.error(
-          "[PATCH /api/reservations/[id]] Stripe/email error",
-          emailErr,
+          "[PATCH /api/reservations/[id]] Stripe/email error:",
+          emailErr?.message,
+          emailErr?.type,
+          emailErr?.raw?.message,
         );
-        // Don't fail the whole request — reservation is already confirmed
+        // Stripe failed but still send confirmation email without payment link
+        try {
+          await sendEmail({
+            to: reservation.guestEmail,
+            subject: "Votre réservation est confirmée — Tulipes Et Cetera",
+            html: `
+              <h2>Bonne nouvelle, votre réservation est confirmée !</h2>
+              <p>Bonjour ${reservation.guestName},</p>
+              <p>Nous avons le plaisir de confirmer votre séjour chez <strong>Tulipes Et Cetera</strong>.</p>
+              <p><strong>Montant du séjour :</strong> ${((reservation.totalAmount ?? 0) / 100).toFixed(2)} €</p>
+              <p>Nous vous enverrons le lien de paiement séparément.</p>
+              <p>À très bientôt en Alsace ! 🌷</p>
+              <p>— L'équipe Tulipes Et Cetera</p>
+            `,
+          });
+        } catch (e2) {
+          console.error("[PATCH] Fallback email also failed:", e2);
+        }
       }
     }
 

@@ -43,9 +43,25 @@ export async function POST(req: NextRequest) {
       totalAmount: reservation.totalAmount,
     });
 
+    if (!session?.url) {
+      console.error("[POST /api/stripe/checkout] No session URL returned");
+      return NextResponse.json(
+        { error: "Stripe non configuré" },
+        { status: 500 },
+      );
+    }
+
     return NextResponse.json({ url: session.url });
-  } catch (err) {
-    console.error("[POST /api/stripe/checkout]", err);
-    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+  } catch (err: any) {
+    console.error(
+      "[POST /api/stripe/checkout] ERROR:",
+      err?.message,
+      err?.type,
+      err?.raw?.message,
+    );
+    return NextResponse.json(
+      { error: "Erreur Stripe: " + (err?.message || "inconnue") },
+      { status: 500 },
+    );
   }
 }
