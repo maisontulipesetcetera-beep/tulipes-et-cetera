@@ -79,7 +79,7 @@ export default function MaisonPage() {
       {/* Page header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          La Maison
+          La Maison 🌷
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
           Une maison de charme atypique, ouverte sur un cadre verdoyant
@@ -177,7 +177,7 @@ export default function MaisonPage() {
             />
           </div>
           <p className="font-heading text-2xl text-tulipe-blue italic">
-            &ldquo;Un vrai Home Sweet Home&rdquo;
+            &ldquo;Un vrai Home Sweet Home&rdquo; 🌷
           </p>
         </div>
       </section>

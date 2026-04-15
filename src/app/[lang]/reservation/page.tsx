@@ -73,7 +73,7 @@ export default async function ReservationPage({
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Tarifs & Réservation
+          Tarifs & Réservation 🌷
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
           Petit-déjeuner inclus — minimum 2 nuits — séjour sur mesure
@@ -88,7 +88,7 @@ export default async function ReservationPage({
               {
                 label: "Chambre Tulipe",
                 price: "179€",
-                note: "/ nuit · 2 personnes",
+                note: "/ nuit · 2 personnes 🌷",
                 highlight: true,
               },
               {

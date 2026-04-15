@@ -64,7 +64,7 @@ export default function ContactPage() {
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Nous contacter
+          Contact 🌷
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
           Une question ? Une demande ? Nous répondons sous 24h.
@@ -97,11 +97,13 @@ export default function ContactPage() {
               </h2>
               <div className="flex flex-col gap-3 font-body text-sm text-gray-700">
                 <p className="flex items-start gap-3">
-                  <span className="text-tulipe-forest text-base mt-0.5">📍</span>
+                  <span className="text-tulipe-forest text-base mt-0.5">
+                    📍
+                  </span>
                   <span>
                     2 Rue des Tulipes
                     <br />
-                    68640 Waldighoffen, France
+                    68640 Waldighoffen, France 🌷
                   </span>
                 </p>
                 <p className="flex items-center gap-3">

@@ -3,7 +3,7 @@ export default function MentionsLegalesPage() {
     <>
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Mentions légales
+          Mentions Légales 🌷
         </h1>
       </section>
 

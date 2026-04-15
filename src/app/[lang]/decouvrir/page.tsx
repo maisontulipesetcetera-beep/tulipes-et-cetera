@@ -115,7 +115,7 @@ export default function DecouvrirPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="relative z-10 w-full px-4 pb-12 text-center">
           <h1 className="font-heading text-4xl md:text-6xl text-white drop-shadow-lg mb-3">
-            Découvrir la région
+            Découvrir la région 🌷
           </h1>
           <p className="font-body text-white/90 text-lg max-w-2xl mx-auto">
             Sundgau, gastronomie alsacienne et activités — votre guide de voyage
@@ -178,7 +178,7 @@ export default function DecouvrirPage() {
           2 Rue des Tulipes, 68640 Waldighoffen
         </p>
         <p className="font-body text-white/60 text-sm">
-          À 20 min de Bâle · 30 min de Mulhouse · 45 min des pistes de ski
+          À 20 min de Bâle · 30 min de Mulhouse · 45 min des pistes de ski 🌷
         </p>
       </section>
     </>

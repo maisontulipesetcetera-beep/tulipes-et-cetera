@@ -66,7 +66,7 @@ interface ChambresPageProps {
 const chambres = [
   {
     slug: "tulipe",
-    name: "Chambre Tulipe",
+    name: "Chambre Tulipe 🌷",
     description:
       "La chambre principale, lumineuse et spacieuse. Lit double king-size avec vue directe sur le jardin fleuri. Décoration élégante avec touches florales.",
     details: [
@@ -80,7 +80,7 @@ const chambres = [
   },
   {
     slug: "lavande",
-    name: "Chambre Lavande",
+    name: "Chambre Lavande 🌷",
     description:
       "Une chambre cosy et apaisante, idéale pour un séjour romantique. Lit double confortable avec coin lecture aménagé près de la fenêtre.",
     details: [
@@ -94,7 +94,7 @@ const chambres = [
   },
   {
     slug: "cigogne",
-    name: "Chambre Cigogne",
+    name: "Chambre Cigogne 🌷",
     description:
       "La chambre familiale, spacieuse et accueillante. Lit double avec possibilité d'ajouter un lit enfant. Idéale pour les familles.",
     details: [
@@ -116,7 +116,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Les Chambres
+          Nos Chambres 🌷
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
           Trois chambres de charme pour un séjour inoubliable en Alsace

@@ -204,7 +204,7 @@ export default async function AvisPage({
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Avis de nos hôtes
+          Avis de nos hôtes 🌷
         </h1>
         <div className="flex items-center justify-center gap-3 mb-4">
           <span className="text-tulipe-gold text-3xl">★★★★★</span>

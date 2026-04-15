@@ -6,7 +6,7 @@ export default function LivretPage() {
       {/* Header sobre */}
       <section className="bg-tulipe-cream py-12 px-4 text-center border-b border-tulipe-beige">
         <h1 className="font-heading text-3xl md:text-4xl text-tulipe-blue mb-2">
-          Livret d&apos;accueil
+          Livret d&apos;accueil 🌷
         </h1>
         <p className="font-body text-gray-500 text-sm">
           Tulipes Et Cetera — Waldighoffen
@@ -35,6 +35,9 @@ export default function LivretPage() {
               </p>
             </div>
           </div>
+
+          {/* Séparateur */}
+          <p className="text-center text-tulipe-gold text-xl select-none">🌷</p>
 
           {/* Équipements */}
           <div className="flex flex-col gap-3">
@@ -82,6 +85,9 @@ export default function LivretPage() {
               </li>
             </ul>
           </div>
+
+          {/* Séparateur */}
+          <p className="text-center text-tulipe-gold text-xl select-none">🌷</p>
 
           {/* Numéros d'urgence */}
           <div className="flex flex-col gap-3 p-6 rounded-xl bg-red-50 border border-red-100">
