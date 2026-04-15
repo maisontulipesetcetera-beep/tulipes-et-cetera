@@ -22,17 +22,17 @@ export default function Footer({ lang }: FooterProps) {
             <div className="flex items-center gap-3 mb-2">
               <Image
                 src="/images/logo.jpg"
-                alt="Tulipes et Cetera"
+                alt="Tulipes Et Cetera"
                 height={40}
                 width={40}
                 className="rounded-md object-cover"
               />
               <span className="font-heading text-base text-white">
-                Tulipes et Cetera
+                Tulipes Et Cetera
               </span>
             </div>
             <p className="text-sm text-white/80 font-body leading-relaxed">
-              Maison d&apos;hôtes de charme
+              Cottage de Charme
               <br />
               Alsace, France
             </p>

@@ -170,7 +170,7 @@ export default function MaisonPage() {
           <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-lg">
             <Image
               src="/images/sweet-home.jpg"
-              alt="Sweet Home — Tulipes et Cetera"
+              alt="Sweet Home — Tulipes Et Cetera"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 672px"

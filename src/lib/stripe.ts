@@ -18,7 +18,7 @@ export async function createCheckoutSession(reservation: {
           currency: "eur",
           product_data: {
             name: "Acompte — Tulipes Et Cetera",
-            description: "Acompte de réservation maison d'hôtes",
+            description: "Acompte de réservation — Cottage de Charme",
           },
           unit_amount: reservation.depositAmount,
         },

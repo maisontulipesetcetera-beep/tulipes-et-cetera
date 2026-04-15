@@ -86,7 +86,7 @@ export default function ContactPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Localisation Tulipes et Cetera — Waldighoffen"
+                title="Localisation Tulipes Et Cetera — Waldighoffen"
               />
             </div>
 

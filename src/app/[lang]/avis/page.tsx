@@ -73,7 +73,7 @@ const reviewsSchema = {
       reviewBody:
         "La réalité dépasse ce qu'on attendait. Un petit quelque chose indéfinissable qui fait qu'on se sent vraiment chez soi, dans un cadre magnifique.",
       itemReviewed: {
-        "@type": "BedAndBreakfast",
+        "@type": "LodgingBusiness",
         name: "Tulipes Et Cetera",
       },
     },
@@ -89,7 +89,7 @@ const reviewsSchema = {
       reviewBody:
         "Endroit magnifique, literie exceptionnelle, accueil au top ! Nous reviendrons sans hésiter. Le jardin est un vrai paradis.",
       itemReviewed: {
-        "@type": "BedAndBreakfast",
+        "@type": "LodgingBusiness",
         name: "Tulipes Et Cetera",
       },
     },
@@ -105,7 +105,7 @@ const reviewsSchema = {
       reviewBody:
         "On y est restés une semaine alors qu'on avait prévu 2 nuits. Impossible de partir ! Le calme, la nature, la maison… tout est parfait.",
       itemReviewed: {
-        "@type": "BedAndBreakfast",
+        "@type": "LodgingBusiness",
         name: "Tulipes Et Cetera",
       },
     },
@@ -121,7 +121,7 @@ const reviewsSchema = {
       reviewBody:
         "Le petit-déjeuner est incroyable, tout est frais et local. Le kougelhopf maison est à tomber. Mention spéciale pour l'accueil chaleureux.",
       itemReviewed: {
-        "@type": "BedAndBreakfast",
+        "@type": "LodgingBusiness",
         name: "Tulipes Et Cetera",
       },
     },
@@ -137,7 +137,7 @@ const reviewsSchema = {
       reviewBody:
         "Un vrai Home Sweet Home. On reviendra ! La baignoire balnéo et le brasero dans le jardin, on ne demande rien de plus.",
       itemReviewed: {
-        "@type": "BedAndBreakfast",
+        "@type": "LodgingBusiness",
         name: "Tulipes Et Cetera",
       },
     },

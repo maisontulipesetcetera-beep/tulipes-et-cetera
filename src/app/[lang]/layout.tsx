@@ -23,9 +23,9 @@ const lato = Lato({
 });
 
 const descriptionByLocale: Record<Locale, string> = {
-  fr: "Maison d'hôtes de charme en Alsace. Chambres confortables, petit-déjeuner inclus, jardin fleuri et balnéothérapie.",
-  de: "Charmantes Gästehaus im Elsass. Komfortable Zimmer, Frühstück inklusive, Blumengarten und Balneotherapie.",
-  en: "Charming bed and breakfast in Alsace. Comfortable rooms, breakfast included, flower garden and balneotherapy.",
+  fr: "Cottage de Charme en Alsace. Chambres confortables, petit-déjeuner inclus, jardin fleuri et balnéothérapie.",
+  de: "Charme-Cottage im Elsass. Komfortable Zimmer, Frühstück inklusive, Blumengarten und Balneotherapie.",
+  en: "Charming Cottage in Alsace. Comfortable rooms, breakfast included, flower garden and balneotherapy.",
 };
 
 export async function generateMetadata({
@@ -37,7 +37,7 @@ export async function generateMetadata({
   const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
 
   return {
-    title: "Tulipes Et Cetera — Maison d'hôtes de charme en Alsace",
+    title: "Tulipes Et Cetera — Cottage de Charme en Alsace",
     description: descriptionByLocale[locale],
   };
 }
@@ -46,11 +46,11 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
-const schemaOrgBedAndBreakfast = {
+const schemaOrgLodgingBusiness = {
   "@context": "https://schema.org",
-  "@type": "BedAndBreakfast",
+  "@type": "LodgingBusiness",
   name: "Tulipes Et Cetera",
-  description: "Maison d'hôtes de charme en Alsace",
+  description: "Cottage de Charme en Alsace",
   address: {
     "@type": "PostalAddress",
     streetAddress: "2 Rue des Tulipes",
@@ -111,7 +111,7 @@ export default async function LangLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemaOrgBedAndBreakfast),
+            __html: JSON.stringify(schemaOrgLodgingBusiness),
           }}
         />
       </head>

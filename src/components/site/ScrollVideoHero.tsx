@@ -503,7 +503,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
         <section className="relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden">
           <Image
             src="/images/hero-facade.jpg"
-            alt="Tulipes Et Cetera — Maison d'hôtes de charme en Alsace"
+            alt="Tulipes Et Cetera — Cottage de Charme en Alsace"
             fill
             className="object-cover"
             priority
@@ -514,7 +514,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-body text-xs tracking-[0.3em] uppercase"
               style={{ color: "#C8A96E" }}
             >
-              Maison d&apos;hôtes · Sundgau · Alsace
+              Cottage de Charme · Sundgau · Alsace
             </span>
             <h1
               className="font-heading text-5xl text-white leading-tight"

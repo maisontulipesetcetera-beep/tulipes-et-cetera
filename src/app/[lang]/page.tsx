@@ -10,19 +10,19 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Tulipes Et Cetera — Maison d'hôtes de charme en Alsace",
+    title: "Tulipes Et Cetera — Cottage de Charme en Alsace",
     description:
-      "Maison d'hôtes 3★ à Waldighoffen, Sundgau. Petit-déjeuner inclus, balnéo, jardin 3000m², vélos gratuits. Note 9.9/10",
+      "Cottage de Charme 3★ à Waldighoffen, Sundgau. Petit-déjeuner inclus, balnéo, jardin 3000m², vélos gratuits. Note 9.9/10",
   },
   de: {
-    title: "Tulipes Et Cetera — Charmantes Gästehaus im Elsass",
+    title: "Tulipes Et Cetera — Charme-Cottage im Elsass",
     description:
-      "3★-Gästehaus in Waldighoffen, Sundgau. Frühstück inklusive, Whirlpool, 3000m² Garten, kostenlose Fahrräder. Bewertung 9,9/10",
+      "3★-Charme-Cottage in Waldighoffen, Sundgau. Frühstück inklusive, Whirlpool, 3000m² Garten, kostenlose Fahrräder. Bewertung 9,9/10",
   },
   en: {
-    title: "Tulipes Et Cetera — Charming Bed & Breakfast in Alsace",
+    title: "Tulipes Et Cetera — Charming Cottage in Alsace",
     description:
-      "3-star B&B in Waldighoffen, Sundgau. Breakfast included, spa bath, 3000m² garden, free bikes. Rated 9.9/10",
+      "3-star Charming Cottage in Waldighoffen, Sundgau. Breakfast included, spa bath, 3000m² garden, free bikes. Rated 9.9/10",
   },
 };
 
