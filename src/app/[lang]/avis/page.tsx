@@ -267,7 +267,7 @@ export default async function AvisPage({
           </p>
           <Link
             href={`/${locale}/livre-dor`}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-tulipe-royal hover:bg-tulipe-royal-dark text-white font-body font-semibold rounded-[10px] transition-colors text-base"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-colors text-base"
           >
             📖 Ouvrir le livre d&apos;or
           </Link>

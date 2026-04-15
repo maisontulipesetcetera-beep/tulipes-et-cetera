@@ -453,7 +453,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
                 </Link>
                 <Link
                   href={`/${lang}/maison`}
-                  className="inline-flex items-center justify-center px-10 py-4 bg-tulipe-royal hover:bg-tulipe-royal-dark text-white font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg shadow-lg"
+                  className="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-tulipe-royal font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg"
                 >
                   Découvrir la maison
                 </Link>

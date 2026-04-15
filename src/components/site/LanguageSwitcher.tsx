@@ -3,12 +3,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import { localeNames, locales, type Locale } from "@/i18n/config";
 
-const localeFlags: Record<Locale, string> = {
-  fr: "🇫🇷",
-  de: "🇩🇪",
-  en: "🇬🇧",
-};
-
 interface LanguageSwitcherProps {
   currentLocale: Locale;
 }
@@ -29,21 +23,20 @@ export default function LanguageSwitcher({
   }
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2">
       {locales.map((locale) => (
         <button
           key={locale}
           onClick={() => switchLocale(locale)}
-          className={`flex items-center gap-1 px-2 py-1 text-sm rounded transition-colors ${
+          className={`min-h-[40px] px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors ${
             locale === currentLocale
-              ? "bg-tulipe-green text-white font-semibold"
-              : "text-gray-600 hover:text-tulipe-royal hover:bg-tulipe-beige"
+              ? "bg-tulipe-green text-white"
+              : "bg-white/80 text-tulipe-royal border border-gray-200 hover:bg-tulipe-beige"
           }`}
           aria-label={`Switch to ${localeNames[locale]}`}
           aria-current={locale === currentLocale ? "true" : undefined}
         >
-          <span aria-hidden="true">{localeFlags[locale]}</span>
-          <span className="uppercase font-medium">{locale}</span>
+          <span className="uppercase">{locale}</span>
         </button>
       ))}
     </div>

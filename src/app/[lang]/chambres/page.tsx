@@ -183,7 +183,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
         </p>
         <Link
           href={`/${lang}/reservation`}
-          className="inline-block px-8 py-3 bg-tulipe-royal hover:bg-tulipe-royal/80 text-white font-body font-semibold rounded-[10px] transition-colors"
+          className="inline-block px-8 py-3 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-colors"
         >
           Voir les tarifs & disponibilités
         </Link>

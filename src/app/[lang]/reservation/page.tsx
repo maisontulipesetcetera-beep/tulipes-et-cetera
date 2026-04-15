@@ -108,13 +108,13 @@ export default async function ReservationPage({
                 key={item.label}
                 className={`rounded-2xl p-8 text-center border flex flex-col gap-2 ${
                   item.highlight
-                    ? "bg-tulipe-royal text-white border-tulipe-royal shadow-lg"
+                    ? "bg-tulipe-green text-white border-tulipe-green shadow-lg"
                     : "bg-white text-tulipe-royal border-tulipe-beige shadow-sm"
                 }`}
               >
                 <h2 className="font-heading text-xl">{item.label}</h2>
                 <p
-                  className={`font-heading text-5xl font-bold ${item.highlight ? "text-tulipe-gold" : "text-tulipe-royal"}`}
+                  className={`font-heading text-5xl font-bold ${item.highlight ? "text-white" : "text-tulipe-royal"}`}
                 >
                   {item.price}
                 </p>

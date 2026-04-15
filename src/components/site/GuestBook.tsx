@@ -106,7 +106,7 @@ function FormPage({ onSuccess }: FormPageProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="mt-auto w-full py-2.5 bg-tulipe-royal hover:bg-tulipe-royal-dark text-white font-semibold rounded transition-colors disabled:opacity-60 cursor-pointer"
+          className="mt-auto w-full py-2.5 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-semibold rounded transition-colors disabled:opacity-60 cursor-pointer"
           style={{ fontFamily: "'Caveat', cursive", fontSize: "18px" }}
         >
           {submitting ? "Envoi..." : "Signer le livre d'or 🌷"}

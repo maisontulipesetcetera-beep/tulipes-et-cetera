@@ -109,7 +109,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <ScrollVideoHero lang={lang} />
 
       {/* Features strip */}
-      <section className="bg-tulipe-cream py-16 md:py-24 px-4">
+      <section className="bg-white py-16 md:py-24 px-4">
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-12">
           {features.map(({ emoji, key }) => (
             <div
@@ -151,7 +151,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-tulipe-cream py-20 md:py-28 px-4">
+      <section className="bg-white py-20 md:py-28 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-heading text-3xl md:text-5xl text-tulipe-royal text-center mb-12">
             Ce que disent nos hôtes
@@ -175,7 +175,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* CTA final */}
-      <section className="bg-tulipe-royal py-20 md:py-28 px-4 text-center">
+      <section className="bg-tulipe-green py-20 md:py-28 px-4 text-center">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-6">
           <h2 className="font-heading text-3xl md:text-5xl text-white">
             Prêt pour une escapade en Alsace ?
@@ -186,7 +186,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </p>
           <Link
             href={`/${lang}/reservation`}
-            className="inline-block px-12 py-5 bg-tulipe-gold hover:bg-amber-500 text-white font-body font-semibold rounded-[10px] transition-all duration-200 hover:scale-105 hover:shadow-xl text-xl shadow-lg"
+            className="inline-block px-12 py-5 bg-white hover:bg-tulipe-cream text-tulipe-royal font-body font-semibold rounded-[10px] transition-all duration-200 hover:scale-105 hover:shadow-xl text-xl shadow-lg"
           >
             Réservez votre séjour 🌷
           </Link>
