@@ -2,29 +2,29 @@ interface StatsCardProps {
   icon: string;
   label: string;
   value: string | number;
-  color: "green" | "blue" | "orange" | "red";
+  color: "green" | "blue" | "orange" | "gold";
 }
 
 const colorClasses = {
   green: {
-    bg: "bg-green-50",
-    icon: "bg-green-100 text-green-700",
-    value: "text-green-700",
+    bg: "bg-green-50 border-green-200",
+    iconBg: "bg-green-100",
+    value: "text-green-800",
   },
   blue: {
-    bg: "bg-blue-50",
-    icon: "bg-blue-100 text-blue-700",
-    value: "text-blue-700",
+    bg: "bg-blue-50 border-blue-200",
+    iconBg: "bg-blue-100",
+    value: "text-blue-800",
   },
   orange: {
-    bg: "bg-orange-50",
-    icon: "bg-orange-100 text-orange-700",
-    value: "text-orange-700",
+    bg: "bg-orange-50 border-orange-200",
+    iconBg: "bg-orange-100",
+    value: "text-orange-800",
   },
-  red: {
-    bg: "bg-red-50",
-    icon: "bg-red-100 text-red-700",
-    value: "text-red-700",
+  gold: {
+    bg: "bg-yellow-50 border-yellow-200",
+    iconBg: "bg-yellow-100",
+    value: "text-yellow-800",
   },
 };
 
@@ -38,18 +38,18 @@ export default function StatsCard({
 
   return (
     <div
-      className={`${classes.bg} rounded-xl p-5 flex items-center gap-4 shadow-sm`}
+      className={`${classes.bg} border-2 rounded-2xl p-8 flex flex-col gap-4 shadow-sm min-h-[140px]`}
     >
       <div
-        className={`${classes.icon} w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0`}
+        className={`${classes.iconBg} w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shrink-0`}
       >
         {icon}
       </div>
       <div>
-        <p className={`${classes.value} text-2xl font-bold leading-tight`}>
+        <p className={`${classes.value} text-5xl font-bold leading-none`}>
           {value}
         </p>
-        <p className="text-sm text-gray-600 mt-0.5">{label}</p>
+        <p className="text-xl text-gray-700 font-medium mt-2">{label}</p>
       </div>
     </div>
   );

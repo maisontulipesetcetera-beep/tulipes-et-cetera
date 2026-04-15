@@ -3,16 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import {
-  Mail,
-  MailOpen,
-  CheckCheck,
-  Reply,
-  ChevronRight,
-  X,
-  Send,
-  Loader2,
-} from "lucide-react";
+import { X, Send, Loader2 } from "lucide-react";
 
 interface Contact {
   id: string;
@@ -32,22 +23,25 @@ interface EmailTemplate {
   lang: string;
 }
 
-const STATUS_LABELS: Record<string, string> = {
-  unread: "Non lu",
-  read: "Lu",
-  replied: "Répondu",
-};
-
-const STATUS_COLORS: Record<string, string> = {
-  unread: "bg-yellow-100 text-yellow-800",
-  read: "bg-gray-100 text-gray-600",
-  replied: "bg-green-100 text-green-700",
-};
-
-const STATUS_ICONS: Record<string, React.ElementType> = {
-  unread: Mail,
-  read: MailOpen,
-  replied: CheckCheck,
+const statusConfig: Record<
+  string,
+  { label: string; badgeClass: string; emoji: string }
+> = {
+  unread: {
+    label: "Nouveau",
+    badgeClass: "bg-red-100 text-red-700 border-red-300",
+    emoji: "🔴",
+  },
+  read: {
+    label: "Lu",
+    badgeClass: "bg-gray-100 text-gray-600 border-gray-300",
+    emoji: "👁",
+  },
+  replied: {
+    label: "Répondu",
+    badgeClass: "bg-green-100 text-green-700 border-green-300",
+    emoji: "✅",
+  },
 };
 
 export default function MessageInbox() {
@@ -122,14 +116,12 @@ export default function MessageInbox() {
     setSending(true);
     setError("");
     setSuccess("");
-
     try {
       const res = await fetch(`/api/messages/${selected.id}/reply`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subject: replySubject, body: replyBody }),
       });
-
       if (!res.ok) {
         const data = await res.json();
         setError(data.error ?? "Erreur lors de l'envoi");
@@ -153,170 +145,97 @@ export default function MessageInbox() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <Loader2 className="animate-spin text-tulipe-green" size={32} />
+      <div className="bg-white/90 rounded-2xl flex flex-col items-center justify-center py-24 gap-4">
+        <Loader2 className="animate-spin text-tulipe-green" size={48} />
+        <p className="text-xl text-gray-500">Chargement des messages…</p>
       </div>
     );
   }
 
-  return (
-    <div className="flex gap-4 h-[calc(100vh-12rem)] min-h-[500px]">
-      {/* List panel */}
-      <div className="w-full lg:w-[340px] shrink-0 bg-white rounded-xl border border-gray-200 flex flex-col overflow-hidden">
-        <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-          <h2 className="font-semibold text-gray-800 text-sm">
-            Boîte de réception
-          </h2>
-          {unreadCount > 0 && (
-            <span className="bg-tulipe-green text-white text-xs font-bold rounded-full px-2 py-0.5">
-              {unreadCount}
-            </span>
-          )}
-        </div>
+  // Si un message est sélectionné sur mobile → afficher uniquement le détail
+  if (selected) {
+    const s = statusConfig[selected.status] ?? {
+      label: selected.status,
+      badgeClass: "bg-gray-100 text-gray-600 border-gray-300",
+      emoji: "•",
+    };
 
-        {contacts.length === 0 ? (
-          <div className="flex-1 flex items-center justify-center text-gray-400 text-sm">
-            Aucun message
-          </div>
-        ) : (
-          <ul className="flex-1 overflow-y-auto divide-y divide-gray-50">
-            {contacts.map((contact) => {
-              const Icon = STATUS_ICONS[contact.status];
-              const isSelected = selected?.id === contact.id;
-              return (
-                <li key={contact.id}>
-                  <button
-                    onClick={() => selectContact(contact)}
-                    className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-start gap-3 ${
-                      isSelected
-                        ? "bg-tulipe-green/5 border-l-2 border-tulipe-green"
-                        : ""
-                    }`}
-                  >
-                    <Icon
-                      size={16}
-                      className={`mt-0.5 shrink-0 ${
-                        contact.status === "unread"
-                          ? "text-yellow-500"
-                          : contact.status === "replied"
-                            ? "text-green-500"
-                            : "text-gray-400"
-                      }`}
-                    />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-2">
-                        <span
-                          className={`text-sm font-medium truncate ${
-                            contact.status === "unread"
-                              ? "text-gray-900"
-                              : "text-gray-600"
-                          }`}
-                        >
-                          {contact.name}
-                        </span>
-                        <span className="text-xs text-gray-400 shrink-0">
-                          {format(new Date(contact.createdAt), "d MMM", {
-                            locale: fr,
-                          })}
-                        </span>
-                      </div>
-                      <p className="text-xs text-gray-500 truncate mt-0.5">
-                        {contact.message}
-                      </p>
-                    </div>
-                    <ChevronRight
-                      size={14}
-                      className="text-gray-300 mt-1 shrink-0"
-                    />
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
+    return (
+      <div className="space-y-4 max-w-3xl mx-auto">
+        {/* Bouton retour */}
+        <button
+          onClick={() => setSelected(null)}
+          className="flex items-center gap-2 px-5 py-3 bg-white/90 text-gray-700 text-lg font-semibold rounded-xl hover:bg-white transition-colors shadow-sm"
+        >
+          ← Retour à la liste
+        </button>
 
-      {/* Detail panel */}
-      <div className="flex-1 bg-white rounded-xl border border-gray-200 flex flex-col overflow-hidden min-w-0">
-        {!selected ? (
-          <div className="flex-1 flex items-center justify-center text-gray-400 text-sm">
-            Sélectionnez un message
+        {/* Carte message */}
+        <div className="bg-white/95 rounded-2xl shadow-sm overflow-hidden">
+          {/* En-tête */}
+          <div className="px-7 py-6 border-b border-gray-100 flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <div className="flex flex-wrap items-center gap-3 mb-1">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {selected.name}
+                </h2>
+                <span
+                  className={`px-4 py-1.5 rounded-xl text-base font-bold border-2 ${s.badgeClass}`}
+                >
+                  {s.emoji} {s.label}
+                </span>
+              </div>
+              <p className="text-lg text-gray-600">{selected.email}</p>
+              <p className="text-base text-gray-400 mt-1">
+                {format(new Date(selected.createdAt), "d MMMM yyyy à HH:mm", {
+                  locale: fr,
+                })}
+              </p>
+            </div>
           </div>
-        ) : (
-          <>
-            {/* Header */}
-            <div className="px-6 py-4 border-b border-gray-100 flex items-start justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="font-semibold text-gray-900">
-                    {selected.name}
-                  </h3>
-                  <span
-                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[selected.status]}`}
-                  >
-                    {STATUS_LABELS[selected.status]}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500 mt-0.5">{selected.email}</p>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  {format(new Date(selected.createdAt), "d MMMM yyyy à HH:mm", {
-                    locale: fr,
-                  })}
-                </p>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={() => {
-                    setReplying(true);
-                    setError("");
-                    setSuccess("");
-                  }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-tulipe-green text-white text-sm rounded-lg hover:bg-tulipe-green-dark transition-colors"
-                >
-                  <Reply size={14} />
-                  Répondre
-                </button>
-                <button
-                  onClick={() => setSelected(null)}
-                  className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 lg:hidden"
-                >
-                  <X size={16} />
-                </button>
-              </div>
+
+          {/* Corps du message */}
+          <div className="px-7 py-6 space-y-6">
+            <div className="bg-tulipe-beige rounded-xl p-6">
+              <p className="text-base font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                Message reçu
+              </p>
+              <p className="text-xl text-gray-800 whitespace-pre-wrap leading-relaxed">
+                {selected.message}
+              </p>
             </div>
 
-            {/* Message body */}
-            <div className="px-6 py-4 flex-1 overflow-y-auto">
-              <div className="bg-gray-50 rounded-lg p-4 text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-                {selected.message}
-              </div>
-
-              {selected.reply && (
-                <div className="mt-4">
-                  <p className="text-xs font-medium text-gray-500 mb-2">
-                    Votre réponse :
-                  </p>
-                  <div className="bg-tulipe-green/5 border border-tulipe-green/20 rounded-lg p-4 text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-                    {selected.reply}
-                  </div>
-                </div>
-              )}
-
-              {success && (
-                <p className="mt-3 text-sm text-green-600 font-medium">
-                  {success}
+            {selected.reply && !replying && (
+              <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6">
+                <p className="text-base font-semibold text-green-700 uppercase tracking-wider mb-3">
+                  ✅ Votre réponse
                 </p>
-              )}
+                <p className="text-xl text-gray-800 whitespace-pre-wrap leading-relaxed">
+                  {selected.reply}
+                </p>
+              </div>
+            )}
 
-              {/* Reply form */}
-              {replying && (
-                <form onSubmit={sendReply} className="mt-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <label className="text-xs text-gray-500 w-16 shrink-0">
-                      Modèle
+            {success && (
+              <p className="text-xl text-green-600 font-semibold bg-green-50 px-5 py-4 rounded-xl">
+                ✅ {success}
+              </p>
+            )}
+
+            {/* Formulaire de réponse */}
+            {replying ? (
+              <form onSubmit={sendReply} className="space-y-5">
+                <p className="text-xl font-bold text-tulipe-bordeaux">
+                  📧 Écrire une réponse
+                </p>
+
+                {templates.length > 0 && (
+                  <div>
+                    <label className="block text-lg font-semibold text-gray-700 mb-2">
+                      Utiliser un modèle (facultatif)
                     </label>
                     <select
-                      className="flex-1 border border-gray-200 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
+                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-green"
                       onChange={(e) => {
                         const t = templates.find(
                           (t) => t.id === e.target.value,
@@ -333,62 +252,152 @@ export default function MessageInbox() {
                       ))}
                     </select>
                   </div>
+                )}
 
-                  <div>
-                    <label className="text-xs text-gray-500 mb-1 block">
-                      Objet
-                    </label>
-                    <input
-                      type="text"
-                      value={replySubject}
-                      onChange={(e) => setReplySubject(e.target.value)}
-                      required
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-lg font-semibold text-gray-700 mb-2">
+                    Objet de la réponse
+                  </label>
+                  <input
+                    type="text"
+                    value={replySubject}
+                    onChange={(e) => setReplySubject(e.target.value)}
+                    required
+                    className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-green"
+                  />
+                </div>
 
-                  <div>
-                    <label className="text-xs text-gray-500 mb-1 block">
-                      Message
-                    </label>
-                    <textarea
-                      value={replyBody}
-                      onChange={(e) => setReplyBody(e.target.value)}
-                      required
-                      rows={6}
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green resize-y"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-lg font-semibold text-gray-700 mb-2">
+                    Votre message
+                  </label>
+                  <textarea
+                    value={replyBody}
+                    onChange={(e) => setReplyBody(e.target.value)}
+                    required
+                    rows={7}
+                    className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-green resize-y"
+                  />
+                </div>
 
-                  {error && <p className="text-sm text-red-600">{error}</p>}
+                {error && (
+                  <p className="text-lg text-red-600 bg-red-50 px-4 py-3 rounded-xl">
+                    ⚠️ {error}
+                  </p>
+                )}
 
-                  <div className="flex gap-2">
-                    <button
-                      type="submit"
-                      disabled={sending}
-                      className="flex items-center gap-2 px-4 py-2 bg-tulipe-green text-white text-sm rounded-lg hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors"
-                    >
-                      {sending ? (
-                        <Loader2 size={14} className="animate-spin" />
-                      ) : (
-                        <Send size={14} />
-                      )}
-                      {sending ? "Envoi…" : "Envoyer"}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setReplying(false)}
-                      className="px-4 py-2 border border-gray-200 text-gray-600 text-sm rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      Annuler
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
-          </>
-        )}
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="flex items-center gap-3 px-7 py-4 bg-tulipe-green text-white text-xl font-bold rounded-xl hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors min-h-[60px]"
+                  >
+                    {sending ? (
+                      <Loader2 size={22} className="animate-spin" />
+                    ) : (
+                      <Send size={22} />
+                    )}
+                    {sending ? "Envoi en cours…" : "Envoyer la réponse"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReplying(false)}
+                    className="flex items-center gap-2 px-6 py-4 border-2 border-gray-300 text-gray-700 text-xl font-semibold rounded-xl hover:bg-gray-100 transition-colors min-h-[60px]"
+                  >
+                    <X size={20} /> Annuler
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <button
+                onClick={() => {
+                  setReplying(true);
+                  setError("");
+                  setSuccess("");
+                }}
+                className="flex items-center gap-3 px-8 py-4 bg-tulipe-bordeaux text-white text-xl font-bold rounded-xl hover:bg-tulipe-bordeaux/90 transition-colors shadow-sm min-h-[60px]"
+              >
+                📧 Répondre à ce message
+              </button>
+            )}
+          </div>
+        </div>
       </div>
+    );
+  }
+
+  // Liste des messages
+  return (
+    <div className="space-y-4 max-w-3xl mx-auto">
+      {/* En-tête */}
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-7 py-5 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-tulipe-bordeaux">
+            Boîte de réception
+          </h2>
+          {unreadCount > 0 && (
+            <span className="bg-red-500 text-white text-lg font-bold rounded-full px-4 py-1 min-w-[36px] text-center">
+              {unreadCount}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {contacts.length === 0 ? (
+        <div className="bg-white/90 rounded-2xl py-20 text-center">
+          <p className="text-2xl text-gray-400">Aucun message pour le moment</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {contacts.map((contact) => {
+            const s = statusConfig[contact.status] ?? {
+              label: contact.status,
+              badgeClass: "bg-gray-100 text-gray-600 border-gray-300",
+              emoji: "•",
+            };
+
+            return (
+              <button
+                key={contact.id}
+                onClick={() => selectContact(contact)}
+                className={`w-full text-left bg-white/95 rounded-2xl px-6 py-5 shadow-sm border-2 transition-all hover:shadow-md hover:border-tulipe-green/40 ${
+                  contact.status === "unread"
+                    ? "border-orange-200"
+                    : "border-gray-100"
+                }`}
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-3 mb-1">
+                      <p className="text-xl font-bold text-gray-900">
+                        {contact.name}
+                      </p>
+                      <span
+                        className={`px-3 py-1 rounded-xl text-base font-bold border-2 ${s.badgeClass}`}
+                      >
+                        {s.emoji} {s.label}
+                      </span>
+                    </div>
+                    <p className="text-lg text-gray-500 truncate">
+                      {contact.message}
+                    </p>
+                  </div>
+                  <div className="shrink-0 text-right">
+                    <p className="text-base text-gray-400">
+                      {format(new Date(contact.createdAt), "d MMM yyyy", {
+                        locale: fr,
+                      })}
+                    </p>
+                    <p className="text-base text-tulipe-green font-semibold mt-1">
+                      Voir →
+                    </p>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

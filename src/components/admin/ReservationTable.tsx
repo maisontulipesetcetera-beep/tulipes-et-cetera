@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { X, Check, Ban, Eye } from "lucide-react";
+import { X, Loader2 } from "lucide-react";
 
 interface Reservation {
   id: string;
@@ -28,53 +28,54 @@ interface ReservationTableProps {
   onStatusChange?: (id: string, status: string) => void;
 }
 
-const statusLabels: Record<string, { label: string; className: string }> = {
+const statusConfig: Record<
+  string,
+  { label: string; badgeClass: string; emoji: string }
+> = {
   pending: {
     label: "En attente",
-    className: "bg-yellow-100 text-yellow-800",
+    badgeClass: "bg-orange-100 text-orange-800 border-orange-300",
+    emoji: "⏳",
   },
-  confirmed: { label: "Confirmée", className: "bg-green-100 text-green-800" },
-  in_progress: { label: "En cours", className: "bg-blue-100 text-blue-800" },
-  completed: { label: "Terminée", className: "bg-gray-100 text-gray-700" },
-  cancelled: { label: "Annulée", className: "bg-red-100 text-red-800" },
+  confirmed: {
+    label: "Confirmée",
+    badgeClass: "bg-green-100 text-green-800 border-green-300",
+    emoji: "✅",
+  },
+  in_progress: {
+    label: "En cours",
+    badgeClass: "bg-blue-100 text-blue-800 border-blue-300",
+    emoji: "🏠",
+  },
+  completed: {
+    label: "Terminée",
+    badgeClass: "bg-gray-100 text-gray-700 border-gray-300",
+    emoji: "✔",
+  },
+  cancelled: {
+    label: "Annulée",
+    badgeClass: "bg-red-100 text-red-800 border-red-300",
+    emoji: "❌",
+  },
 };
 
-const sourceLabels: Record<string, { label: string; className: string }> = {
-  booking: { label: "Booking", className: "bg-blue-100 text-blue-800" },
-  airbnb: { label: "Airbnb", className: "bg-pink-100 text-pink-800" },
-  direct: { label: "Direct", className: "bg-green-100 text-green-800" },
+const sourceConfig: Record<string, { label: string; badgeClass: string }> = {
+  booking: {
+    label: "Booking",
+    badgeClass: "bg-blue-50 text-blue-700 border-blue-200",
+  },
+  airbnb: {
+    label: "Airbnb",
+    badgeClass: "bg-pink-50 text-pink-700 border-pink-200",
+  },
+  direct: {
+    label: "Direct",
+    badgeClass: "bg-green-50 text-green-700 border-green-200",
+  },
 };
-
-function StatusBadge({ status }: { status: string }) {
-  const s = statusLabels[status] ?? {
-    label: status,
-    className: "bg-gray-100 text-gray-700",
-  };
-  return (
-    <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${s.className}`}
-    >
-      {s.label}
-    </span>
-  );
-}
-
-function SourceBadge({ source }: { source: string }) {
-  const s = sourceLabels[source] ?? {
-    label: source,
-    className: "bg-gray-100 text-gray-700",
-  };
-  return (
-    <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${s.className}`}
-    >
-      {s.label}
-    </span>
-  );
-}
 
 function formatDate(dateStr: string) {
-  return format(new Date(dateStr), "dd/MM/yyyy", { locale: fr });
+  return format(new Date(dateStr), "dd MMMM yyyy", { locale: fr });
 }
 
 function formatAmount(cents: number | null) {
@@ -85,25 +86,24 @@ function formatAmount(cents: number | null) {
   });
 }
 
+const FILTER_BUTTONS = [
+  { value: "all", label: "Toutes" },
+  { value: "pending", label: "⏳ En attente" },
+  { value: "confirmed", label: "✅ Confirmées" },
+  { value: "cancelled", label: "❌ Annulées" },
+];
+
 export default function ReservationTable({
   reservations,
   onStatusChange,
 }: ReservationTableProps) {
   const [filterStatus, setFilterStatus] = useState("all");
-  const [filterSource, setFilterSource] = useState("all");
-  const [filterDate, setFilterDate] = useState("");
   const [selectedReservation, setSelectedReservation] =
     useState<Reservation | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);
 
   const filtered = reservations.filter((r) => {
     if (filterStatus !== "all" && r.status !== filterStatus) return false;
-    if (filterSource !== "all" && r.source !== filterSource) return false;
-    if (filterDate) {
-      const checkIn = new Date(r.checkIn).toISOString().slice(0, 10);
-      const checkOut = new Date(r.checkOut).toISOString().slice(0, 10);
-      if (checkIn > filterDate || checkOut < filterDate) return false;
-    }
     return true;
   });
 
@@ -126,289 +126,272 @@ export default function ReservationTable({
     }
   }
 
-  function exportCSV() {
-    const headers = [
-      "ID",
-      "Client",
-      "Email",
-      "Téléphone",
-      "Arrivée",
-      "Départ",
-      "Personnes",
-      "Source",
-      "Statut",
-      "Montant",
-    ];
-    const rows = filtered.map((r) => [
-      r.id,
-      r.guestName,
-      r.guestEmail,
-      r.guestPhone ?? "",
-      formatDate(r.checkIn),
-      formatDate(r.checkOut),
-      r.guests,
-      r.source,
-      r.status,
-      formatAmount(r.totalAmount),
-    ]);
-    const csv = [headers, ...rows]
-      .map((row) => row.map((v) => `"${v}"`).join(","))
-      .join("\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `reservations-${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
   return (
-    <div>
-      {/* Filters + Export */}
-      <div className="flex flex-wrap gap-3 mb-4 items-center">
-        <select
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
-        >
-          <option value="all">Tous les statuts</option>
-          <option value="pending">En attente</option>
-          <option value="confirmed">Confirmée</option>
-          <option value="in_progress">En cours</option>
-          <option value="completed">Terminée</option>
-          <option value="cancelled">Annulée</option>
-        </select>
-
-        <select
-          value={filterSource}
-          onChange={(e) => setFilterSource(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
-        >
-          <option value="all">Toutes les sources</option>
-          <option value="direct">Direct</option>
-          <option value="booking">Booking</option>
-          <option value="airbnb">Airbnb</option>
-        </select>
-
-        <input
-          type="date"
-          value={filterDate}
-          onChange={(e) => setFilterDate(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
-          placeholder="Filtrer par date"
-        />
-
-        {(filterStatus !== "all" || filterSource !== "all" || filterDate) && (
+    <div className="space-y-6">
+      {/* Filtres */}
+      <div className="flex flex-wrap gap-3">
+        {FILTER_BUTTONS.map(({ value, label }) => (
           <button
-            onClick={() => {
-              setFilterStatus("all");
-              setFilterSource("all");
-              setFilterDate("");
-            }}
-            className="text-sm text-gray-500 hover:text-gray-700 underline"
+            key={value}
+            onClick={() => setFilterStatus(value)}
+            className={`px-6 py-3 rounded-xl text-lg font-semibold border-2 transition-all ${
+              filterStatus === value
+                ? "bg-tulipe-green text-white border-tulipe-green shadow-sm"
+                : "bg-white text-gray-700 border-gray-200 hover:border-tulipe-green hover:text-tulipe-green"
+            }`}
           >
-            Réinitialiser
+            {label}
           </button>
-        )}
-
-        <button
-          onClick={exportCSV}
-          className="ml-auto flex items-center gap-1.5 px-4 py-1.5 bg-tulipe-green text-white text-sm font-medium rounded-lg hover:bg-tulipe-green-dark transition-colors"
-        >
-          Exporter CSV
-        </button>
+        ))}
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-gray-200">
-        <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b border-gray-200">
-            <tr>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">
-                Client
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">
-                Dates
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700 hidden md:table-cell">
-                Pers.
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700 hidden sm:table-cell">
-                Source
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">
-                Statut
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700 hidden lg:table-cell">
-                Montant
-              </th>
-              <th className="px-4 py-3 text-right font-semibold text-gray-700">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={7} className="text-center py-10 text-gray-400">
-                  Aucune réservation trouvée
-                </td>
-              </tr>
-            )}
-            {filtered.map((r) => (
-              <tr
+      {/* Cartes */}
+      {filtered.length === 0 ? (
+        <div className="bg-white/90 rounded-2xl p-16 text-center">
+          <p className="text-2xl text-gray-400">Aucune réservation trouvée</p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {filtered.map((r) => {
+            const status = statusConfig[r.status] ?? {
+              label: r.status,
+              badgeClass: "bg-gray-100 text-gray-700 border-gray-300",
+              emoji: "•",
+            };
+            const source = sourceConfig[r.source] ?? {
+              label: r.source,
+              badgeClass: "bg-gray-50 text-gray-700 border-gray-200",
+            };
+            const isUpdating = updating === r.id;
+
+            return (
+              <div
                 key={r.id}
-                className="hover:bg-gray-50 cursor-pointer transition-colors"
-                onClick={() => setSelectedReservation(r)}
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-gray-100"
               >
-                <td className="px-4 py-3">
-                  <p className="font-medium text-gray-900">{r.guestName}</p>
-                  <p className="text-xs text-gray-500">{r.guestEmail}</p>
-                </td>
-                <td className="px-4 py-3 whitespace-nowrap">
-                  <p>{formatDate(r.checkIn)}</p>
-                  <p className="text-xs text-gray-500">
-                    → {formatDate(r.checkOut)}
-                  </p>
-                </td>
-                <td className="px-4 py-3 hidden md:table-cell text-gray-600">
-                  {r.guests}
-                </td>
-                <td className="px-4 py-3 hidden sm:table-cell">
-                  <SourceBadge source={r.source} />
-                </td>
-                <td className="px-4 py-3">
-                  <StatusBadge status={r.status} />
-                </td>
-                <td className="px-4 py-3 hidden lg:table-cell text-gray-700">
-                  {formatAmount(r.totalAmount)}
-                </td>
-                <td
-                  className="px-4 py-3 text-right"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="flex items-center justify-end gap-1">
-                    <button
-                      onClick={() => setSelectedReservation(r)}
-                      className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
-                      title="Voir détails"
-                    >
-                      <Eye size={15} />
-                    </button>
-                    {r.status === "pending" && (
-                      <button
-                        onClick={() => handleStatusChange(r.id, "confirmed")}
-                        disabled={updating === r.id}
-                        className="p-1.5 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded transition-colors disabled:opacity-50"
-                        title="Confirmer"
-                      >
-                        <Check size={15} />
-                      </button>
-                    )}
-                    {r.status !== "cancelled" && r.status !== "completed" && (
-                      <button
-                        onClick={() => handleStatusChange(r.id, "cancelled")}
-                        disabled={updating === r.id}
-                        className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors disabled:opacity-50"
-                        title="Annuler"
-                      >
-                        <Ban size={15} />
-                      </button>
-                    )}
+                {/* En-tête carte */}
+                <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
+                  <div>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {r.guestName}
+                    </p>
+                    <p className="text-lg text-gray-500 mt-1">{r.guestEmail}</p>
                   </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  <div className="flex flex-wrap gap-2">
+                    <span
+                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-bold border-2 ${source.badgeClass}`}
+                    >
+                      {source.label}
+                    </span>
+                    <span
+                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-bold border-2 ${status.badgeClass}`}
+                    >
+                      {status.emoji} {status.label}
+                    </span>
+                  </div>
+                </div>
 
-      {/* Detail Modal */}
+                {/* Infos séjour */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 bg-tulipe-beige rounded-xl p-4">
+                  <div>
+                    <p className="text-base text-gray-500 font-medium">
+                      Arrivée
+                    </p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {formatDate(r.checkIn)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-base text-gray-500 font-medium">
+                      Départ
+                    </p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {formatDate(r.checkOut)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-base text-gray-500 font-medium">
+                      Personnes
+                    </p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {r.guests} pers.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-base text-gray-500 font-medium">
+                      Montant
+                    </p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {formatAmount(r.totalAmount)}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Boutons d'action */}
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    onClick={() => setSelectedReservation(r)}
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-800 text-lg font-semibold rounded-xl hover:bg-gray-200 transition-colors min-h-[52px]"
+                  >
+                    📄 Voir les détails
+                  </button>
+                  {r.status === "pending" && (
+                    <button
+                      onClick={() => handleStatusChange(r.id, "confirmed")}
+                      disabled={isUpdating}
+                      className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 min-h-[52px]"
+                    >
+                      {isUpdating ? (
+                        <Loader2 size={20} className="animate-spin" />
+                      ) : (
+                        "✅"
+                      )}{" "}
+                      Confirmer
+                    </button>
+                  )}
+                  {r.status !== "cancelled" && r.status !== "completed" && (
+                    <button
+                      onClick={() => handleStatusChange(r.id, "cancelled")}
+                      disabled={isUpdating}
+                      className="flex items-center gap-2 px-6 py-3 bg-red-100 text-red-700 text-lg font-semibold rounded-xl hover:bg-red-200 transition-colors disabled:opacity-50 min-h-[52px]"
+                    >
+                      {isUpdating ? (
+                        <Loader2 size={20} className="animate-spin" />
+                      ) : (
+                        "❌"
+                      )}{" "}
+                      Annuler
+                    </button>
+                  )}
+                  {r.guestEmail && (
+                    <a
+                      href={`mailto:${r.guestEmail}`}
+                      className="flex items-center gap-2 px-6 py-3 bg-tulipe-bordeaux/10 text-tulipe-bordeaux text-lg font-semibold rounded-xl hover:bg-tulipe-bordeaux/20 transition-colors min-h-[52px]"
+                    >
+                      📧 Contacter
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Modal détail */}
       {selectedReservation && (
         <div
-          className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedReservation(null)}
         >
           <div
-            className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h2 className="font-heading text-lg font-semibold text-tulipe-bordeaux">
+            {/* En-tête modal */}
+            <div className="flex items-center justify-between px-7 py-5 border-b border-gray-100">
+              <h2 className="font-heading text-2xl font-bold text-tulipe-bordeaux">
                 Fiche réservation
               </h2>
               <button
                 onClick={() => setSelectedReservation(null)}
-                className="p-1 text-gray-400 hover:text-gray-600 rounded"
+                className="p-2 text-gray-400 hover:text-gray-700 rounded-xl hover:bg-gray-100 transition-colors"
+                aria-label="Fermer"
               >
-                <X size={20} />
+                <X size={24} />
               </button>
             </div>
 
-            <div className="px-6 py-5 space-y-4">
-              {/* Status + source row */}
-              <div className="flex gap-2">
-                <StatusBadge status={selectedReservation.status} />
-                <SourceBadge source={selectedReservation.source} />
+            <div className="px-7 py-6 space-y-6">
+              {/* Badges statut + source */}
+              <div className="flex flex-wrap gap-3">
+                {(() => {
+                  const s = statusConfig[selectedReservation.status] ?? {
+                    label: selectedReservation.status,
+                    badgeClass: "bg-gray-100 text-gray-700 border-gray-300",
+                    emoji: "•",
+                  };
+                  const src = sourceConfig[selectedReservation.source] ?? {
+                    label: selectedReservation.source,
+                    badgeClass: "bg-gray-50 text-gray-700 border-gray-200",
+                  };
+                  return (
+                    <>
+                      <span
+                        className={`px-4 py-2 rounded-xl text-base font-bold border-2 ${src.badgeClass}`}
+                      >
+                        {src.label}
+                      </span>
+                      <span
+                        className={`px-4 py-2 rounded-xl text-base font-bold border-2 ${s.badgeClass}`}
+                      >
+                        {s.emoji} {s.label}
+                      </span>
+                    </>
+                  );
+                })()}
               </div>
 
               {/* Client */}
-              <div>
-                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+              <div className="bg-tulipe-beige rounded-xl p-5 space-y-2">
+                <p className="text-base font-semibold text-gray-500 uppercase tracking-wider">
                   Client
-                </h3>
-                <div className="space-y-1 text-sm">
-                  <p className="font-medium text-gray-900">
-                    {selectedReservation.guestName}
+                </p>
+                <p className="text-xl font-bold text-gray-900">
+                  {selectedReservation.guestName}
+                </p>
+                <p className="text-lg text-gray-600">
+                  {selectedReservation.guestEmail}
+                </p>
+                {selectedReservation.guestPhone && (
+                  <p className="text-lg text-gray-600">
+                    📞 {selectedReservation.guestPhone}
                   </p>
-                  <p className="text-gray-600">
-                    {selectedReservation.guestEmail}
-                  </p>
-                  {selectedReservation.guestPhone && (
-                    <p className="text-gray-600">
-                      {selectedReservation.guestPhone}
-                    </p>
-                  )}
-                </div>
+                )}
               </div>
 
               {/* Séjour */}
-              <div>
-                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+              <div className="bg-tulipe-cream rounded-xl p-5">
+                <p className="text-base font-semibold text-gray-500 uppercase tracking-wider mb-3">
                   Séjour
-                </h3>
-                <div className="grid grid-cols-2 gap-2 text-sm">
+                </p>
+                <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-gray-500">Arrivée</p>
-                    <p className="font-medium">
+                    <p className="text-base text-gray-500">Arrivée</p>
+                    <p className="text-lg font-bold text-gray-800">
                       {formatDate(selectedReservation.checkIn)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Départ</p>
-                    <p className="font-medium">
+                    <p className="text-base text-gray-500">Départ</p>
+                    <p className="text-lg font-bold text-gray-800">
                       {formatDate(selectedReservation.checkOut)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Personnes</p>
-                    <p className="font-medium">{selectedReservation.guests}</p>
+                    <p className="text-base text-gray-500">Personnes</p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {selectedReservation.guests}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Montant total</p>
-                    <p className="font-medium">
+                    <p className="text-base text-gray-500">Montant total</p>
+                    <p className="text-lg font-bold text-gray-800">
                       {formatAmount(selectedReservation.totalAmount)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Acompte</p>
-                    <p className="font-medium">
+                    <p className="text-base text-gray-500">Acompte</p>
+                    <p className="text-lg font-bold text-gray-800">
                       {formatAmount(selectedReservation.depositAmount)}{" "}
                       {selectedReservation.depositPaid ? (
-                        <span className="text-green-600 text-xs">(payé)</span>
+                        <span className="text-green-600 text-base font-semibold">
+                          (payé ✅)
+                        </span>
                       ) : (
-                        <span className="text-red-500 text-xs">(non payé)</span>
+                        <span className="text-red-500 text-base font-semibold">
+                          (non payé)
+                        </span>
                       )}
                     </p>
                   </div>
@@ -418,10 +401,10 @@ export default function ReservationTable({
               {/* Message */}
               {selectedReservation.message && (
                 <div>
-                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                  <p className="text-base font-semibold text-gray-500 uppercase tracking-wider mb-2">
                     Message du client
-                  </h3>
-                  <p className="text-sm text-gray-700 bg-gray-50 rounded-lg p-3">
+                  </p>
+                  <p className="text-lg text-gray-700 bg-gray-50 rounded-xl p-4">
                     {selectedReservation.message}
                   </p>
                 </div>
@@ -430,27 +413,26 @@ export default function ReservationTable({
               {/* Notes */}
               {selectedReservation.notes && (
                 <div>
-                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                  <p className="text-base font-semibold text-gray-500 uppercase tracking-wider mb-2">
                     Notes internes
-                  </h3>
-                  <p className="text-sm text-gray-700 bg-yellow-50 rounded-lg p-3">
+                  </p>
+                  <p className="text-lg text-gray-700 bg-yellow-50 rounded-xl p-4">
                     {selectedReservation.notes}
                   </p>
                 </div>
               )}
 
-              {/* Actions */}
-              <div className="pt-2 flex gap-2 flex-wrap">
+              {/* Actions dans la modal */}
+              <div className="pt-2 flex flex-wrap gap-3">
                 {selectedReservation.status === "pending" && (
                   <button
                     onClick={() =>
                       handleStatusChange(selectedReservation.id, "confirmed")
                     }
                     disabled={updating === selectedReservation.id}
-                    className="flex items-center gap-1.5 px-4 py-2 bg-tulipe-green text-white text-sm font-medium rounded-lg hover:bg-tulipe-green-dark transition-colors disabled:opacity-50"
+                    className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 min-h-[52px]"
                   >
-                    <Check size={15} />
-                    Confirmer
+                    ✅ Confirmer la réservation
                   </button>
                 )}
                 {selectedReservation.status !== "cancelled" &&
@@ -460,10 +442,9 @@ export default function ReservationTable({
                         handleStatusChange(selectedReservation.id, "cancelled")
                       }
                       disabled={updating === selectedReservation.id}
-                      className="flex items-center gap-1.5 px-4 py-2 bg-red-100 text-red-700 text-sm font-medium rounded-lg hover:bg-red-200 transition-colors disabled:opacity-50"
+                      className="flex items-center gap-2 px-6 py-3 bg-red-100 text-red-700 text-lg font-semibold rounded-xl hover:bg-red-200 transition-colors disabled:opacity-50 min-h-[52px]"
                     >
-                      <Ban size={15} />
-                      Annuler
+                      ❌ Annuler la réservation
                     </button>
                   )}
               </div>

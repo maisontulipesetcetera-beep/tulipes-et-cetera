@@ -4,17 +4,41 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
 const statusLabels: Record<string, { label: string; className: string }> = {
-  pending: { label: "En attente", className: "bg-yellow-100 text-yellow-800" },
-  confirmed: { label: "Confirmée", className: "bg-green-100 text-green-800" },
-  in_progress: { label: "En cours", className: "bg-blue-100 text-blue-800" },
-  completed: { label: "Terminée", className: "bg-gray-100 text-gray-700" },
-  cancelled: { label: "Annulée", className: "bg-red-100 text-red-800" },
+  pending: {
+    label: "⏳ En attente",
+    className: "bg-orange-100 text-orange-800 border-orange-200",
+  },
+  confirmed: {
+    label: "✅ Confirmée",
+    className: "bg-green-100 text-green-800 border-green-200",
+  },
+  in_progress: {
+    label: "🏠 En cours",
+    className: "bg-blue-100 text-blue-800 border-blue-200",
+  },
+  completed: {
+    label: "✔ Terminée",
+    className: "bg-gray-100 text-gray-700 border-gray-200",
+  },
+  cancelled: {
+    label: "❌ Annulée",
+    className: "bg-red-100 text-red-800 border-red-200",
+  },
 };
 
 const sourceLabels: Record<string, { label: string; className: string }> = {
-  booking: { label: "Booking", className: "bg-blue-100 text-blue-700" },
-  airbnb: { label: "Airbnb", className: "bg-pink-100 text-pink-700" },
-  direct: { label: "Direct", className: "bg-green-100 text-green-700" },
+  booking: {
+    label: "Booking",
+    className: "bg-blue-50 text-blue-700 border-blue-200",
+  },
+  airbnb: {
+    label: "Airbnb",
+    className: "bg-pink-50 text-pink-700 border-pink-200",
+  },
+  direct: {
+    label: "Direct",
+    className: "bg-green-50 text-green-700 border-green-200",
+  },
 };
 
 export default async function AdminDashboardPage() {
@@ -31,20 +55,20 @@ export default async function AdminDashboardPage() {
     0,
   ).getDate();
 
+  const dateJour = format(today, "EEEE d MMMM yyyy", { locale: fr });
+  const moisNom = today.toLocaleDateString("fr-FR", { month: "long" });
+
   const [arrivees, enAttente, reservationsMois, recentesRaw] =
     await Promise.all([
-      // Arrivées aujourd'hui
       db.reservation.count({
         where: {
           status: "confirmed",
           checkIn: { gte: today, lt: tomorrow },
         },
       }),
-      // Réservations en attente
       db.reservation.count({
         where: { status: "pending" },
       }),
-      // Réservations ce mois pour taux d'occupation + CA
       db.reservation.findMany({
         where: {
           status: { in: ["confirmed", "completed", "in_progress"] },
@@ -58,7 +82,6 @@ export default async function AdminDashboardPage() {
           status: true,
         },
       }),
-      // 5 dernières réservations
       db.reservation.findMany({
         orderBy: { createdAt: "desc" },
         take: 5,
@@ -71,12 +94,11 @@ export default async function AdminDashboardPage() {
           status: true,
           source: true,
           totalAmount: true,
-          createdAt: true,
         },
       }),
     ]);
 
-  // Calcul taux d'occupation : nombre de jours réservés dans le mois
+  // Taux d'occupation
   let joursReserves = 0;
   for (const r of reservationsMois) {
     const debut = r.checkIn < monthStart ? monthStart : r.checkIn;
@@ -92,7 +114,7 @@ export default async function AdminDashboardPage() {
     Math.round((joursReserves / daysInMonth) * 100),
   );
 
-  // CA du mois : sum confirmed + completed
+  // CA du mois
   const caMois = reservationsMois
     .filter((r) => ["confirmed", "completed"].includes(r.status))
     .reduce((s, r) => s + (r.totalAmount ?? 0), 0);
@@ -104,72 +126,76 @@ export default async function AdminDashboardPage() {
   });
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-heading font-bold text-tulipe-bordeaux">
-        Tableau de bord
-      </h1>
+    <div className="space-y-8 max-w-5xl mx-auto">
+      {/* En-tête chaleureux */}
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-7 shadow-sm">
+        <h1 className="text-4xl font-heading font-bold text-tulipe-bordeaux">
+          Bonjour ! 👋
+        </h1>
+        <p className="text-xl text-gray-600 mt-2 capitalize">{dateJour}</p>
+      </div>
 
-      {/* Stats grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* Grille 4 statistiques */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <StatsCard
-          icon="🏠"
+          icon="🛬"
           label="Arrivées aujourd'hui"
           value={arrivees}
           color="green"
         />
         <StatsCard
           icon="⏳"
-          label="En attente"
+          label="En attente de confirmation"
           value={enAttente}
           color="orange"
         />
         <StatsCard
-          icon="📅"
-          label={`Occupation ${today.toLocaleDateString("fr-FR", { month: "long" })}`}
+          icon="📊"
+          label={`Occupation en ${moisNom}`}
           value={`${tauxOccupation}%`}
           color="blue"
         />
         <StatsCard
-          icon="💶"
-          label={`CA ${today.toLocaleDateString("fr-FR", { month: "long" })}`}
+          icon="💰"
+          label={`Revenus en ${moisNom}`}
           value={caMoisEuros}
-          color="green"
+          color="gold"
         />
       </div>
 
-      {/* Réservations récentes */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-          <h2 className="font-heading font-semibold text-gray-900">
-            Réservations récentes
+      {/* Dernières réservations */}
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100">
+          <h2 className="font-heading text-2xl font-bold text-tulipe-bordeaux">
+            Dernières réservations
           </h2>
           <a
             href="/admin/reservations"
-            className="text-sm text-tulipe-green hover:underline"
+            className="text-lg font-semibold text-tulipe-green hover:underline"
           >
-            Voir tout →
+            Tout voir →
           </a>
         </div>
 
         {recentesRaw.length === 0 ? (
-          <p className="text-sm text-gray-400 text-center py-10">
+          <p className="text-xl text-gray-400 text-center py-16">
             Aucune réservation pour le moment
           </p>
         ) : (
-          <div className="divide-y divide-gray-50">
+          <div className="p-6 space-y-4">
             {recentesRaw.map((r) => {
               const statusInfo = statusLabels[r.status] ?? {
                 label: r.status,
-                className: "bg-gray-100 text-gray-700",
+                className: "bg-gray-100 text-gray-700 border-gray-200",
               };
               const sourceInfo = sourceLabels[r.source] ?? {
                 label: r.source,
-                className: "bg-gray-100 text-gray-700",
+                className: "bg-gray-50 text-gray-700 border-gray-200",
               };
-              const checkIn = format(new Date(r.checkIn), "dd/MM/yyyy", {
+              const checkIn = format(new Date(r.checkIn), "dd MMMM yyyy", {
                 locale: fr,
               });
-              const checkOut = format(new Date(r.checkOut), "dd/MM/yyyy", {
+              const checkOut = format(new Date(r.checkOut), "dd MMMM yyyy", {
                 locale: fr,
               });
               const montant =
@@ -183,30 +209,38 @@ export default async function AdminDashboardPage() {
               return (
                 <div
                   key={r.id}
-                  className="flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors"
+                  className="bg-tulipe-beige rounded-2xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4 border border-gray-100"
                 >
-                  <div className="min-w-0">
-                    <p className="font-medium text-gray-900 text-sm truncate">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-2xl font-bold text-gray-900 truncate">
                       {r.guestName}
                     </p>
-                    <p className="text-xs text-gray-500 mt-0.5">
-                      {checkIn} → {checkOut} · {r.guests} pers.
+                    <p className="text-lg text-gray-600 mt-1">
+                      Du {checkIn} au {checkOut}
+                    </p>
+                    <p className="text-lg text-gray-500 mt-0.5">
+                      {r.guests} personne{r.guests > 1 ? "s" : ""} · {montant}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 ml-4 shrink-0">
+                  <div className="flex flex-wrap items-center gap-3 shrink-0">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${sourceInfo.className}`}
+                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-semibold border ${sourceInfo.className}`}
                     >
                       {sourceInfo.label}
                     </span>
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusInfo.className}`}
+                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-semibold border ${statusInfo.className}`}
                     >
                       {statusInfo.label}
                     </span>
-                    <span className="text-sm font-semibold text-gray-700 hidden sm:block">
-                      {montant}
-                    </span>
+                  </div>
+                  <div className="flex gap-3 shrink-0">
+                    <a
+                      href="/admin/reservations"
+                      className="flex items-center gap-2 px-5 py-3 bg-tulipe-green text-white text-lg font-semibold rounded-xl hover:bg-tulipe-green-dark transition-colors"
+                    >
+                      Voir
+                    </a>
                   </div>
                 </div>
               );

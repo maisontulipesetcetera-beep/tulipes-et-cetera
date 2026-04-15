@@ -53,25 +53,38 @@ export default function ReservationsPage() {
   }
 
   return (
-    <div className="space-y-5">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-heading font-bold text-tulipe-bordeaux">
-          Réservations
+    <div className="space-y-6 max-w-5xl mx-auto">
+      {/* En-tête */}
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <h1 className="text-3xl font-heading font-bold text-tulipe-bordeaux">
+          📋 Réservations
         </h1>
         <button
           onClick={fetchReservations}
-          className="text-sm text-gray-500 hover:text-tulipe-green transition-colors"
+          disabled={loading}
+          className="flex items-center gap-2 px-6 py-3 bg-tulipe-green text-white text-lg font-semibold rounded-xl hover:bg-tulipe-green-dark transition-colors disabled:opacity-50 min-h-[52px]"
         >
+          {loading ? <Loader2 size={20} className="animate-spin" /> : "🔄"}{" "}
           Actualiser
         </button>
       </div>
 
+      {/* Contenu */}
       {loading ? (
-        <div className="flex justify-center py-24">
-          <Loader2 className="animate-spin text-tulipe-green" size={32} />
+        <div className="bg-white/90 rounded-2xl flex flex-col items-center justify-center py-24 gap-4">
+          <Loader2 className="animate-spin text-tulipe-green" size={48} />
+          <p className="text-xl text-gray-500">Chargement en cours…</p>
         </div>
       ) : error ? (
-        <div className="text-center py-24 text-red-500 text-sm">{error}</div>
+        <div className="bg-white/90 rounded-2xl py-16 text-center">
+          <p className="text-xl text-red-500">{error}</p>
+          <button
+            onClick={fetchReservations}
+            className="mt-6 px-6 py-3 bg-tulipe-green text-white text-lg font-semibold rounded-xl hover:bg-tulipe-green-dark transition-colors"
+          >
+            Réessayer
+          </button>
+        </div>
       ) : (
         <ReservationTable
           reservations={reservations}
