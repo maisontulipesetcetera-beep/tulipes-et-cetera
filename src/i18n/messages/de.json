@@ -1,0 +1,50 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "house": "Das Haus",
+    "rooms": "Zimmer",
+    "services": "Leistungen",
+    "discover": "Entdecken",
+    "booking": "Buchung",
+    "reviews": "Bewertungen",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Tulipes et Cetera",
+    "subtitle": "Ihre Oase der Ruhe im Elsass",
+    "cta": "Verfügbarkeit prüfen"
+  },
+  "features": {
+    "garden": "Blumengarten",
+    "balneo": "Balneotherapie",
+    "breakfast": "Frühstück inklusive",
+    "bikes": "Fahrräder verfügbar",
+    "pony": "Pony vor Ort"
+  },
+  "booking": {
+    "title": "Ihren Aufenthalt buchen",
+    "checkIn": "Anreise",
+    "checkOut": "Abreise",
+    "guests": "Reisende",
+    "name": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefon",
+    "message": "Nachricht",
+    "submit": "Anfrage senden",
+    "priceFrom": "Ab"
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "name": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "message": "Nachricht",
+    "submit": "Senden",
+    "success": "Ihre Nachricht wurde erfolgreich gesendet!"
+  },
+  "footer": {
+    "legal": "Impressum",
+    "privacy": "Datenschutz",
+    "rights": "Alle Rechte vorbehalten"
+  }
+}

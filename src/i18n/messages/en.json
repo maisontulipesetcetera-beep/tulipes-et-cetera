@@ -1,0 +1,50 @@
+{
+  "nav": {
+    "home": "Home",
+    "house": "The House",
+    "rooms": "Rooms",
+    "services": "Services",
+    "discover": "Discover",
+    "booking": "Booking",
+    "reviews": "Reviews",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Tulipes et Cetera",
+    "subtitle": "Your haven of peace in Alsace",
+    "cta": "Check availability"
+  },
+  "features": {
+    "garden": "Flower garden",
+    "balneo": "Balneotherapy",
+    "breakfast": "Breakfast included",
+    "bikes": "Bikes available",
+    "pony": "Pony on site"
+  },
+  "booking": {
+    "title": "Book your stay",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "guests": "Guests",
+    "name": "Full name",
+    "email": "Email address",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Send request",
+    "priceFrom": "From"
+  },
+  "contact": {
+    "title": "Contact us",
+    "name": "Full name",
+    "email": "Email address",
+    "message": "Message",
+    "submit": "Send",
+    "success": "Your message has been sent successfully!"
+  },
+  "footer": {
+    "legal": "Legal notice",
+    "privacy": "Privacy policy",
+    "rights": "All rights reserved"
+  }
+}
