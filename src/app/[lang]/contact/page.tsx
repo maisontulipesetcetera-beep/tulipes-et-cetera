@@ -1,0 +1,168 @@
+"use client";
+
+import { useState } from "react";
+
+export default function ContactPage() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Placeholder — API à brancher en Task 4
+    setSubmitted(true);
+  }
+
+  return (
+    <>
+      {/* Header */}
+      <section className="bg-tulipe-bordeaux py-16 px-4 text-center">
+        <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
+          Nous contacter
+        </h1>
+        <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
+          Une question ? Une demande ? Nous répondons sous 24h.
+        </p>
+      </section>
+
+      {/* Map + Form */}
+      <section className="py-16 px-4 bg-tulipe-cream">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-10">
+          {/* Left: Map + infos */}
+          <div className="lg:w-1/2 flex flex-col gap-6">
+            {/* Google Maps embed */}
+            <div className="rounded-2xl overflow-hidden shadow-md aspect-[4/3] w-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2676.5!2d7.3186!3d47.4589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDI3JzMyLjAiTiA3wrAxOScwNy4wIkU!5e0!3m2!1sfr!2sfr!4v1700000000000"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localisation Tulipes et Cetera — Waldighoffen"
+              />
+            </div>
+
+            {/* Infos de contact */}
+            <div className="bg-white rounded-2xl p-7 shadow-sm border border-tulipe-beige flex flex-col gap-4">
+              <h2 className="font-heading text-xl text-tulipe-bordeaux">
+                Informations
+              </h2>
+              <div className="flex flex-col gap-3 font-body text-sm text-gray-700">
+                <p className="flex items-start gap-3">
+                  <span className="text-tulipe-bordeaux text-base mt-0.5">
+                    📍
+                  </span>
+                  <span>
+                    2 Rue des Tulipes
+                    <br />
+                    68640 Waldighoffen, France
+                  </span>
+                </p>
+                <p className="flex items-center gap-3">
+                  <span className="text-tulipe-bordeaux text-base">📞</span>
+                  <a
+                    href="tel:+33389400290"
+                    className="hover:text-tulipe-green transition-colors"
+                  >
+                    +33 3 89 40 02 90
+                  </a>
+                </p>
+                <p className="flex items-center gap-3">
+                  <span className="text-tulipe-bordeaux text-base">✉️</span>
+                  <a
+                    href="mailto:contact@tulipes-et-cetera.fr"
+                    className="hover:text-tulipe-green transition-colors"
+                  >
+                    contact@tulipes-et-cetera.fr
+                  </a>
+                </p>
+                <p className="flex items-center gap-3">
+                  <span className="text-tulipe-bordeaux text-base">🕐</span>
+                  <span>Réponse sous 24h</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Formulaire */}
+          <div className="lg:w-1/2">
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-tulipe-beige">
+              <h2 className="font-heading text-2xl text-tulipe-bordeaux mb-6">
+                Envoyez-nous un message
+              </h2>
+
+              {submitted ? (
+                <div className="py-12 text-center flex flex-col items-center gap-4">
+                  <span className="text-5xl">✅</span>
+                  <p className="font-heading text-xl text-tulipe-green">
+                    Message envoyé !
+                  </p>
+                  <p className="font-body text-gray-600 text-sm">
+                    Nous vous répondrons dans les meilleurs délais.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor="name"
+                      className="font-body text-sm font-semibold text-gray-700"
+                    >
+                      Nom complet *
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      required
+                      className="px-4 py-3 rounded-[10px] border border-gray-200 font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green bg-tulipe-cream"
+                      placeholder="Votre nom"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor="email"
+                      className="font-body text-sm font-semibold text-gray-700"
+                    >
+                      Adresse e-mail *
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      className="px-4 py-3 rounded-[10px] border border-gray-200 font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green bg-tulipe-cream"
+                      placeholder="votre@email.fr"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor="message"
+                      className="font-body text-sm font-semibold text-gray-700"
+                    >
+                      Message *
+                    </label>
+                    <textarea
+                      id="message"
+                      required
+                      rows={5}
+                      className="px-4 py-3 rounded-[10px] border border-gray-200 font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green bg-tulipe-cream resize-none"
+                      placeholder="Votre message, dates souhaitées, questions…"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="px-8 py-3 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-colors"
+                  >
+                    Envoyer le message
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
