@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BookingForm from "@/components/site/BookingForm";
 
 interface ReservationPageProps {
   params: Promise<{ lang: string }>;
@@ -93,39 +94,17 @@ export default async function ReservationPage({
         </div>
       </section>
 
-      {/* Calendrier placeholder */}
+      {/* Calendrier + Formulaire de réservation */}
       <section className="py-16 px-4 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl text-tulipe-bordeaux text-center mb-8">
-            Disponibilités
-          </h2>
-          <div className="border-2 border-dashed border-tulipe-beige rounded-2xl p-16 text-center bg-tulipe-cream">
-            <p className="font-body text-gray-400 text-lg">
-              Calendrier — à venir
-            </p>
-            <p className="font-body text-gray-300 text-sm mt-2">
-              Intégration iCal / Booking en cours
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Formulaire placeholder */}
-      <section className="py-16 px-4 bg-tulipe-beige">
         <div className="max-w-3xl mx-auto">
           <h2 className="font-heading text-3xl text-tulipe-bordeaux text-center mb-8">
             Faire une demande de réservation
           </h2>
-          <div className="border-2 border-dashed border-tulipe-beige rounded-2xl p-16 text-center bg-white">
-            <p className="font-body text-gray-400 text-lg">
-              Formulaire — à venir
-            </p>
-            <p className="font-body text-gray-300 text-sm mt-2">
-              Système de réservation en cours d&apos;intégration
-            </p>
+          <div className="bg-tulipe-cream rounded-2xl border border-tulipe-beige p-6 md:p-10">
+            <BookingForm />
           </div>
-          <p className="font-body text-center text-gray-600 mt-8">
-            En attendant, contactez-nous directement :{" "}
+          <p className="font-body text-center text-gray-500 text-sm mt-8">
+            Vous pouvez aussi nous contacter directement :{" "}
             <Link
               href={`/${lang}/contact`}
               className="text-tulipe-bordeaux underline hover:text-tulipe-green transition-colors"

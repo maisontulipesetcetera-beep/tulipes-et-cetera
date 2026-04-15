@@ -1,0 +1,51 @@
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+import { db } from "@/lib/db";
+import { createCheckoutSession } from "@/lib/stripe";
+
+const CheckoutSchema = z.object({
+  reservationId: z.string().min(1),
+});
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const parsed = CheckoutSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "reservationId requis" },
+        { status: 400 },
+      );
+    }
+
+    const reservation = await db.reservation.findUnique({
+      where: { id: parsed.data.reservationId },
+    });
+
+    if (!reservation) {
+      return NextResponse.json(
+        { error: "Réservation introuvable" },
+        { status: 404 },
+      );
+    }
+
+    if (!reservation.depositAmount) {
+      return NextResponse.json(
+        { error: "Montant acompte manquant" },
+        { status: 400 },
+      );
+    }
+
+    const session = await createCheckoutSession({
+      id: reservation.id,
+      guestEmail: reservation.guestEmail,
+      depositAmount: reservation.depositAmount,
+    });
+
+    return NextResponse.json({ url: session.url });
+  } catch (err) {
+    console.error("[POST /api/stripe/checkout]", err);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+  }
+}

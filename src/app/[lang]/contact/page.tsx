@@ -1,16 +1,6 @@
-"use client";
-
-import { useState } from "react";
+import ContactForm from "@/components/site/ContactForm";
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // Placeholder — API à brancher en Task 4
-    setSubmitted(true);
-  }
-
   return (
     <>
       {/* Header */}
@@ -91,74 +81,7 @@ export default function ContactPage() {
                 Envoyez-nous un message
               </h2>
 
-              {submitted ? (
-                <div className="py-12 text-center flex flex-col items-center gap-4">
-                  <span className="text-5xl">✅</span>
-                  <p className="font-heading text-xl text-tulipe-green">
-                    Message envoyé !
-                  </p>
-                  <p className="font-body text-gray-600 text-sm">
-                    Nous vous répondrons dans les meilleurs délais.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                  <div className="flex flex-col gap-1.5">
-                    <label
-                      htmlFor="name"
-                      className="font-body text-sm font-semibold text-gray-700"
-                    >
-                      Nom complet *
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      required
-                      className="px-4 py-3 rounded-[10px] border border-gray-200 font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green bg-tulipe-cream"
-                      placeholder="Votre nom"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <label
-                      htmlFor="email"
-                      className="font-body text-sm font-semibold text-gray-700"
-                    >
-                      Adresse e-mail *
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      className="px-4 py-3 rounded-[10px] border border-gray-200 font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green bg-tulipe-cream"
-                      placeholder="votre@email.fr"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <label
-                      htmlFor="message"
-                      className="font-body text-sm font-semibold text-gray-700"
-                    >
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      required
-                      rows={5}
-                      className="px-4 py-3 rounded-[10px] border border-gray-200 font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green bg-tulipe-cream resize-none"
-                      placeholder="Votre message, dates souhaitées, questions…"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="px-8 py-3 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-colors"
-                  >
-                    Envoyer le message
-                  </button>
-                </form>
-              )}
+              <ContactForm />
             </div>
           </div>
         </div>
