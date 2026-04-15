@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 
 const BASE_URL = "https://tulipes-et-cetera.fr";
@@ -195,6 +196,8 @@ export default async function AvisPage({
 }) {
   const { lang } = await params;
   const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const t = await getTranslations("avis");
+
   return (
     <>
       <script
@@ -204,15 +207,13 @@ export default async function AvisPage({
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Avis de nos hôtes 🌷
+          {t("page_title")}
         </h1>
         <div className="flex items-center justify-center gap-3 mb-4">
           <span className="text-tulipe-gold text-3xl">★★★★★</span>
           <span className="font-heading text-3xl text-white">9.9 / 10</span>
         </div>
-        <p className="font-body text-white/70 text-sm">
-          Note moyenne sur Booking.com
-        </p>
+        <p className="font-body text-white/70 text-sm">{t("rating_label")}</p>
       </section>
 
       {/* Avis grid */}
@@ -243,7 +244,7 @@ export default async function AvisPage({
       {/* Lien Booking */}
       <section className="py-12 px-4 bg-tulipe-beige text-center">
         <p className="font-body text-gray-600 mb-4 text-lg">
-          Retrouvez tous nos avis vérifiés sur Booking.com
+          {t("booking_text")}
         </p>
         <a
           href="https://www.booking.com"
@@ -251,7 +252,7 @@ export default async function AvisPage({
           rel="noopener noreferrer"
           className="inline-block px-8 py-3 bg-[#003580] hover:bg-[#00224f] text-white font-body font-semibold rounded-[10px] transition-colors"
         >
-          Voir tous les avis sur Booking.com
+          {t("booking_button")}
         </a>
       </section>
 
@@ -259,17 +260,16 @@ export default async function AvisPage({
       <section className="py-16 px-4 bg-tulipe-cream">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-heading text-3xl text-tulipe-blue mb-4">
-            Livre d&apos;or
+            {t("guestbook_title")}
           </h2>
           <p className="font-body text-gray-600 mb-8 text-base max-w-xl mx-auto">
-            Feuilletez les mots laissés par nos hôtes et, si vous le souhaitez,
-            laissez-y votre empreinte.
+            {t("guestbook_text")}
           </p>
           <Link
             href={`/${locale}/livre-dor`}
             className="inline-flex items-center gap-2 px-8 py-3 bg-tulipe-forest hover:bg-tulipe-forest-dark text-white font-body font-semibold rounded-[10px] transition-colors text-base"
           >
-            📖 Ouvrir le livre d&apos;or
+            📖 {t("guestbook_button")}
           </Link>
         </div>
       </section>

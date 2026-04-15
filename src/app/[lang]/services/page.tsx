@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 
 const BASE_URL = "https://tulipes-et-cetera.fr";
@@ -58,73 +59,73 @@ export async function generateMetadata({
   };
 }
 
-const prestations = [
+const prestationsData = [
   {
     emoji: "🥐",
-    title: "Petit-déjeuner complet",
-    description:
-      "Kougelhopf maison, pain frais, œufs fermiers, confitures artisanales et produits locaux d'Alsace. Un réveil en douceur chaque matin.",
+    titleKey: "breakfast_title" as const,
+    descKey: "breakfast_desc" as const,
   },
   {
     emoji: "📶",
-    title: "Wifi & confort moderne",
-    description:
-      "TV connectée, bibliothèque garnie de livres et revues, jeux de société, linge de lit et de bain fourni — tout le confort d'un chez-soi.",
+    titleKey: "wifi_title" as const,
+    descKey: "wifi_desc" as const,
   },
   {
     emoji: "🚲",
-    title: "Vélos gratuits",
-    description:
-      "Prêt de vélos pour découvrir le Sundgau à votre rythme : villages pittoresques, vignes, étangs et pistes cyclables balisées.",
+    titleKey: "bikes_title" as const,
+    descKey: "bikes_desc" as const,
   },
   {
     emoji: "🐴",
-    title: "Poney sur place",
-    description:
-      "Rencontrez le poney de la propriété ! Une joie pour les enfants et un moment de douceur pour les grands.",
+    titleKey: "pony_title" as const,
+    descKey: "pony_desc" as const,
   },
   {
     emoji: "🧺",
-    title: "Paniers pique-nique",
-    description:
-      "Sur commande, nous préparons des paniers pique-nique avec des produits bio et locaux pour vos escapades dans la région.",
+    titleKey: "picnic_title" as const,
+    descKey: "picnic_desc" as const,
   },
   {
     emoji: "🔥",
-    title: "Brasero & jardin",
-    description:
-      "Jardin privatif de 3 000 m², terrasse aménagée et brasero pour les soirées estivales. Votre espace vert, rien que pour vous.",
+    titleKey: "brasero_title" as const,
+    descKey: "brasero_desc" as const,
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  await params;
+  const t = await getTranslations("services");
+
   return (
     <>
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Nos Prestations 🌷
+          {t("page_title")}
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
-          Tout ce qu&apos;il faut pour un séjour parfait, inclus ou disponible
-          sur place
+          {t("page_subtitle")}
         </p>
       </section>
 
       {/* Grid */}
       <section className="py-20 md:py-28 px-4 bg-tulipe-cream">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {prestations.map((item) => (
+          {prestationsData.map((item) => (
             <div
-              key={item.title}
+              key={item.titleKey}
               className="bg-white rounded-2xl p-8 shadow-sm border border-tulipe-beige flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300"
             >
               <span className="text-5xl">{item.emoji}</span>
               <h2 className="font-heading text-xl text-tulipe-blue">
-                {item.title}
+                {t(item.titleKey)}
               </h2>
               <p className="font-body text-gray-600 leading-relaxed text-sm">
-                {item.description}
+                {t(item.descKey)}
               </p>
             </div>
           ))}
@@ -135,7 +136,7 @@ export default function ServicesPage() {
       <section className="py-16 px-4 bg-tulipe-beige">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-heading text-3xl text-tulipe-blue text-center mb-10">
-            Des moments savoureux 🌷
+            {t("moments_title")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">

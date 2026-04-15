@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 
 const BASE_URL = "https://tulipes-et-cetera.fr";
@@ -63,46 +64,43 @@ interface ChambresPageProps {
   params: Promise<{ lang: string }>;
 }
 
-const chambres = [
+const chambresData = [
   {
     slug: "tulipe",
-    name: "Chambre Tulipe 🌷",
-    description:
-      "La chambre principale, lumineuse et spacieuse. Lit double king-size avec vue directe sur le jardin fleuri. Décoration élégante avec touches florales.",
+    nameKey: "tulipe_name" as const,
+    descKey: "tulipe_desc" as const,
     details: [
-      "Lit king-size 180×200",
-      "Vue jardin",
-      "Literie premium",
-      "Accès salle de bains",
-    ],
+      "tulipe_detail1",
+      "tulipe_detail2",
+      "tulipe_detail3",
+      "tulipe_detail4",
+    ] as const,
     image: "/images/gallery/salon-champagne.jpg",
     imageAlt: "Chambre Tulipe — vue sur le jardin",
   },
   {
     slug: "lavande",
-    name: "Chambre Lavande 🌷",
-    description:
-      "Une chambre cosy et apaisante, idéale pour un séjour romantique. Lit double confortable avec coin lecture aménagé près de la fenêtre.",
+    nameKey: "lavande_name" as const,
+    descKey: "lavande_desc" as const,
     details: [
-      "Lit double 160×200",
-      "Coin lecture",
-      "Ambiance chaleureuse",
-      "Accès salle de bains",
-    ],
+      "lavande_detail1",
+      "lavande_detail2",
+      "lavande_detail3",
+      "lavande_detail4",
+    ] as const,
     image: "/images/gallery/diner-romantique.jpg",
     imageAlt: "Chambre Lavande — ambiance cosy",
   },
   {
     slug: "cigogne",
-    name: "Chambre Cigogne 🌷",
-    description:
-      "La chambre familiale, spacieuse et accueillante. Lit double avec possibilité d'ajouter un lit enfant. Idéale pour les familles.",
+    nameKey: "cigogne_name" as const,
+    descKey: "cigogne_desc" as const,
     details: [
-      "Lit double 160×200",
-      "Lit enfant possible",
-      "Grande superficie",
-      "Accès salle de bains",
-    ],
+      "cigogne_detail1",
+      "cigogne_detail2",
+      "cigogne_detail3",
+      "cigogne_detail4",
+    ] as const,
     image: "/images/gallery/raclette-2.jpg",
     imageAlt: "Chambre Cigogne — chambre familiale",
   },
@@ -110,23 +108,24 @@ const chambres = [
 
 export default async function ChambresPage({ params }: ChambresPageProps) {
   const { lang } = await params;
+  const t = await getTranslations("chambres");
 
   return (
     <>
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Nos Chambres 🌷
+          {t("page_title")}
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
-          Trois chambres de charme pour un séjour inoubliable en Alsace
+          {t("page_subtitle")}
         </p>
       </section>
 
       {/* Chambres */}
       <section className="py-20 md:py-28 px-4 bg-tulipe-cream">
         <div className="max-w-5xl mx-auto flex flex-col gap-12">
-          {chambres.map((chambre, idx) => (
+          {chambresData.map((chambre, idx) => (
             <div
               key={chambre.slug}
               className={`flex flex-col ${idx % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} gap-8 bg-white rounded-2xl overflow-hidden shadow-sm border border-tulipe-beige hover:shadow-lg transition-shadow duration-300`}
@@ -145,19 +144,19 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
               {/* Content */}
               <div className="md:w-3/5 p-8 flex flex-col gap-4 justify-center">
                 <h2 className="font-heading text-2xl md:text-3xl text-tulipe-blue">
-                  {chambre.name}
+                  {t(chambre.nameKey)}
                 </h2>
                 <p className="font-body text-gray-700 leading-relaxed">
-                  {chambre.description}
+                  {t(chambre.descKey)}
                 </p>
                 <ul className="flex flex-col gap-1.5">
-                  {chambre.details.map((detail) => (
+                  {chambre.details.map((detailKey) => (
                     <li
-                      key={detail}
+                      key={detailKey}
                       className="flex items-center gap-2 font-body text-sm text-gray-600"
                     >
                       <span className="text-tulipe-forest font-bold">✓</span>
-                      {detail}
+                      {t(detailKey)}
                     </li>
                   ))}
                 </ul>
@@ -166,7 +165,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
                     href={`/${lang}/reservation`}
                     className="inline-block px-6 py-3 bg-tulipe-forest hover:bg-tulipe-forest-dark text-white font-body font-semibold rounded-[10px] transition-colors text-sm"
                   >
-                    Réserver cette chambre
+                    {t("book_button")}
                   </Link>
                 </div>
               </div>
@@ -177,15 +176,12 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
 
       {/* CTA */}
       <section className="bg-tulipe-beige py-12 px-4 text-center">
-        <p className="font-body text-gray-700 text-lg mb-4">
-          Toutes les chambres bénéficient d&apos;une literie de qualité, linge
-          fourni, et accès à la salle de bains avec baignoire balnéo.
-        </p>
+        <p className="font-body text-gray-700 text-lg mb-4">{t("cta_text")}</p>
         <Link
           href={`/${lang}/reservation`}
           className="inline-block px-8 py-3 bg-tulipe-forest hover:bg-tulipe-forest-dark text-white font-body font-semibold rounded-[10px] transition-colors"
         >
-          Voir les tarifs & disponibilités
+          {t("cta_button")}
         </Link>
       </section>
     </>

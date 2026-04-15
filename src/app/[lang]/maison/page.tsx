@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 
 const BASE_URL = "https://tulipes-et-cetera.fr";
@@ -58,7 +59,14 @@ export async function generateMetadata({
   };
 }
 
-export default function MaisonPage() {
+export default async function MaisonPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  await params;
+  const t = await getTranslations("maison");
+
   const photos = [
     {
       src: "/images/gallery/salon-champagne.jpg",
@@ -79,10 +87,10 @@ export default function MaisonPage() {
       {/* Page header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          La Maison 🌷
+          {t("page_title")}
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
-          Une maison de charme atypique, ouverte sur un cadre verdoyant
+          {t("page_subtitle")}
         </p>
       </section>
 
@@ -93,51 +101,40 @@ export default function MaisonPage() {
             {/* Text — 60% */}
             <div className="lg:w-[60%] flex flex-col gap-6">
               <h2 className="font-heading text-3xl text-tulipe-blue">
-                On me dit &ldquo;Maison de Charme&rdquo; et je le suis !
+                {t("section_title")}
               </h2>
               <p className="font-body text-gray-700 text-lg leading-relaxed">
-                Atypique et ouverte sur un cadre verdoyant, j&apos;offre tous
-                mes atouts à savoir l&apos;indépendance, le calme,
-                l&apos;agrément, la détente et tous les éléments qui
-                participeront au bonheur de celui qui résidera sous mon toit. Un
-                jardin privatif aménagé, des places de parking et le prêt
-                gratuit de vélos, un chargeur de voitures électriques et tout au
-                fond de la propriété un brasero pour l&apos;ambiance.
+                {t("desc1")}
               </p>
               <p className="font-body text-gray-700 text-lg leading-relaxed">
-                Parlons de moi Maison de Charme&hellip; Je suis composée
-                d&apos;un grand salon/SAM avec bibliothèque de livres et revues,
-                téléviseur connecté ainsi que tout un équipement de loisirs. Un
-                perron et une grande terrasse, un poêle à bois, une cuisine
-                parfaitement équipée, une machine à laver, des toilettes
-                indépendantes, un bureau&hellip; ceci pour le rez-de-chaussée.
+                {t("desc2")}
               </p>
               <p className="font-body text-gray-700 text-lg leading-relaxed">
-                À l&apos;étage trois chambres, une salle de bains avec douche et
-                baignoire balnéo, etc. Les lits sont de belles dimensions et les
-                literies de qualité, tout est fourni.
+                {t("desc3")}
               </p>
 
               {/* Features list */}
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  "Jardin privatif 3 000 m²",
-                  "Parking gratuit",
-                  "Vélos en prêt gratuit",
-                  "Chargeur voiture électrique",
-                  "Brasero & terrasse",
-                  "Poêle à bois",
-                  "Cuisine équipée",
-                  "Machine à laver",
-                  "TV connectée & bibliothèque",
-                  "Baignoire balnéo",
-                ].map((item) => (
+                {(
+                  [
+                    "feature_garden",
+                    "feature_parking",
+                    "feature_bikes",
+                    "feature_ev",
+                    "feature_brasero",
+                    "feature_stove",
+                    "feature_kitchen",
+                    "feature_washer",
+                    "feature_tv",
+                    "feature_balneo",
+                  ] as const
+                ).map((key) => (
                   <div
-                    key={item}
+                    key={key}
                     className="flex items-center gap-2 font-body text-gray-700"
                   >
                     <span className="text-tulipe-forest font-bold">✓</span>
-                    {item}
+                    {t(key)}
                   </div>
                 ))}
               </div>
@@ -177,7 +174,7 @@ export default function MaisonPage() {
             />
           </div>
           <p className="font-heading text-2xl text-tulipe-blue italic">
-            &ldquo;Un vrai Home Sweet Home&rdquo; 🌷
+            &ldquo;{t("sweet_home")}&rdquo;
           </p>
         </div>
       </section>

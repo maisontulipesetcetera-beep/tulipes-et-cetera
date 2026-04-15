@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/site/ContactForm";
+import { getTranslations } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 
 const BASE_URL = "https://tulipes-et-cetera.fr";
@@ -58,16 +59,23 @@ export async function generateMetadata({
   };
 }
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  await params;
+  const t = await getTranslations("contact");
+
   return (
     <>
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Contact 🌷
+          {t("page_title")}
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
-          Une question ? Une demande ? Nous répondons sous 24h.
+          {t("page_subtitle")}
         </p>
       </section>
 
@@ -93,7 +101,7 @@ export default function ContactPage() {
             {/* Infos de contact */}
             <div className="bg-white rounded-2xl p-7 shadow-sm border border-tulipe-beige flex flex-col gap-4">
               <h2 className="font-heading text-xl text-tulipe-blue">
-                Informations
+                {t("info_title")}
               </h2>
               <div className="flex flex-col gap-3 font-body text-sm text-gray-700">
                 <p className="flex items-start gap-3">
@@ -126,7 +134,7 @@ export default function ContactPage() {
                 </p>
                 <p className="flex items-center gap-3">
                   <span className="text-tulipe-forest text-base">🕐</span>
-                  <span>Réponse sous 24h</span>
+                  <span>{t("response_time")}</span>
                 </p>
               </div>
             </div>
@@ -136,7 +144,7 @@ export default function ContactPage() {
           <div className="lg:w-1/2">
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-tulipe-beige">
               <h2 className="font-heading text-2xl text-tulipe-blue mb-6">
-                Envoyez-nous un message
+                {t("send_message")}
               </h2>
 
               <ContactForm />

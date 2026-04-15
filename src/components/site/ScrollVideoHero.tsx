@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,28 +22,24 @@ const SLIDES = [
     side: "left" as const,
     startPct: 14,
     endPct: 28,
-    text: "Un écrin de douceur au fond d'une ruelle sans issue, où le temps s'arrête",
   },
   {
     id: "slide2",
     side: "right" as const,
     startPct: 28,
     endPct: 45,
-    text: "Trois chambres de charme, literie haut de gamme et balnéo",
   },
   {
     id: "slide3",
     side: "left" as const,
     startPct: 45,
     endPct: 62,
-    text: "Petit-déjeuner fait maison, kougelhopf et produits bio locaux",
   },
   {
     id: "slide4",
     side: "right" as const,
     startPct: 62,
     endPct: 78,
-    text: "Vous viendrez en hôte et repartirez en ami",
   },
   {
     id: "cta",
@@ -68,6 +65,7 @@ interface ScrollVideoHeroProps {
 }
 
 export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
+  const t = useTranslations("hero");
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const framesRef = useRef<HTMLImageElement[]>([]);
@@ -318,7 +316,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
             <div className="absolute inset-0 z-10">
               <Image
                 src="/images/hero-facade.jpg"
-                alt="Tulipes Et Cetera — chargement"
+                alt={t("loading_alt")}
                 fill
                 className="object-cover"
                 priority
@@ -361,7 +359,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
                 textShadow: "0 2px 12px rgba(0,0,0,0.8)",
               }}
             >
-              Cottage de Charme · Sundgau · Alsace 🌷
+              {t("slide0_surtitle")}
             </span>
             <h1
               className="text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05]"
@@ -370,7 +368,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
                 fontFamily: "var(--font-script)",
               }}
             >
-              Tulipes Et Cetera
+              {t("slide0_title")}
             </h1>
           </div>
 
@@ -386,7 +384,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl leading-snug"
               style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
             >
-              {SLIDES[1].text}
+              {t("slide1")}
             </p>
           </div>
 
@@ -402,7 +400,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl text-right leading-snug"
               style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
             >
-              {SLIDES[2].text}
+              {t("slide2")}
             </p>
           </div>
 
@@ -418,7 +416,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl leading-snug"
               style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
             >
-              {SLIDES[3].text}
+              {t("slide3")}
             </p>
           </div>
 
@@ -434,7 +432,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl text-right leading-snug"
               style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
             >
-              {SLIDES[4].text}
+              {t("slide4")}
             </p>
           </div>
 
@@ -452,13 +450,13 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
                   href={`/${lang}/reservation`}
                   className="inline-flex items-center justify-center px-10 py-4 bg-tulipe-forest hover:bg-tulipe-forest-dark text-white font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg shadow-lg"
                 >
-                  Réservez votre séjour
+                  {t("slide5_cta1")}
                 </Link>
                 <Link
                   href={`/${lang}/maison`}
                   className="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-tulipe-blue font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg"
                 >
-                  Découvrir la maison
+                  {t("slide5_cta2")}
                 </Link>
               </div>
               <div className="flex items-center gap-3 mt-1">
@@ -472,7 +470,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
                   className="font-body text-white/85 text-base"
                   style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}
                 >
-                  9.9/10 sur Booking · 86 avis
+                  {t("slide5_reviews")}
                 </span>
               </div>
             </div>
@@ -506,7 +504,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
         <section className="relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden">
           <Image
             src="/images/hero-facade.jpg"
-            alt="Tulipes Et Cetera — Cottage de Charme en Alsace"
+            alt={t("loading_alt")}
             fill
             className="object-cover"
             priority
@@ -517,13 +515,13 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               className="font-body text-xs tracking-[0.3em] uppercase"
               style={{ color: "#C8A96E" }}
             >
-              Cottage de Charme · Sundgau · Alsace
+              {t("slide0_surtitle")}
             </span>
             <h1
               className="font-heading text-5xl text-white leading-tight"
               style={{ textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}
             >
-              Tulipes Et Cetera
+              {t("slide0_title")}
             </h1>
           </div>
         </section>
