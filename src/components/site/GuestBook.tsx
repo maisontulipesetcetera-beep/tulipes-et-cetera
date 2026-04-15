@@ -370,7 +370,9 @@ export default function GuestBook() {
             <div
               className="absolute inset-0 rounded-[2px_16px_16px_2px] overflow-hidden"
               style={{
-                background: isCover ? "#5C1A1A" : "#FFF8E7",
+                background: isCover
+                  ? "url('/images/guestbook-cover.png') center/cover no-repeat, #5C1A1A"
+                  : "#FFF8E7",
                 boxShadow:
                   "inset -4px 0 8px rgba(0,0,0,0.08), 2px 4px 20px rgba(0,0,0,0.15)",
               }}

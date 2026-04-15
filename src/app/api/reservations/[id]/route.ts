@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
+import { sendEmail } from "@/lib/email";
+import { createCheckoutSession } from "@/lib/stripe";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
@@ -60,10 +62,56 @@ export async function PATCH(
       );
     }
 
+    // Fetch current reservation to detect status transition
+    const existing = await db.reservation.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json(
+        { error: "Réservation introuvable" },
+        { status: 404 },
+      );
+    }
+
     const reservation = await db.reservation.update({
       where: { id },
       data: parsed.data,
     });
+
+    // When status transitions to "confirmed", create Stripe checkout and email client
+    if (parsed.data.status === "confirmed" && existing.status !== "confirmed") {
+      try {
+        const session = await createCheckoutSession({
+          id: reservation.id,
+          guestEmail: reservation.guestEmail,
+          depositAmount: reservation.depositAmount ?? 0,
+        });
+
+        await sendEmail({
+          to: reservation.guestEmail,
+          subject: "Votre réservation est confirmée — Tulipes Et Cetera",
+          html: `
+            <h2>Bonne nouvelle, votre réservation est confirmée !</h2>
+            <p>Bonjour ${reservation.guestName},</p>
+            <p>Nous avons le plaisir de confirmer votre séjour chez <strong>Tulipes Et Cetera</strong>.</p>
+            <p>Pour finaliser votre réservation, veuillez régler l'acompte en cliquant sur le lien ci-dessous :</p>
+            <p style="margin: 24px 0;">
+              <a href="${session.url}" style="background:#2d6a4f;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">
+                Payer l'acompte
+              </a>
+            </p>
+            <p><strong>Montant de l'acompte :</strong> ${((reservation.depositAmount ?? 0) / 100).toFixed(2)} €</p>
+            <p>Ce lien est sécurisé et vous redirigera vers notre page de paiement Stripe.</p>
+            <p>À très bientôt en Alsace !</p>
+            <p>— L'équipe Tulipes Et Cetera</p>
+          `,
+        });
+      } catch (emailErr) {
+        console.error(
+          "[PATCH /api/reservations/[id]] Stripe/email error",
+          emailErr,
+        );
+        // Don't fail the whole request — reservation is already confirmed
+      }
+    }
 
     return NextResponse.json(reservation);
   } catch (err) {

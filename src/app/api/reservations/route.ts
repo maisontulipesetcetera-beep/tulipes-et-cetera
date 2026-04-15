@@ -11,7 +11,7 @@ const ReservationSchema = z.object({
   guestPhone: z.string().optional(),
   checkIn: z.string().datetime(),
   checkOut: z.string().datetime(),
-  guests: z.number().int().min(1).max(20),
+  guests: z.number().int().min(1).max(6),
   message: z.string().optional(),
   // honeypot
   website: z.string().max(0).optional(),

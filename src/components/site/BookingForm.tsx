@@ -11,7 +11,7 @@ const BookingSchema = z.object({
   guestName: z.string().min(2, "Nom trop court"),
   guestEmail: z.string().email("Email invalide"),
   guestPhone: z.string().optional(),
-  guests: z.number().int().min(1).max(20),
+  guests: z.number().int().min(1).max(6),
   message: z.string().optional(),
 });
 
@@ -111,7 +111,8 @@ export default function BookingForm() {
           Demande envoyée !
         </p>
         <p className="font-body text-gray-600">
-          Vous recevrez une confirmation par email sous 24 h.
+          Votre demande a été envoyée ! Vous recevrez un email avec un lien de
+          paiement une fois votre réservation confirmée par l&apos;hôte.
         </p>
       </div>
     );
@@ -213,12 +214,15 @@ export default function BookingForm() {
             onChange={handleChange}
             className={inputCls(errors.guests)}
           >
-            {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+            {Array.from({ length: 6 }, (_, i) => i + 1).map((n) => (
               <option key={n} value={n}>
                 {n} {n === 1 ? "personne" : "personnes"}
               </option>
             ))}
           </select>
+          <p className="mt-1 text-xs text-gray-500 font-body">
+            6 voyageurs maximum
+          </p>
         </div>
 
         <div className="sm:col-span-2">

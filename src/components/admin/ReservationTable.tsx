@@ -107,6 +107,7 @@ export default function ReservationTable({
   const [selectedReservation, setSelectedReservation] =
     useState<Reservation | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);
+  const [paymentEmailSent, setPaymentEmailSent] = useState<string | null>(null);
 
   const filtered = reservations.filter((r) => {
     if (filterStatus !== "all" && r.status !== filterStatus) return false;
@@ -115,6 +116,7 @@ export default function ReservationTable({
 
   async function handleStatusChange(id: string, status: string) {
     setUpdating(id);
+    setPaymentEmailSent(null);
     try {
       const res = await fetch(`/api/reservations/${id}`, {
         method: "PATCH",
@@ -126,6 +128,10 @@ export default function ReservationTable({
         onStatusChange?.(id, status);
         if (selectedReservation?.id === id) {
           setSelectedReservation((prev) => (prev ? { ...prev, status } : null));
+        }
+        if (status === "confirmed") {
+          setPaymentEmailSent(id);
+          setTimeout(() => setPaymentEmailSent(null), 5000);
         }
       }
     } finally {
@@ -284,6 +290,11 @@ export default function ReservationTable({
                     </a>
                   )}
                 </div>
+                {paymentEmailSent === r.id && (
+                  <p className="mt-3 text-sm font-semibold text-green-700 bg-green-50 border border-green-200 rounded-xl px-4 py-2">
+                    Email de paiement envoyé au client.
+                  </p>
+                )}
               </div>
             );
           })}
