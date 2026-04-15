@@ -104,16 +104,19 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero Video */}
       <section className="relative h-[90vh] min-h-[560px] flex items-center justify-center overflow-hidden">
-        <Image
-          src="/images/hero-facade.jpg"
-          alt="Façade de Tulipes et Cetera au coucher de soleil"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/50" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/hero-facade.jpg"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/images/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto flex flex-col items-center gap-6">
           <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl text-white leading-tight drop-shadow-lg">
             {t("title")}
