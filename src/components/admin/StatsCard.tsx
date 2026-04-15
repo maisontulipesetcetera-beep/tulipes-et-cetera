@@ -1,5 +1,7 @@
+import type { LucideIcon } from "lucide-react";
+
 interface StatsCardProps {
-  icon: string;
+  icon: LucideIcon;
   label: string;
   value: string | number;
   color: "green" | "blue" | "orange" | "gold";
@@ -7,29 +9,29 @@ interface StatsCardProps {
 
 const colorClasses = {
   green: {
-    bg: "bg-green-50 border-green-200",
-    iconBg: "bg-green-100",
-    value: "text-green-800",
+    circleBg: "bg-green-100",
+    iconColor: "text-green-700",
+    value: "text-gray-900",
   },
   blue: {
-    bg: "bg-blue-50 border-blue-200",
-    iconBg: "bg-blue-100",
-    value: "text-blue-800",
+    circleBg: "bg-blue-100",
+    iconColor: "text-blue-700",
+    value: "text-gray-900",
   },
   orange: {
-    bg: "bg-orange-50 border-orange-200",
-    iconBg: "bg-orange-100",
-    value: "text-orange-800",
+    circleBg: "bg-orange-100",
+    iconColor: "text-orange-700",
+    value: "text-gray-900",
   },
   gold: {
-    bg: "bg-yellow-50 border-yellow-200",
-    iconBg: "bg-yellow-100",
-    value: "text-yellow-800",
+    circleBg: "bg-amber-100",
+    iconColor: "text-amber-700",
+    value: "text-gray-900",
   },
 };
 
 export default function StatsCard({
-  icon,
+  icon: Icon,
   label,
   value,
   color,
@@ -37,19 +39,20 @@ export default function StatsCard({
   const classes = colorClasses[color];
 
   return (
-    <div
-      className={`${classes.bg} border-2 rounded-2xl p-8 flex flex-col gap-4 shadow-sm min-h-[140px]`}
-    >
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col gap-4">
+      {/* Icon circle */}
       <div
-        className={`${classes.iconBg} w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shrink-0`}
+        className={`${classes.circleBg} w-12 h-12 rounded-full flex items-center justify-center shrink-0`}
       >
-        {icon}
+        <Icon size={24} className={classes.iconColor} strokeWidth={2} />
       </div>
+
+      {/* Value + label */}
       <div>
-        <p className={`${classes.value} text-5xl font-bold leading-none`}>
+        <p className={`${classes.value} text-4xl font-bold leading-none`}>
           {value}
         </p>
-        <p className="text-xl text-gray-700 font-medium mt-2">{label}</p>
+        <p className="text-base text-gray-500 font-medium mt-2">{label}</p>
       </div>
     </div>
   );

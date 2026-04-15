@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Home, CalendarDays, MessageSquare, Settings } from "lucide-react";
 
 const mobileNavItems = [
-  { emoji: "🏠", label: "Accueil", href: "/admin" },
-  { emoji: "📋", label: "Réservations", href: "/admin/reservations" },
-  { emoji: "📅", label: "Calendrier", href: "/admin/calendrier" },
-  { emoji: "💬", label: "Messages", href: "/admin/messages" },
+  { icon: Home, label: "Accueil", href: "/admin" },
+  { icon: CalendarDays, label: "Réservations", href: "/admin/reservations" },
+  { icon: MessageSquare, label: "Messages", href: "/admin/messages" },
+  { icon: Settings, label: "Réglages", href: "/admin/parametres" },
 ];
 
 export default function MobileBottomNav() {
@@ -20,7 +21,7 @@ export default function MobileBottomNav() {
 
   return (
     <div className="flex items-stretch justify-around">
-      {mobileNavItems.map(({ emoji, label, href }) => {
+      {mobileNavItems.map(({ icon: Icon, label, href }) => {
         const active = isActive(href);
         return (
           <Link
@@ -32,7 +33,11 @@ export default function MobileBottomNav() {
                 : "text-gray-500 hover:text-tulipe-green"
             }`}
           >
-            <span className="text-2xl">{emoji}</span>
+            <Icon
+              size={22}
+              className={active ? "text-tulipe-green" : "text-gray-400"}
+              strokeWidth={active ? 2.5 : 2}
+            />
             <span
               className={`text-xs font-semibold ${active ? "text-tulipe-green" : "text-gray-500"}`}
             >

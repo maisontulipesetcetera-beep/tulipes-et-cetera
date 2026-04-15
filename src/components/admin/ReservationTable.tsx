@@ -3,7 +3,15 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { X, Loader2 } from "lucide-react";
+import {
+  X,
+  Loader2,
+  FileText,
+  CheckCircle,
+  XCircle,
+  Mail,
+  Phone,
+} from "lucide-react";
 
 interface Reservation {
   id: string;
@@ -28,48 +36,46 @@ interface ReservationTableProps {
   onStatusChange?: (id: string, status: string) => void;
 }
 
-const statusConfig: Record<
-  string,
-  { label: string; badgeClass: string; emoji: string }
-> = {
+const statusConfig: Record<string, { label: string; badgeClass: string }> = {
   pending: {
     label: "En attente",
     badgeClass: "bg-orange-100 text-orange-800 border-orange-300",
-    emoji: "⏳",
   },
   confirmed: {
     label: "Confirmée",
     badgeClass: "bg-green-100 text-green-800 border-green-300",
-    emoji: "✅",
   },
   in_progress: {
     label: "En cours",
     badgeClass: "bg-blue-100 text-blue-800 border-blue-300",
-    emoji: "🏠",
   },
   completed: {
     label: "Terminée",
     badgeClass: "bg-gray-100 text-gray-700 border-gray-300",
-    emoji: "✔",
   },
   cancelled: {
     label: "Annulée",
     badgeClass: "bg-red-100 text-red-800 border-red-300",
-    emoji: "❌",
   },
 };
 
-const sourceConfig: Record<string, { label: string; badgeClass: string }> = {
+const sourceConfig: Record<
+  string,
+  { label: string; dotColor: string; badgeClass: string }
+> = {
   booking: {
     label: "Booking",
+    dotColor: "bg-blue-500",
     badgeClass: "bg-blue-50 text-blue-700 border-blue-200",
   },
   airbnb: {
     label: "Airbnb",
+    dotColor: "bg-pink-500",
     badgeClass: "bg-pink-50 text-pink-700 border-pink-200",
   },
   direct: {
     label: "Direct",
+    dotColor: "bg-green-500",
     badgeClass: "bg-green-50 text-green-700 border-green-200",
   },
 };
@@ -88,9 +94,9 @@ function formatAmount(cents: number | null) {
 
 const FILTER_BUTTONS = [
   { value: "all", label: "Toutes" },
-  { value: "pending", label: "⏳ En attente" },
-  { value: "confirmed", label: "✅ Confirmées" },
-  { value: "cancelled", label: "❌ Annulées" },
+  { value: "pending", label: "En attente" },
+  { value: "confirmed", label: "Confirmées" },
+  { value: "cancelled", label: "Annulées" },
 ];
 
 export default function ReservationTable({
@@ -156,10 +162,10 @@ export default function ReservationTable({
             const status = statusConfig[r.status] ?? {
               label: r.status,
               badgeClass: "bg-gray-100 text-gray-700 border-gray-300",
-              emoji: "•",
             };
             const source = sourceConfig[r.source] ?? {
               label: r.source,
+              dotColor: "bg-gray-400",
               badgeClass: "bg-gray-50 text-gray-700 border-gray-200",
             };
             const isUpdating = updating === r.id;
@@ -179,14 +185,17 @@ export default function ReservationTable({
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <span
-                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-bold border-2 ${source.badgeClass}`}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold border ${source.badgeClass}`}
                     >
+                      <span
+                        className={`w-2 h-2 rounded-full shrink-0 ${source.dotColor}`}
+                      />
                       {source.label}
                     </span>
                     <span
-                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-bold border-2 ${status.badgeClass}`}
+                      className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold border ${status.badgeClass}`}
                     >
-                      {status.emoji} {status.label}
+                      {status.label}
                     </span>
                   </div>
                 </div>
@@ -231,21 +240,22 @@ export default function ReservationTable({
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() => setSelectedReservation(r)}
-                    className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-800 text-lg font-semibold rounded-xl hover:bg-gray-200 transition-colors min-h-[52px]"
+                    className="flex items-center gap-2 px-5 py-3 bg-gray-100 text-gray-800 text-base font-semibold rounded-xl hover:bg-gray-200 transition-colors min-h-[52px]"
                   >
-                    📄 Voir les détails
+                    <FileText size={18} strokeWidth={2} />
+                    Voir les détails
                   </button>
                   {r.status === "pending" && (
                     <button
                       onClick={() => handleStatusChange(r.id, "confirmed")}
                       disabled={isUpdating}
-                      className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 min-h-[52px]"
+                      className="flex items-center gap-2 px-5 py-3 bg-green-600 text-white text-base font-semibold rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 min-h-[52px]"
                     >
                       {isUpdating ? (
-                        <Loader2 size={20} className="animate-spin" />
+                        <Loader2 size={18} className="animate-spin" />
                       ) : (
-                        "✅"
-                      )}{" "}
+                        <CheckCircle size={18} strokeWidth={2} />
+                      )}
                       Confirmer
                     </button>
                   )}
@@ -253,22 +263,23 @@ export default function ReservationTable({
                     <button
                       onClick={() => handleStatusChange(r.id, "cancelled")}
                       disabled={isUpdating}
-                      className="flex items-center gap-2 px-6 py-3 bg-red-100 text-red-700 text-lg font-semibold rounded-xl hover:bg-red-200 transition-colors disabled:opacity-50 min-h-[52px]"
+                      className="flex items-center gap-2 px-5 py-3 bg-red-100 text-red-700 text-base font-semibold rounded-xl hover:bg-red-200 transition-colors disabled:opacity-50 min-h-[52px]"
                     >
                       {isUpdating ? (
-                        <Loader2 size={20} className="animate-spin" />
+                        <Loader2 size={18} className="animate-spin" />
                       ) : (
-                        "❌"
-                      )}{" "}
+                        <XCircle size={18} strokeWidth={2} />
+                      )}
                       Annuler
                     </button>
                   )}
                   {r.guestEmail && (
                     <a
                       href={`mailto:${r.guestEmail}`}
-                      className="flex items-center gap-2 px-6 py-3 bg-tulipe-bordeaux/10 text-tulipe-bordeaux text-lg font-semibold rounded-xl hover:bg-tulipe-bordeaux/20 transition-colors min-h-[52px]"
+                      className="flex items-center gap-2 px-5 py-3 bg-tulipe-bordeaux/10 text-tulipe-bordeaux text-base font-semibold rounded-xl hover:bg-tulipe-bordeaux/20 transition-colors min-h-[52px]"
                     >
-                      📧 Contacter
+                      <Mail size={18} strokeWidth={2} />
+                      Contacter
                     </a>
                   )}
                 </div>
@@ -309,23 +320,26 @@ export default function ReservationTable({
                   const s = statusConfig[selectedReservation.status] ?? {
                     label: selectedReservation.status,
                     badgeClass: "bg-gray-100 text-gray-700 border-gray-300",
-                    emoji: "•",
                   };
                   const src = sourceConfig[selectedReservation.source] ?? {
                     label: selectedReservation.source,
+                    dotColor: "bg-gray-400",
                     badgeClass: "bg-gray-50 text-gray-700 border-gray-200",
                   };
                   return (
                     <>
                       <span
-                        className={`px-4 py-2 rounded-xl text-base font-bold border-2 ${src.badgeClass}`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold border ${src.badgeClass}`}
                       >
+                        <span
+                          className={`w-2 h-2 rounded-full shrink-0 ${src.dotColor}`}
+                        />
                         {src.label}
                       </span>
                       <span
-                        className={`px-4 py-2 rounded-xl text-base font-bold border-2 ${s.badgeClass}`}
+                        className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold border ${s.badgeClass}`}
                       >
-                        {s.emoji} {s.label}
+                        {s.label}
                       </span>
                     </>
                   );
@@ -344,8 +358,13 @@ export default function ReservationTable({
                   {selectedReservation.guestEmail}
                 </p>
                 {selectedReservation.guestPhone && (
-                  <p className="text-lg text-gray-600">
-                    📞 {selectedReservation.guestPhone}
+                  <p className="text-lg text-gray-600 flex items-center gap-2">
+                    <Phone
+                      size={16}
+                      strokeWidth={2}
+                      className="text-gray-400 shrink-0"
+                    />
+                    {selectedReservation.guestPhone}
                   </p>
                 )}
               </div>
@@ -386,7 +405,7 @@ export default function ReservationTable({
                       {formatAmount(selectedReservation.depositAmount)}{" "}
                       {selectedReservation.depositPaid ? (
                         <span className="text-green-600 text-base font-semibold">
-                          (payé ✅)
+                          (payé)
                         </span>
                       ) : (
                         <span className="text-red-500 text-base font-semibold">
@@ -430,9 +449,14 @@ export default function ReservationTable({
                       handleStatusChange(selectedReservation.id, "confirmed")
                     }
                     disabled={updating === selectedReservation.id}
-                    className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 min-h-[52px]"
+                    className="flex items-center gap-2 px-5 py-3 bg-green-600 text-white text-base font-semibold rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 min-h-[52px]"
                   >
-                    ✅ Confirmer la réservation
+                    {updating === selectedReservation.id ? (
+                      <Loader2 size={18} className="animate-spin" />
+                    ) : (
+                      <CheckCircle size={18} strokeWidth={2} />
+                    )}
+                    Confirmer la réservation
                   </button>
                 )}
                 {selectedReservation.status !== "cancelled" &&
@@ -442,9 +466,14 @@ export default function ReservationTable({
                         handleStatusChange(selectedReservation.id, "cancelled")
                       }
                       disabled={updating === selectedReservation.id}
-                      className="flex items-center gap-2 px-6 py-3 bg-red-100 text-red-700 text-lg font-semibold rounded-xl hover:bg-red-200 transition-colors disabled:opacity-50 min-h-[52px]"
+                      className="flex items-center gap-2 px-5 py-3 bg-red-100 text-red-700 text-base font-semibold rounded-xl hover:bg-red-200 transition-colors disabled:opacity-50 min-h-[52px]"
                     >
-                      ❌ Annuler la réservation
+                      {updating === selectedReservation.id ? (
+                        <Loader2 size={18} className="animate-spin" />
+                      ) : (
+                        <XCircle size={18} strokeWidth={2} />
+                      )}
+                      Annuler la réservation
                     </button>
                   )}
               </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 import WeatherWidget from "@/components/site/WeatherWidget";
+import ScrollVideoHero from "@/components/site/ScrollVideoHero";
 
 const BASE_URL = "https://tulipes-et-cetera.fr";
 
@@ -104,98 +105,8 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      {/* Hero Video — style cinématique */}
-      <section className="relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden">
-        {/* Vidéo plein écran sans bandes noires */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/images/hero-facade.jpg"
-          className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
-        >
-          <source src="/images/hero-video.mp4" type="video/mp4" />
-        </video>
-
-        {/* Overlay dégradé du bas */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-        {/* Contenu aligné en bas à gauche — style aiman-renovation */}
-        <div className="relative z-10 px-6 sm:px-12 md:px-20 pb-16 md:pb-24 max-w-4xl flex flex-col gap-5">
-          {/* Sur-titre */}
-          <span className="font-body text-sm sm:text-base tracking-[0.3em] uppercase text-tulipe-gold">
-            Maison d&apos;hôtes de charme · Sundgau · Alsace
-          </span>
-
-          {/* Titre principal */}
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05] drop-shadow-2xl">
-            {t("title")}
-          </h1>
-
-          {/* Accroche inspirée du texte fourni */}
-          <p className="font-body text-lg sm:text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed">
-            Vous viendrez en hôte et repartirez en ami.
-            <br className="hidden sm:block" />
-            <span className="text-white/70">
-              Un écrin de douceur au fond d&apos;une ruelle sans issue, où le
-              temps s&apos;arrête.
-            </span>
-          </p>
-
-          {/* Boutons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <Link
-              href={`/${lang}/reservation`}
-              className="inline-flex items-center justify-center px-10 py-4 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-lg shadow-lg"
-            >
-              {t("cta")}
-            </Link>
-            <Link
-              href={`/${lang}/maison`}
-              className="inline-flex items-center justify-center px-10 py-4 bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white font-body font-semibold rounded-[10px] transition-all duration-300 border border-white/30 text-lg"
-            >
-              Découvrir la maison
-            </Link>
-          </div>
-
-          {/* Note Booking */}
-          <div className="flex items-center gap-3 mt-2">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-tulipe-gold text-xl">
-                  ★
-                </span>
-              ))}
-            </div>
-            <span className="font-body text-white/80 text-sm sm:text-base">
-              9.9/10 sur Booking · 86 avis
-            </span>
-          </div>
-        </div>
-
-        {/* Météo en haut à droite */}
-        <div className="absolute top-24 right-6 sm:right-12 z-10">
-          <WeatherWidget />
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-          <svg
-            className="w-6 h-6 text-white/60"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </div>
-      </section>
+      {/* Hero scroll-driven GSAP */}
+      <ScrollVideoHero lang={lang} />
 
       {/* Features strip */}
       <section className="bg-tulipe-cream py-12 px-4">

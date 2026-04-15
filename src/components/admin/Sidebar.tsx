@@ -3,14 +3,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import {
+  Home,
+  CalendarDays,
+  MessageSquare,
+  FileEdit,
+  Settings,
+  BookOpen,
+} from "lucide-react";
 
 const navItems = [
-  { emoji: "🏠", label: "Accueil", href: "/admin" },
-  { emoji: "📋", label: "Réservations", href: "/admin/reservations" },
-  { emoji: "📅", label: "Calendrier", href: "/admin/calendrier" },
-  { emoji: "💬", label: "Messages", href: "/admin/messages" },
-  { emoji: "📝", label: "Mon site", href: "/admin/contenu" },
-  { emoji: "⚙️", label: "Réglages", href: "/admin/parametres" },
+  { icon: Home, label: "Accueil", href: "/admin" },
+  { icon: BookOpen, label: "Réservations", href: "/admin/reservations" },
+  { icon: CalendarDays, label: "Calendrier", href: "/admin/calendrier" },
+  { icon: MessageSquare, label: "Messages", href: "/admin/messages" },
+  { icon: FileEdit, label: "Mon site", href: "/admin/contenu" },
+  { icon: Settings, label: "Réglages", href: "/admin/parametres" },
 ];
 
 export default function Sidebar() {
@@ -22,7 +30,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white/95 backdrop-blur-sm rounded-2xl m-3 shadow-md overflow-hidden">
+    <div className="flex flex-col h-full bg-white rounded-2xl m-3 shadow-md overflow-hidden border border-gray-100">
       {/* Logo */}
       <div className="flex items-center gap-4 px-6 py-6 border-b border-gray-100">
         <Image
@@ -41,29 +49,33 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-5 space-y-2 overflow-y-auto">
-        {navItems.map(({ emoji, label, href }) => {
+      <nav className="flex-1 px-3 py-5 space-y-1 overflow-y-auto">
+        {navItems.map(({ icon: Icon, label, href }) => {
           const active = isActive(href);
           return (
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-4 px-5 py-4 rounded-xl text-lg font-semibold transition-all ${
+              className={`flex items-center gap-3 py-3.5 px-5 rounded-xl text-base font-medium transition-all ${
                 active
-                  ? "bg-tulipe-green/15 text-tulipe-green border-l-4 border-tulipe-green"
-                  : "text-gray-700 hover:bg-tulipe-beige hover:text-gray-900 border-l-4 border-transparent"
+                  ? "bg-tulipe-green/10 text-tulipe-green font-semibold"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
               }`}
             >
-              <span className="text-2xl">{emoji}</span>
+              <Icon
+                size={22}
+                className={active ? "text-tulipe-green" : "text-gray-400"}
+                strokeWidth={active ? 2.5 : 2}
+              />
               <span>{label}</span>
             </Link>
           );
         })}
       </nav>
 
-      {/* Pied de sidebar */}
+      {/* Footer */}
       <div className="px-6 py-4 border-t border-gray-100">
-        <p className="text-sm text-gray-400 text-center">
+        <p className="text-xs text-gray-400 text-center">
           Espace administration
         </p>
       </div>

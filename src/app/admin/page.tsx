@@ -2,41 +2,49 @@ import { db } from "@/lib/db";
 import StatsCard from "@/components/admin/StatsCard";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { Plane, Clock, BarChart3, Euro } from "lucide-react";
+import Link from "next/link";
 
 const statusLabels: Record<string, { label: string; className: string }> = {
   pending: {
-    label: "⏳ En attente",
+    label: "En attente",
     className: "bg-orange-100 text-orange-800 border-orange-200",
   },
   confirmed: {
-    label: "✅ Confirmée",
+    label: "Confirmée",
     className: "bg-green-100 text-green-800 border-green-200",
   },
   in_progress: {
-    label: "🏠 En cours",
+    label: "En cours",
     className: "bg-blue-100 text-blue-800 border-blue-200",
   },
   completed: {
-    label: "✔ Terminée",
+    label: "Terminée",
     className: "bg-gray-100 text-gray-700 border-gray-200",
   },
   cancelled: {
-    label: "❌ Annulée",
+    label: "Annulée",
     className: "bg-red-100 text-red-800 border-red-200",
   },
 };
 
-const sourceLabels: Record<string, { label: string; className: string }> = {
+const sourceLabels: Record<
+  string,
+  { label: string; dotColor: string; className: string }
+> = {
   booking: {
     label: "Booking",
+    dotColor: "bg-blue-500",
     className: "bg-blue-50 text-blue-700 border-blue-200",
   },
   airbnb: {
     label: "Airbnb",
+    dotColor: "bg-pink-500",
     className: "bg-pink-50 text-pink-700 border-pink-200",
   },
   direct: {
     label: "Direct",
+    dotColor: "bg-green-500",
     className: "bg-green-50 text-green-700 border-green-200",
   },
 };
@@ -127,54 +135,54 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
-      {/* En-tête chaleureux */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-7 shadow-sm">
-        <h1 className="text-4xl font-heading font-bold text-tulipe-bordeaux">
-          Bonjour ! 👋
+      {/* Header card */}
+      <div className="bg-white rounded-2xl px-8 py-7 shadow-sm border border-gray-100">
+        <h1 className="text-3xl font-heading font-bold text-tulipe-bordeaux">
+          Bonjour !
         </h1>
-        <p className="text-xl text-gray-600 mt-2 capitalize">{dateJour}</p>
+        <p className="text-lg text-gray-500 mt-1 capitalize">{dateJour}</p>
       </div>
 
-      {/* Grille 4 statistiques */}
+      {/* Stats grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <StatsCard
-          icon="🛬"
+          icon={Plane}
           label="Arrivées aujourd'hui"
           value={arrivees}
           color="green"
         />
         <StatsCard
-          icon="⏳"
+          icon={Clock}
           label="En attente de confirmation"
           value={enAttente}
           color="orange"
         />
         <StatsCard
-          icon="📊"
+          icon={BarChart3}
           label={`Occupation en ${moisNom}`}
           value={`${tauxOccupation}%`}
           color="blue"
         />
         <StatsCard
-          icon="💰"
+          icon={Euro}
           label={`Revenus en ${moisNom}`}
           value={caMoisEuros}
           color="gold"
         />
       </div>
 
-      {/* Dernières réservations */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm overflow-hidden">
+      {/* Recent reservations */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100">
           <h2 className="font-heading text-2xl font-bold text-tulipe-bordeaux">
             Dernières réservations
           </h2>
-          <a
+          <Link
             href="/admin/reservations"
-            className="text-lg font-semibold text-tulipe-green hover:underline"
+            className="text-base font-semibold text-tulipe-green hover:underline"
           >
             Tout voir →
-          </a>
+          </Link>
         </div>
 
         {recentesRaw.length === 0 ? (
@@ -190,6 +198,7 @@ export default async function AdminDashboardPage() {
               };
               const sourceInfo = sourceLabels[r.source] ?? {
                 label: r.source,
+                dotColor: "bg-gray-400",
                 className: "bg-gray-50 text-gray-700 border-gray-200",
               };
               const checkIn = format(new Date(r.checkIn), "dd MMMM yyyy", {
@@ -209,38 +218,43 @@ export default async function AdminDashboardPage() {
               return (
                 <div
                   key={r.id}
-                  className="bg-tulipe-beige rounded-2xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4 border border-gray-100"
+                  className="bg-[#FAF8F5] rounded-2xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4 border border-gray-100"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-2xl font-bold text-gray-900 truncate">
+                    <p className="text-xl font-bold text-gray-900 truncate">
                       {r.guestName}
                     </p>
-                    <p className="text-lg text-gray-600 mt-1">
+                    <p className="text-base text-gray-600 mt-1">
                       Du {checkIn} au {checkOut}
                     </p>
-                    <p className="text-lg text-gray-500 mt-0.5">
+                    <p className="text-base text-gray-500 mt-0.5">
                       {r.guests} personne{r.guests > 1 ? "s" : ""} · {montant}
                     </p>
                   </div>
-                  <div className="flex flex-wrap items-center gap-3 shrink-0">
+                  <div className="flex flex-wrap items-center gap-2 shrink-0">
+                    {/* Source badge with dot */}
                     <span
-                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-semibold border ${sourceInfo.className}`}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold border ${sourceInfo.className}`}
                     >
+                      <span
+                        className={`w-2 h-2 rounded-full shrink-0 ${sourceInfo.dotColor}`}
+                      />
                       {sourceInfo.label}
                     </span>
+                    {/* Status badge */}
                     <span
-                      className={`inline-flex items-center px-4 py-2 rounded-xl text-base font-semibold border ${statusInfo.className}`}
+                      className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold border ${statusInfo.className}`}
                     >
                       {statusInfo.label}
                     </span>
                   </div>
                   <div className="flex gap-3 shrink-0">
-                    <a
+                    <Link
                       href="/admin/reservations"
-                      className="flex items-center gap-2 px-5 py-3 bg-tulipe-green text-white text-lg font-semibold rounded-xl hover:bg-tulipe-green-dark transition-colors"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-tulipe-green text-white text-base font-semibold rounded-xl hover:bg-tulipe-green-dark transition-colors min-h-[44px]"
                     >
                       Voir
-                    </a>
+                    </Link>
                   </div>
                 </div>
               );
