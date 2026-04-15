@@ -12,7 +12,7 @@ export async function GET() {
   try {
     const entries = await db.guestbookEntry.findMany({
       where: { visible: true },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
     });
 
     return NextResponse.json(entries);

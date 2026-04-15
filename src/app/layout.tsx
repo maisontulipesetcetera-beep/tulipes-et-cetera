@@ -1,14 +1,27 @@
-// Root layout — minimal shell required by Next.js.
-// The [lang] nested layout handles html/body for all locale routes.
-// The middleware redirects "/" to "/fr" automatically.
+import "./globals.css";
+import { Playfair_Display, Lato } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
-      <body>{children}</body>
+    <html lang="fr" className={`${playfair.variable} ${lato.variable}`}>
+      <body className="font-body antialiased">{children}</body>
     </html>
   );
 }

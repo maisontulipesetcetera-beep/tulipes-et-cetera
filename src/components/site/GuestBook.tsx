@@ -468,11 +468,7 @@ export default function GuestBook() {
 
         <button
           onClick={goNext}
-          disabled={
-            currentPage === lastPage ||
-            flipping ||
-            (currentPage === lastPage - 1 && !submitted && entries.length === 0)
-          }
+          disabled={currentPage === lastPage || flipping}
           className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#c5a55a] text-[#5C1A1A] hover:bg-[#5C1A1A] hover:text-[#f5e6c8] transition-all disabled:opacity-30 disabled:cursor-not-allowed text-sm font-semibold"
           aria-label="Page suivante"
         >
