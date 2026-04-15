@@ -77,15 +77,34 @@ export async function PATCH(
     });
 
     // When status transitions to "confirmed", create Stripe checkout and email client
+    console.log(
+      "[PATCH] status change:",
+      existing.status,
+      "->",
+      parsed.data.status,
+    );
     if (parsed.data.status === "confirmed" && existing.status !== "confirmed") {
       try {
+        console.log(
+          "[PATCH] Creating Stripe checkout for",
+          reservation.id,
+          "amount:",
+          reservation.totalAmount,
+        );
         const checkoutSession = await createCheckoutSession({
           id: reservation.id,
           guestEmail: reservation.guestEmail,
           totalAmount: reservation.totalAmount ?? 0,
         });
+        console.log(
+          "[PATCH] Stripe session:",
+          checkoutSession?.id,
+          "url:",
+          checkoutSession?.url?.slice(0, 50),
+        );
 
         const paymentUrl = checkoutSession?.url ?? "#";
+        console.log("[PATCH] Sending email to", reservation.guestEmail);
 
         await sendEmail({
           to: reservation.guestEmail,
