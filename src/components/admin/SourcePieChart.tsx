@@ -99,7 +99,7 @@ export default function SourcePieChart({ data }: Props) {
             outerRadius={90}
             dataKey="value"
             labelLine={false}
-            label={renderCustomLabel}
+            label={renderCustomLabel as any}
           >
             {chartData.map((entry, i) => (
               <Cell key={i} fill={entry.color} />
