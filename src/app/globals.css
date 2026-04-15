@@ -12,9 +12,12 @@
   --font-heading: var(--font-geist-sans);
 
   /* Tulipes Et Cetera brand colors */
-  --color-tulipe-green: #4caf50;
-  --color-tulipe-green-dark: #388e3c;
-  --color-tulipe-green-light: #66bb6a;
+  --color-tulipe-green: #667846;
+  --color-tulipe-green-dark: #4f5e36;
+  --color-tulipe-green-light: #9cac76;
+  --color-tulipe-sage: #b9c790;
+  --color-tulipe-royal: #1e3a8a;
+  --color-tulipe-royal-dark: #172e73;
   --color-tulipe-beige: #faf8f5;
   --color-tulipe-cream: #fff8f0;
   --color-tulipe-bordeaux: #722f37;

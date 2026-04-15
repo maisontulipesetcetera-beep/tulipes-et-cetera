@@ -30,7 +30,7 @@ const SOURCE_LABELS: Record<string, string> = {
   airbnb: "Airbnb",
 };
 
-const PIE_COLORS = ["#4caf50", "#c5a55a", "#722f37", "#66bb6a", "#388e3c"];
+const PIE_COLORS = ["#667846", "#c5a55a", "#722f37", "#9cac76", "#4f5e36"];
 
 function StatCard({
   icon: Icon,
@@ -175,7 +175,7 @@ export default function StatistiquesPage() {
               <Bar
                 dataKey="count"
                 name="Réservations"
-                fill="#4caf50"
+                fill="#667846"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>

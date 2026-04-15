@@ -61,7 +61,7 @@ export default function Footer({ lang }: FooterProps) {
               <Link
                 key={key}
                 href={`/${lang}${href === "/" ? "" : href}`}
-                className="text-sm text-white/80 hover:text-white font-body transition-colors"
+                className="text-sm text-white/80 hover:text-tulipe-sage font-body transition-colors"
               >
                 {t(`nav.${key}`)}
               </Link>
@@ -95,13 +95,13 @@ export default function Footer({ lang }: FooterProps) {
           <div className="flex items-center gap-4">
             <Link
               href={`/${lang}/mentions-legales`}
-              className="hover:text-white transition-colors"
+              className="hover:text-tulipe-sage transition-colors"
             >
               {t("footer.legal")}
             </Link>
             <Link
               href={`/${lang}/confidentialite`}
-              className="hover:text-white transition-colors"
+              className="hover:text-tulipe-sage transition-colors"
             >
               {t("footer.privacy")}
             </Link>
