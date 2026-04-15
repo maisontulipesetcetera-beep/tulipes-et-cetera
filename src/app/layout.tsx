@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Playfair_Display, Lato } from "next/font/google";
+import { Playfair_Display, Lato, Great_Vibes } from "next/font/google";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -14,13 +14,23 @@ const lato = Lato({
   display: "swap",
 });
 
+const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-script",
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${lato.variable}`}>
+    <html
+      lang="fr"
+      className={`${playfair.variable} ${lato.variable} ${greatVibes.variable}`}
+    >
       <body className="font-body antialiased">{children}</body>
     </html>
   );

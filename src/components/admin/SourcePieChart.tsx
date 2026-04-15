@@ -21,7 +21,7 @@ interface Props {
 const SOURCE_CONFIG: Record<string, { label: string; color: string }> = {
   booking: { label: "Booking.com", color: "#3b82f6" },
   airbnb: { label: "Airbnb", color: "#ec4899" },
-  direct: { label: "Direct", color: "#667846" },
+  direct: { label: "Direct", color: "#10B981" },
 };
 
 function formatEuros(cents: number): string {

@@ -12,10 +12,10 @@
   --font-heading: var(--font-geist-sans);
 
   /* Tulipes EtCetera brand colors */
-  --color-tulipe-green: #708257;
-  --color-tulipe-green-dark: #566640;
-  --color-tulipe-green-light: #9aad7e;
-  --color-tulipe-sage: #b9c790;
+  --color-tulipe-green: #10b981;
+  --color-tulipe-green-dark: #059669;
+  --color-tulipe-green-light: #34d399;
+  --color-tulipe-sage: #6ee7b7;
   --color-tulipe-royal: #1e3a8a;
   --color-tulipe-royal-dark: #172e73;
   --color-tulipe-beige: #faf8f5;
@@ -26,6 +26,7 @@
   /* Tulipes fonts */
   --font-heading: "Playfair Display", serif;
   --font-body: "Lato", sans-serif;
+  --font-script: var(--font-script);
 
   /* Tulipes border radius */
   --radius-btn: 10px;

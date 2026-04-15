@@ -27,7 +27,10 @@ export default function Footer({ lang }: FooterProps) {
                 width={40}
                 className="rounded-md object-cover"
               />
-              <span className="font-heading text-base text-white">
+              <span
+                className="text-xl text-white"
+                style={{ fontFamily: "var(--font-script)" }}
+              >
                 Tulipes EtCetera
               </span>
             </div>

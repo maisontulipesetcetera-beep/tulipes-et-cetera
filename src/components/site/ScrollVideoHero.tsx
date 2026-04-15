@@ -364,8 +364,11 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               Cottage de Charme · Sundgau · Alsace 🌷
             </span>
             <h1
-              className="font-heading text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05]"
-              style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
+              className="text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05]"
+              style={{
+                textShadow: "0 4px 24px rgba(0,0,0,0.85)",
+                fontFamily: "var(--font-script)",
+              }}
             >
               Tulipes EtCetera
             </h1>
