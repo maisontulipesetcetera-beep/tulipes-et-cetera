@@ -3,10 +3,6 @@ import { stripe } from "@/lib/stripe";
 import { db } from "@/lib/db";
 import { sendEmail } from "@/lib/email";
 
-export const config = {
-  api: { bodyParser: false },
-};
-
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const sig = req.headers.get("stripe-signature");
