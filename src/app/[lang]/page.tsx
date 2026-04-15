@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 import WeatherWidget from "@/components/site/WeatherWidget";
 
@@ -67,8 +67,8 @@ interface HomePageProps {
 
 export default async function HomePage({ params }: HomePageProps) {
   const { lang } = await params;
-  const t = useTranslations("hero");
-  const tf = useTranslations("features");
+  const t = await getTranslations("hero");
+  const tf = await getTranslations("features");
 
   const galleryImages = [
     {
