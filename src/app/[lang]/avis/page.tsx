@@ -188,7 +188,13 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-export default function AvisPage() {
+export default async function AvisPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
   return (
     <>
       <script
@@ -249,20 +255,22 @@ export default function AvisPage() {
         </a>
       </section>
 
-      {/* Livre d'or placeholder */}
+      {/* Livre d'or */}
       <section className="py-16 px-4 bg-tulipe-cream">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl text-tulipe-bordeaux text-center mb-8">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="font-heading text-3xl text-tulipe-bordeaux mb-4">
             Livre d&apos;or
           </h2>
-          <div className="border-2 border-dashed border-tulipe-beige rounded-2xl p-16 text-center bg-white">
-            <p className="font-body text-gray-400 text-lg">
-              Livre d&apos;or numérique — à venir
-            </p>
-            <p className="font-body text-gray-300 text-sm mt-2">
-              Partagez votre expérience directement depuis cette page
-            </p>
-          </div>
+          <p className="font-body text-gray-600 mb-8 text-base max-w-xl mx-auto">
+            Feuilletez les mots laissés par nos hôtes et, si vous le souhaitez,
+            laissez-y votre empreinte.
+          </p>
+          <Link
+            href={`/${locale}/livre-dor`}
+            className="inline-flex items-center gap-2 px-8 py-3 bg-tulipe-bordeaux hover:bg-[#7a2323] text-white font-body font-semibold rounded-[10px] transition-colors text-base"
+          >
+            📖 Ouvrir le livre d&apos;or
+          </Link>
         </div>
       </section>
     </>
