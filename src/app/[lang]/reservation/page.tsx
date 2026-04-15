@@ -1,5 +1,63 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import BookingForm from "@/components/site/BookingForm";
+import { locales, type Locale } from "@/i18n/config";
+
+const BASE_URL = "https://tulipes-et-cetera.fr";
+
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
+  fr: {
+    title: "Réserver — Tulipes Et Cetera",
+    description:
+      "Réservez votre séjour à partir de 179€/nuit. Calendrier en temps réel, paiement sécurisé.",
+  },
+  de: {
+    title: "Buchen — Tulipes Et Cetera",
+    description:
+      "Buchen Sie Ihren Aufenthalt ab 179€/Nacht. Echtzeit-Kalender, sichere Zahlung.",
+  },
+  en: {
+    title: "Book — Tulipes Et Cetera",
+    description:
+      "Book your stay from €179/night. Real-time availability calendar, secure payment.",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const { title, description } = metaByLocale[locale];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/reservation`,
+      languages: {
+        fr: `${BASE_URL}/fr/reservation`,
+        de: `${BASE_URL}/de/reservation`,
+        en: `${BASE_URL}/en/reservation`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}/reservation`,
+      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${BASE_URL}/images/hero-facade.jpg`],
+    },
+  };
+}
 
 interface ReservationPageProps {
   params: Promise<{ lang: string }>;

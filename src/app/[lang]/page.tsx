@@ -1,6 +1,65 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { locales, type Locale } from "@/i18n/config";
+import WeatherWidget from "@/components/site/WeatherWidget";
+
+const BASE_URL = "https://tulipes-et-cetera.fr";
+
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
+  fr: {
+    title: "Tulipes Et Cetera — Maison d'hôtes de charme en Alsace",
+    description:
+      "Maison d'hôtes 3★ à Waldighoffen, Sundgau. Petit-déjeuner inclus, balnéo, jardin 3000m², vélos gratuits. Note 9.9/10",
+  },
+  de: {
+    title: "Tulipes Et Cetera — Charmantes Gästehaus im Elsass",
+    description:
+      "3★-Gästehaus in Waldighoffen, Sundgau. Frühstück inklusive, Whirlpool, 3000m² Garten, kostenlose Fahrräder. Bewertung 9,9/10",
+  },
+  en: {
+    title: "Tulipes Et Cetera — Charming Bed & Breakfast in Alsace",
+    description:
+      "3-star B&B in Waldighoffen, Sundgau. Breakfast included, spa bath, 3000m² garden, free bikes. Rated 9.9/10",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const { title, description } = metaByLocale[locale];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}`,
+      languages: {
+        fr: `${BASE_URL}/fr`,
+        de: `${BASE_URL}/de`,
+        en: `${BASE_URL}/en`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}`,
+      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${BASE_URL}/images/hero-facade.jpg`],
+    },
+  };
+}
 
 interface HomePageProps {
   params: Promise<{ lang: string }>;
@@ -64,10 +123,13 @@ export default async function HomePage({ params }: HomePageProps) {
           </p>
           <Link
             href={`/${lang}/reservation`}
-            className="mt-2 inline-block px-10 py-4 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-colors text-lg shadow-lg"
+            className="mt-2 inline-block px-10 py-4 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-all duration-200 hover:scale-105 hover:shadow-xl text-lg shadow-lg"
           >
             {t("cta")}
           </Link>
+          <div className="mt-2">
+            <WeatherWidget />
+          </div>
         </div>
       </section>
 
@@ -121,7 +183,7 @@ export default async function HomePage({ params }: HomePageProps) {
             {testimonials.map((t) => (
               <blockquote
                 key={t.author}
-                className="bg-white rounded-xl p-8 shadow-sm border border-tulipe-beige flex flex-col gap-4"
+                className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg border border-tulipe-beige flex flex-col gap-4 transition-shadow duration-200"
               >
                 <p className="font-body text-gray-700 italic text-lg leading-relaxed">
                   &ldquo;{t.text}&rdquo;
@@ -147,7 +209,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </p>
           <Link
             href={`/${lang}/reservation`}
-            className="inline-block px-10 py-4 bg-tulipe-gold hover:bg-amber-500 text-white font-body font-semibold rounded-[10px] transition-colors text-lg shadow-lg"
+            className="inline-block px-10 py-4 bg-tulipe-gold hover:bg-amber-500 text-white font-body font-semibold rounded-[10px] transition-all duration-200 hover:scale-105 hover:shadow-xl text-lg shadow-lg"
           >
             Réservez votre séjour
           </Link>

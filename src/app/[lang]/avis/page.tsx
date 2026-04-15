@@ -1,4 +1,148 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { locales, type Locale } from "@/i18n/config";
+
+const BASE_URL = "https://tulipes-et-cetera.fr";
+
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
+  fr: {
+    title: "Avis clients — Tulipes Et Cetera",
+    description:
+      "Note 9.9/10 sur Booking. Découvrez les témoignages de nos hôtes.",
+  },
+  de: {
+    title: "Gästebewertungen — Tulipes Et Cetera",
+    description:
+      "Bewertung 9,9/10 auf Booking. Lesen Sie die Erfahrungsberichte unserer Gäste.",
+  },
+  en: {
+    title: "Guest Reviews — Tulipes Et Cetera",
+    description: "Rated 9.9/10 on Booking. Read our guests' testimonials.",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const { title, description } = metaByLocale[locale];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/avis`,
+      languages: {
+        fr: `${BASE_URL}/fr/avis`,
+        de: `${BASE_URL}/de/avis`,
+        en: `${BASE_URL}/en/avis`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}/avis`,
+      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${BASE_URL}/images/hero-facade.jpg`],
+    },
+  };
+}
+
+const reviewsSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: [
+    {
+      "@type": "Review",
+      position: 1,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: { "@type": "Person", name: "Marie" },
+      reviewBody:
+        "La réalité dépasse ce qu'on attendait. Un petit quelque chose indéfinissable qui fait qu'on se sent vraiment chez soi, dans un cadre magnifique.",
+      itemReviewed: {
+        "@type": "BedAndBreakfast",
+        name: "Tulipes Et Cetera",
+      },
+    },
+    {
+      "@type": "Review",
+      position: 2,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: { "@type": "Person", name: "Thomas" },
+      reviewBody:
+        "Endroit magnifique, literie exceptionnelle, accueil au top ! Nous reviendrons sans hésiter. Le jardin est un vrai paradis.",
+      itemReviewed: {
+        "@type": "BedAndBreakfast",
+        name: "Tulipes Et Cetera",
+      },
+    },
+    {
+      "@type": "Review",
+      position: 3,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: { "@type": "Person", name: "Famille Al-Rashid" },
+      reviewBody:
+        "On y est restés une semaine alors qu'on avait prévu 2 nuits. Impossible de partir ! Le calme, la nature, la maison… tout est parfait.",
+      itemReviewed: {
+        "@type": "BedAndBreakfast",
+        name: "Tulipes Et Cetera",
+      },
+    },
+    {
+      "@type": "Review",
+      position: 4,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: { "@type": "Person", name: "Annette" },
+      reviewBody:
+        "Le petit-déjeuner est incroyable, tout est frais et local. Le kougelhopf maison est à tomber. Mention spéciale pour l'accueil chaleureux.",
+      itemReviewed: {
+        "@type": "BedAndBreakfast",
+        name: "Tulipes Et Cetera",
+      },
+    },
+    {
+      "@type": "Review",
+      position: 5,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: { "@type": "Person", name: "Lucas & Sophie" },
+      reviewBody:
+        "Un vrai Home Sweet Home. On reviendra ! La baignoire balnéo et le brasero dans le jardin, on ne demande rien de plus.",
+      itemReviewed: {
+        "@type": "BedAndBreakfast",
+        name: "Tulipes Et Cetera",
+      },
+    },
+  ],
+};
 
 const avis = [
   {
@@ -47,6 +191,10 @@ function Stars({ count }: { count: number }) {
 export default function AvisPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
+      />
       {/* Header */}
       <section className="bg-tulipe-bordeaux py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">

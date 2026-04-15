@@ -1,4 +1,62 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { locales, type Locale } from "@/i18n/config";
+
+const BASE_URL = "https://tulipes-et-cetera.fr";
+
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
+  fr: {
+    title: "La Maison — Tulipes Et Cetera",
+    description:
+      "Découvrez notre maison de charme : salon, cuisine équipée, terrasse, jardin, poêle à bois. 3 chambres avec balnéo.",
+  },
+  de: {
+    title: "Das Haus — Tulipes Et Cetera",
+    description:
+      "Entdecken Sie unser charmantes Haus: Wohnzimmer, voll ausgestattete Küche, Terrasse, Garten, Holzofen. 3 Zimmer mit Whirlpool.",
+  },
+  en: {
+    title: "The House — Tulipes Et Cetera",
+    description:
+      "Discover our charming house: living room, fully equipped kitchen, terrace, garden, wood stove. 3 rooms with spa bath.",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const { title, description } = metaByLocale[locale];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/maison`,
+      languages: {
+        fr: `${BASE_URL}/fr/maison`,
+        de: `${BASE_URL}/de/maison`,
+        en: `${BASE_URL}/en/maison`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}/maison`,
+      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${BASE_URL}/images/hero-facade.jpg`],
+    },
+  };
+}
 
 export default function MaisonPage() {
   const photos = [

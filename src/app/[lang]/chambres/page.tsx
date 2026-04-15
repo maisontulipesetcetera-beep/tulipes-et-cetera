@@ -1,5 +1,63 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { locales, type Locale } from "@/i18n/config";
+
+const BASE_URL = "https://tulipes-et-cetera.fr";
+
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
+  fr: {
+    title: "Nos Chambres — Tulipes Et Cetera",
+    description:
+      "3 chambres de charme avec literie haut de gamme, salle de bains balnéo. Chambre Tulipe, Lavande et Cigogne.",
+  },
+  de: {
+    title: "Unsere Zimmer — Tulipes Et Cetera",
+    description:
+      "3 charmante Zimmer mit hochwertiger Bettwäsche und Whirlpool-Badezimmer. Zimmer Tulpe, Lavendel und Storch.",
+  },
+  en: {
+    title: "Our Rooms — Tulipes Et Cetera",
+    description:
+      "3 charming rooms with premium bedding and spa bathroom. Tulipe, Lavande and Cigogne rooms.",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const { title, description } = metaByLocale[locale];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/chambres`,
+      languages: {
+        fr: `${BASE_URL}/fr/chambres`,
+        de: `${BASE_URL}/de/chambres`,
+        en: `${BASE_URL}/en/chambres`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}/chambres`,
+      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${BASE_URL}/images/hero-facade.jpg`],
+    },
+  };
+}
 
 interface ChambresPageProps {
   params: Promise<{ lang: string }>;

@@ -1,4 +1,62 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { locales, type Locale } from "@/i18n/config";
+
+const BASE_URL = "https://tulipes-et-cetera.fr";
+
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
+  fr: {
+    title: "Prestations — Tulipes Et Cetera",
+    description:
+      "Petit-déjeuner bio, vélos gratuits, poney, paniers pique-nique, brasero, jardin privatif.",
+  },
+  de: {
+    title: "Leistungen — Tulipes Et Cetera",
+    description:
+      "Bio-Frühstück, kostenlose Fahrräder, Pony, Picknickkorb, Feuerstelle, privater Garten.",
+  },
+  en: {
+    title: "Services — Tulipes Et Cetera",
+    description:
+      "Organic breakfast, free bikes, pony, picnic baskets, fire pit, private garden.",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const { title, description } = metaByLocale[locale];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/services`,
+      languages: {
+        fr: `${BASE_URL}/fr/services`,
+        de: `${BASE_URL}/de/services`,
+        en: `${BASE_URL}/en/services`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}/services`,
+      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${BASE_URL}/images/hero-facade.jpg`],
+    },
+  };
+}
 
 const prestations = [
   {

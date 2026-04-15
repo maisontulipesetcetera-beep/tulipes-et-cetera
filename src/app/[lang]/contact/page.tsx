@@ -1,4 +1,62 @@
+import type { Metadata } from "next";
 import ContactForm from "@/components/site/ContactForm";
+import { locales, type Locale } from "@/i18n/config";
+
+const BASE_URL = "https://tulipes-et-cetera.fr";
+
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
+  fr: {
+    title: "Contact — Tulipes Et Cetera",
+    description:
+      "2 Rue des Tulipes, 68640 Waldighoffen. Tél: +33 3 89 40 02 90",
+  },
+  de: {
+    title: "Kontakt — Tulipes Et Cetera",
+    description:
+      "2 Rue des Tulipes, 68640 Waldighoffen. Tel: +33 3 89 40 02 90",
+  },
+  en: {
+    title: "Contact — Tulipes Et Cetera",
+    description:
+      "2 Rue des Tulipes, 68640 Waldighoffen. Tel: +33 3 89 40 02 90",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = locales.includes(lang as Locale) ? (lang as Locale) : "fr";
+  const { title, description } = metaByLocale[locale];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/contact`,
+      languages: {
+        fr: `${BASE_URL}/fr/contact`,
+        de: `${BASE_URL}/de/contact`,
+        en: `${BASE_URL}/en/contact`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/${locale}/contact`,
+      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${BASE_URL}/images/hero-facade.jpg`],
+    },
+  };
+}
 
 export default function ContactPage() {
   return (

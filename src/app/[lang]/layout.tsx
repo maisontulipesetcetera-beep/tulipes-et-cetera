@@ -7,6 +7,7 @@ import "../globals.css";
 import { locales, type Locale } from "@/i18n/config";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
+import ScrollToTop from "@/components/site/ScrollToTop";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-heading",
@@ -45,6 +46,46 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
+const schemaOrgBedAndBreakfast = {
+  "@context": "https://schema.org",
+  "@type": "BedAndBreakfast",
+  name: "Tulipes Et Cetera",
+  description: "Maison d'hôtes de charme en Alsace",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "2 Rue des Tulipes",
+    addressLocality: "Waldighoffen",
+    postalCode: "68640",
+    addressCountry: "FR",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 47.4589,
+    longitude: 7.3186,
+  },
+  telephone: "+33389400290",
+  priceRange: "€€",
+  starRating: { "@type": "Rating", ratingValue: "3" },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "9.9",
+    bestRating: "10",
+    reviewCount: "86",
+  },
+  amenityFeature: [
+    { "@type": "LocationFeatureSpecification", name: "Free WiFi" },
+    { "@type": "LocationFeatureSpecification", name: "Free Parking" },
+    { "@type": "LocationFeatureSpecification", name: "Breakfast Included" },
+    { "@type": "LocationFeatureSpecification", name: "Garden" },
+    { "@type": "LocationFeatureSpecification", name: "Free Bicycles" },
+  ],
+  image: "https://tulipes-et-cetera.fr/images/hero-facade.jpg",
+  url: "https://tulipes-et-cetera.fr",
+  availableLanguage: ["French", "German", "English"],
+  checkinTime: "16:00",
+  checkoutTime: "11:00",
+};
+
 export default async function LangLayout({
   children,
   params,
@@ -66,11 +107,20 @@ export default async function LangLayout({
       lang={locale}
       className={`${playfairDisplay.variable} ${lato.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-tulipe-cream font-body">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemaOrgBedAndBreakfast),
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-tulipe-cream font-body scroll-smooth">
         <NextIntlClientProvider messages={messages}>
           <Header lang={locale} />
           <main className="flex-1">{children}</main>
           <Footer lang={locale} />
+          <ScrollToTop />
         </NextIntlClientProvider>
       </body>
     </html>
