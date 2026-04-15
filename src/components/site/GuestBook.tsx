@@ -135,7 +135,7 @@ function EntryCard({ entry }: { entry: GuestbookEntry }) {
       </p>
       <div className="mt-auto pt-2 border-t border-[#e8dcc8]/50">
         <p
-          className="text-tulipe-royal font-semibold text-base"
+          className="text-tulipe-green font-semibold text-base"
           style={{ fontFamily: "'Caveat', cursive" }}
         >
           — {entry.author}
@@ -526,7 +526,7 @@ export default function GuestBook() {
         <button
           onClick={goPrev}
           disabled={currentPage === 0 || isAnimating}
-          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-tulipe-royal hover:bg-tulipe-royal hover:text-white transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-tulipe-green hover:bg-tulipe-green hover:text-white transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
           aria-label="Page précédente"
         >
           ← Précédent
@@ -539,7 +539,7 @@ export default function GuestBook() {
               key={i}
               className={`rounded-full transition-all ${
                 i === currentPage
-                  ? "w-2.5 h-2.5 bg-tulipe-royal"
+                  ? "w-2.5 h-2.5 bg-tulipe-green"
                   : "w-1.5 h-1.5 bg-[#c5a55a]/35"
               }`}
             />
@@ -549,7 +549,7 @@ export default function GuestBook() {
         <button
           onClick={goNext}
           disabled={currentPage === lastPage || isAnimating}
-          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-tulipe-royal hover:bg-tulipe-royal hover:text-white transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded border border-[#c5a55a] text-tulipe-green hover:bg-tulipe-green hover:text-white transition-all disabled:opacity-25 disabled:cursor-not-allowed text-sm font-semibold cursor-pointer"
           aria-label="Page suivante"
         >
           Suivant →

@@ -146,7 +146,7 @@ export default function ContenuPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-heading font-bold text-tulipe-royal mb-6">
+      <h1 className="text-2xl font-heading font-bold text-tulipe-green mb-6">
         Contenu du site
       </h1>
 

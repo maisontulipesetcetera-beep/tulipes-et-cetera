@@ -114,7 +114,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-royal py-16 px-4 text-center">
+      <section className="bg-tulipe-green py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Les Chambres
         </h1>
@@ -144,7 +144,7 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
 
               {/* Content */}
               <div className="md:w-3/5 p-8 flex flex-col gap-4 justify-center">
-                <h2 className="font-heading text-2xl md:text-3xl text-tulipe-royal">
+                <h2 className="font-heading text-2xl md:text-3xl text-tulipe-green">
                   {chambre.name}
                 </h2>
                 <p className="font-body text-gray-700 leading-relaxed">

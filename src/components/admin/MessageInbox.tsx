@@ -180,7 +180,7 @@ export default function MessageInbox() {
           <div className="px-7 py-6 border-b border-gray-100 flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-3 mb-1">
-                <h2 className="text-2xl font-bold text-tulipe-royal">
+                <h2 className="text-2xl font-bold text-tulipe-green">
                   {selected.name}
                 </h2>
                 <span
@@ -229,7 +229,7 @@ export default function MessageInbox() {
             {/* Formulaire de réponse */}
             {replying ? (
               <form onSubmit={sendReply} className="space-y-5">
-                <p className="text-xl font-bold text-tulipe-royal">
+                <p className="text-xl font-bold text-tulipe-green">
                   📧 Écrire une réponse
                 </p>
 
@@ -336,7 +336,7 @@ export default function MessageInbox() {
       {/* En-tête */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-7 py-5 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
-          <h2 className="text-2xl font-bold text-tulipe-royal">
+          <h2 className="text-2xl font-bold text-tulipe-green">
             Boîte de réception
           </h2>
           {unreadCount > 0 && (
@@ -373,7 +373,7 @@ export default function MessageInbox() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-3 mb-1">
-                      <p className="text-xl font-bold text-tulipe-royal">
+                      <p className="text-xl font-bold text-tulipe-green">
                         {contact.name}
                       </p>
                       <span

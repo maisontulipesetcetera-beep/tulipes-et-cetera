@@ -48,7 +48,7 @@ function StatCard({
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm text-gray-500">{label}</p>
-          <p className="text-2xl font-bold text-tulipe-royal mt-1">{value}</p>
+          <p className="text-2xl font-bold text-tulipe-green mt-1">{value}</p>
           {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
         </div>
         <div className="p-2.5 bg-tulipe-green/10 rounded-lg">
@@ -108,7 +108,7 @@ export default function StatistiquesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-heading font-bold text-tulipe-royal">
+      <h1 className="text-2xl font-heading font-bold text-tulipe-green">
         Statistiques
       </h1>
 

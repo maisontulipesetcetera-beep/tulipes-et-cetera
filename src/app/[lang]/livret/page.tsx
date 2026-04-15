@@ -5,7 +5,7 @@ export default function LivretPage() {
     <>
       {/* Header sobre */}
       <section className="bg-tulipe-cream py-12 px-4 text-center border-b border-tulipe-beige">
-        <h1 className="font-heading text-3xl md:text-4xl text-tulipe-royal mb-2">
+        <h1 className="font-heading text-3xl md:text-4xl text-tulipe-green mb-2">
           Livret d&apos;accueil
         </h1>
         <p className="font-body text-gray-500 text-sm">
@@ -17,7 +17,7 @@ export default function LivretPage() {
         <div className="max-w-2xl mx-auto flex flex-col gap-10">
           {/* Wifi */}
           <div className="flex flex-col gap-3 p-6 rounded-xl bg-tulipe-cream border border-tulipe-beige">
-            <h2 className="font-heading text-xl text-tulipe-royal flex items-center gap-2">
+            <h2 className="font-heading text-xl text-tulipe-green flex items-center gap-2">
               <span>📶</span> Connexion Wifi
             </h2>
             <div className="font-body text-sm text-gray-700 flex flex-col gap-1.5">
@@ -38,7 +38,7 @@ export default function LivretPage() {
 
           {/* Équipements */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-xl text-tulipe-royal flex items-center gap-2">
+            <h2 className="font-heading text-xl text-tulipe-green flex items-center gap-2">
               <span>🏠</span> Équipements
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-2">
@@ -61,7 +61,7 @@ export default function LivretPage() {
 
           {/* Poubelles / tri */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-xl text-tulipe-royal flex items-center gap-2">
+            <h2 className="font-heading text-xl text-tulipe-green flex items-center gap-2">
               <span>♻️</span> Tri des déchets
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-1.5">
@@ -113,7 +113,7 @@ export default function LivretPage() {
 
           {/* Restaurants recommandés */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-xl text-tulipe-royal flex items-center gap-2">
+            <h2 className="font-heading text-xl text-tulipe-green flex items-center gap-2">
               <span>🍽️</span> Restaurants recommandés
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-2">
@@ -132,7 +132,7 @@ export default function LivretPage() {
 
           {/* Activités */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-xl text-tulipe-royal flex items-center gap-2">
+            <h2 className="font-heading text-xl text-tulipe-green flex items-center gap-2">
               <span>🗺️</span> Activités à proximité
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-2">
@@ -153,7 +153,7 @@ export default function LivretPage() {
 
           {/* Contact hôtes */}
           <div className="flex flex-col gap-2 p-6 rounded-xl bg-tulipe-cream border border-tulipe-beige text-center">
-            <p className="font-heading text-lg text-tulipe-royal">
+            <p className="font-heading text-lg text-tulipe-green">
               Une question ? Besoin d&apos;aide ?
             </p>
             <a
@@ -169,7 +169,7 @@ export default function LivretPage() {
 
           {/* QR Code — à imprimer */}
           <div className="flex flex-col gap-4 p-6 rounded-xl bg-tulipe-cream border border-tulipe-beige text-center items-center">
-            <h2 className="font-heading text-xl text-tulipe-royal flex items-center gap-2">
+            <h2 className="font-heading text-xl text-tulipe-green flex items-center gap-2">
               <span>📲</span> Accès rapide au livret
             </h2>
             <p className="font-body text-sm text-gray-500">

@@ -79,7 +79,7 @@ export default function Header({ lang }: HeaderProps) {
             />
             <span
               className={`font-heading text-lg hidden sm:block leading-tight transition-colors duration-300 ${
-                scrolled ? "text-tulipe-royal" : "text-white"
+                scrolled ? "text-tulipe-green" : "text-white"
               }`}
             >
               Tulipes
@@ -102,7 +102,7 @@ export default function Header({ lang }: HeaderProps) {
                       ? "text-tulipe-green font-semibold border-b-2 border-tulipe-green"
                       : "text-white font-semibold border-b-2 border-white"
                     : scrolled
-                      ? "text-gray-700 hover:text-tulipe-royal"
+                      ? "text-gray-700 hover:text-tulipe-green"
                       : "text-white/90 hover:text-white"
                 }`}
               >
@@ -117,7 +117,7 @@ export default function Header({ lang }: HeaderProps) {
             <button
               className={`lg:hidden p-2 rounded-md transition-colors ${
                 scrolled
-                  ? "text-tulipe-royal hover:bg-tulipe-beige"
+                  ? "text-tulipe-green hover:bg-tulipe-beige"
                   : "text-white hover:bg-white/20"
               }`}
               onClick={() => setMobileOpen((v) => !v)}
@@ -140,7 +140,7 @@ export default function Header({ lang }: HeaderProps) {
               className={`px-3 py-2.5 rounded text-sm font-body transition-colors ${
                 isActive(navHrefs[key])
                   ? "text-tulipe-green font-semibold bg-tulipe-beige"
-                  : "text-gray-700 hover:text-tulipe-royal hover:bg-tulipe-beige"
+                  : "text-gray-700 hover:text-tulipe-green hover:bg-tulipe-beige"
               }`}
               onClick={() => setMobileOpen(false)}
             >

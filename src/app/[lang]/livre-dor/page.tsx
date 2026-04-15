@@ -60,7 +60,7 @@ export default function LivreDorPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-royal py-16 px-4 text-center">
+      <section className="bg-tulipe-green py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Livre d&apos;or 🌷
         </h1>

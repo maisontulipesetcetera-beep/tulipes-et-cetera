@@ -71,7 +71,7 @@ export default async function ReservationPage({
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-royal py-16 px-4 text-center">
+      <section className="bg-tulipe-green py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Tarifs & Réservation
         </h1>
@@ -109,12 +109,12 @@ export default async function ReservationPage({
                 className={`rounded-2xl p-8 text-center border flex flex-col gap-2 ${
                   item.highlight
                     ? "bg-tulipe-green text-white border-tulipe-green shadow-lg"
-                    : "bg-white text-tulipe-royal border-tulipe-beige shadow-sm"
+                    : "bg-white text-tulipe-green border-tulipe-beige shadow-sm"
                 }`}
               >
                 <h2 className="font-heading text-xl">{item.label}</h2>
                 <p
-                  className={`font-heading text-5xl font-bold ${item.highlight ? "text-white" : "text-tulipe-royal"}`}
+                  className={`font-heading text-5xl font-bold ${item.highlight ? "text-white" : "text-tulipe-green"}`}
                 >
                   {item.price}
                 </p>
@@ -155,7 +155,7 @@ export default async function ReservationPage({
       {/* Calendrier + Formulaire de réservation */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl text-tulipe-royal text-center mb-8">
+          <h2 className="font-heading text-3xl text-tulipe-green text-center mb-8">
             Faire une demande de réservation
           </h2>
           <div className="bg-tulipe-cream rounded-2xl border border-tulipe-beige p-6 md:p-10">
@@ -165,14 +165,14 @@ export default async function ReservationPage({
             Vous pouvez aussi nous contacter directement :{" "}
             <Link
               href={`/${lang}/contact`}
-              className="text-tulipe-royal underline hover:text-tulipe-green transition-colors"
+              className="text-tulipe-green underline hover:text-tulipe-green transition-colors"
             >
               page contact
             </Link>{" "}
             ou par téléphone au{" "}
             <a
               href="tel:+33389400290"
-              className="text-tulipe-royal underline hover:text-tulipe-green transition-colors"
+              className="text-tulipe-green underline hover:text-tulipe-green transition-colors"
             >
               +33 3 89 40 02 90
             </a>

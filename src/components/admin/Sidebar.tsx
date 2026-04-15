@@ -41,7 +41,7 @@ export default function Sidebar() {
           className="rounded-full object-cover shrink-0 shadow-sm"
         />
         <div className="leading-tight">
-          <p className="font-heading text-xl font-bold text-tulipe-royal">
+          <p className="font-heading text-xl font-bold text-tulipe-green">
             Tulipes
           </p>
           <p className="font-heading text-base text-tulipe-gold">et Cetera</p>

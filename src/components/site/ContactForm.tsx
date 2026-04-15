@@ -79,7 +79,7 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div className="rounded-2xl bg-tulipe-green/10 border border-tulipe-green/30 p-8 text-center">
-        <p className="font-heading text-xl text-tulipe-royal mb-2">
+        <p className="font-heading text-xl text-tulipe-green mb-2">
           Message envoyé !
         </p>
         <p className="font-body text-gray-600">

@@ -63,7 +63,7 @@ export default function LoginPage() {
         </div>
 
         {/* Titles */}
-        <h1 className="font-heading text-3xl font-bold text-center text-tulipe-royal mb-1">
+        <h1 className="font-heading text-3xl font-bold text-center text-tulipe-green mb-1">
           Bienvenue
         </h1>
         <p className="font-body text-base text-center text-gray-500 mb-8">

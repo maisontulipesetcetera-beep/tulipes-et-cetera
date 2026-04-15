@@ -62,7 +62,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-royal py-16 px-4 text-center">
+      <section className="bg-tulipe-green py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Nous contacter
         </h1>
@@ -92,12 +92,12 @@ export default function ContactPage() {
 
             {/* Infos de contact */}
             <div className="bg-white rounded-2xl p-7 shadow-sm border border-tulipe-beige flex flex-col gap-4">
-              <h2 className="font-heading text-xl text-tulipe-royal">
+              <h2 className="font-heading text-xl text-tulipe-green">
                 Informations
               </h2>
               <div className="flex flex-col gap-3 font-body text-sm text-gray-700">
                 <p className="flex items-start gap-3">
-                  <span className="text-tulipe-royal text-base mt-0.5">📍</span>
+                  <span className="text-tulipe-green text-base mt-0.5">📍</span>
                   <span>
                     2 Rue des Tulipes
                     <br />
@@ -105,7 +105,7 @@ export default function ContactPage() {
                   </span>
                 </p>
                 <p className="flex items-center gap-3">
-                  <span className="text-tulipe-royal text-base">📞</span>
+                  <span className="text-tulipe-green text-base">📞</span>
                   <a
                     href="tel:+33389400290"
                     className="hover:text-tulipe-green transition-colors"
@@ -114,7 +114,7 @@ export default function ContactPage() {
                   </a>
                 </p>
                 <p className="flex items-center gap-3">
-                  <span className="text-tulipe-royal text-base">✉️</span>
+                  <span className="text-tulipe-green text-base">✉️</span>
                   <a
                     href="mailto:contact@tulipes-et-cetera.fr"
                     className="hover:text-tulipe-green transition-colors"
@@ -123,7 +123,7 @@ export default function ContactPage() {
                   </a>
                 </p>
                 <p className="flex items-center gap-3">
-                  <span className="text-tulipe-royal text-base">🕐</span>
+                  <span className="text-tulipe-green text-base">🕐</span>
                   <span>Réponse sous 24h</span>
                 </p>
               </div>
@@ -133,7 +133,7 @@ export default function ContactPage() {
           {/* Right: Formulaire */}
           <div className="lg:w-1/2">
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-tulipe-beige">
-              <h2 className="font-heading text-2xl text-tulipe-royal mb-6">
+              <h2 className="font-heading text-2xl text-tulipe-green mb-6">
                 Envoyez-nous un message
               </h2>
 
