@@ -76,7 +76,7 @@ export default function OccupancyGauge({ data }: Props) {
           width={40}
         />
         <Tooltip
-          formatter={(value: number) => [`${value}%`, "Taux d'occupation"]}
+          formatter={(value) => [`${value as number}%`, "Taux d'occupation"]}
           labelStyle={{ fontWeight: 600, color: "#111827" }}
           contentStyle={{
             border: "1px solid #e5e7eb",

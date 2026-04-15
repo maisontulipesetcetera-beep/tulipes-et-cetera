@@ -78,7 +78,7 @@ export default function RevenueChart({ data }: Props) {
           width={50}
         />
         <Tooltip
-          formatter={(value: number) => [formatEuros(value), "Revenus"]}
+          formatter={(value) => [formatEuros(value as number), "Revenus"]}
           labelStyle={{ fontWeight: 600, color: "#111827" }}
           contentStyle={{
             border: "1px solid #e5e7eb",

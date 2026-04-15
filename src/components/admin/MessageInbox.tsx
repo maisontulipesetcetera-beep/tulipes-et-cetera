@@ -57,7 +57,7 @@ export default function MessageInbox() {
   const [success, setSuccess] = useState("");
 
   const fetchContacts = useCallback(async () => {
-    const res = await fetch("/api/messages");
+    const res = await fetch("/api/messages", { credentials: "include" });
     if (res.ok) {
       const data = await res.json();
       setContacts(data);
@@ -67,7 +67,9 @@ export default function MessageInbox() {
 
   const fetchTemplates = useCallback(async () => {
     try {
-      const res = await fetch("/api/email-templates");
+      const res = await fetch("/api/email-templates", {
+        credentials: "include",
+      });
       if (res.ok) {
         const data = await res.json();
         setTemplates(data);
@@ -86,6 +88,7 @@ export default function MessageInbox() {
     if (contact.status === "unread") {
       await fetch(`/api/messages/${contact.id}`, {
         method: "PATCH",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "read" }),
       });
@@ -119,6 +122,7 @@ export default function MessageInbox() {
     try {
       const res = await fetch(`/api/messages/${selected.id}/reply`, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subject: replySubject, body: replyBody }),
       });

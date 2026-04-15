@@ -41,7 +41,9 @@ export default function PhotoManager() {
 
   const fetchPhotos = useCallback(async () => {
     setLoading(true);
-    const res = await fetch(`/api/photos?page=${selectedPage}`);
+    const res = await fetch(`/api/photos?page=${selectedPage}`, {
+      credentials: "include",
+    });
     if (res.ok) {
       const data = await res.json();
       setPhotos(data);
@@ -71,6 +73,7 @@ export default function PhotoManager() {
 
       const res = await fetch("/api/photos", {
         method: "POST",
+        credentials: "include",
         body: formData,
       });
 
@@ -93,6 +96,7 @@ export default function PhotoManager() {
 
     const res = await fetch("/api/photos", {
       method: "DELETE",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: photo.id, url: photo.url }),
     });
@@ -120,11 +124,13 @@ export default function PhotoManager() {
     await Promise.all([
       fetch("/api/photos", {
         method: "PATCH",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: photo.id, sortOrder: swap.sortOrder }),
       }),
       fetch("/api/photos", {
         method: "PATCH",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: swap.id, sortOrder: photo.sortOrder }),
       }),

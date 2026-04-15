@@ -69,7 +69,7 @@ export default function SettingsForm() {
   const [showPw, setShowPw] = useState(false);
 
   useEffect(() => {
-    fetch("/api/settings")
+    fetch("/api/settings", { credentials: "include" })
       .then((r) => r.json())
       .then((data) => {
         setSettings(data);
@@ -101,6 +101,7 @@ export default function SettingsForm() {
 
     const res = await fetch("/api/settings", {
       method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
@@ -118,7 +119,7 @@ export default function SettingsForm() {
   async function testIcal() {
     setTestingIcal(true);
     setIcalResult("");
-    const res = await fetch("/api/ical/import");
+    const res = await fetch("/api/ical/import", { credentials: "include" });
     setTestingIcal(false);
     setIcalResult(
       res.ok
@@ -135,6 +136,7 @@ export default function SettingsForm() {
 
     const res = await fetch("/api/auth/change-password", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ currentPassword, newPassword, confirmPassword }),
     });

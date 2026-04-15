@@ -51,7 +51,7 @@ export default function ReviewManager() {
   const [formError, setFormError] = useState("");
 
   const fetchReviews = useCallback(async () => {
-    const res = await fetch("/api/reviews");
+    const res = await fetch("/api/reviews", { credentials: "include" });
     if (res.ok) {
       const data = await res.json();
       setReviews(data);
@@ -67,6 +67,7 @@ export default function ReviewManager() {
     setTogglingId(review.id);
     const res = await fetch("/api/reviews", {
       method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: review.id, visible: !review.visible }),
     });
@@ -84,6 +85,7 @@ export default function ReviewManager() {
     setDeletingId(id);
     const res = await fetch("/api/reviews", {
       method: "DELETE",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
     });
@@ -102,11 +104,13 @@ export default function ReviewManager() {
     await Promise.all([
       fetch("/api/reviews", {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: review.id, sortOrder: swap.sortOrder }),
       }),
       fetch("/api/reviews", {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: swap.id, sortOrder: review.sortOrder }),
       }),
@@ -126,6 +130,7 @@ export default function ReviewManager() {
 
     const res = await fetch("/api/reviews", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ author, content, rating, source }),
     });

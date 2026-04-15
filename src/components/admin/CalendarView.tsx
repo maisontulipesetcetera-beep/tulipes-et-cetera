@@ -75,6 +75,7 @@ export default function CalendarView() {
     try {
       const res = await fetch(
         `/api/reservations/calendar?month=${formatMonth(year, month)}`,
+        { credentials: "include" },
       );
       if (res.ok) {
         const data = await res.json();
@@ -180,6 +181,7 @@ export default function CalendarView() {
     try {
       const res = await fetch("/api/blocked-dates", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           startDate: blockStart,
@@ -203,7 +205,10 @@ export default function CalendarView() {
 
   async function handleUnblock(id: string) {
     try {
-      await fetch(`/api/blocked-dates?id=${id}`, { method: "DELETE" });
+      await fetch(`/api/blocked-dates?id=${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
       await fetchData();
     } catch (err) {
       console.error(err);

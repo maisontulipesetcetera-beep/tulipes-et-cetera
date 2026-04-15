@@ -109,31 +109,33 @@ export default async function HomePage({ params }: HomePageProps) {
       <ScrollVideoHero lang={lang} />
 
       {/* Features strip */}
-      <section className="bg-tulipe-cream py-12 px-4">
-        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8">
+      <section className="bg-tulipe-cream py-16 md:py-24 px-4">
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-12">
           {features.map(({ emoji, key }) => (
             <div
               key={key}
-              className="flex flex-col items-center gap-2 text-center min-w-[100px]"
+              className="flex flex-col items-center gap-3 text-center min-w-[110px]"
             >
-              <span className="text-4xl">{emoji}</span>
-              <span className="font-body text-sm text-gray-700">{tf(key)}</span>
+              <span className="text-5xl">{emoji}</span>
+              <span className="font-body text-base font-medium text-gray-700">
+                {tf(key)}
+              </span>
             </div>
           ))}
         </div>
       </section>
 
       {/* Mini gallery */}
-      <section className="bg-tulipe-beige py-16 px-4">
+      <section className="bg-tulipe-beige py-20 md:py-28 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-4xl text-tulipe-bordeaux text-center mb-10">
+          <h2 className="font-heading text-3xl md:text-5xl text-tulipe-bordeaux text-center mb-12">
             Quelques instants chez nous
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {galleryImages.map((img) => (
               <div
                 key={img.src}
-                className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer"
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer"
               >
                 <Image
                   src={img.src}
@@ -149,18 +151,18 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-tulipe-cream py-16 px-4">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-4xl text-tulipe-bordeaux text-center mb-10">
+      <section className="bg-tulipe-cream py-20 md:py-28 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-heading text-3xl md:text-5xl text-tulipe-bordeaux text-center mb-12">
             Ce que disent nos hôtes
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {testimonials.map((t) => (
               <blockquote
                 key={t.author}
-                className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg border border-tulipe-beige flex flex-col gap-4 transition-shadow duration-200"
+                className="bg-white rounded-2xl p-10 shadow-md hover:shadow-lg border border-tulipe-beige flex flex-col gap-4 transition-shadow duration-200"
               >
-                <p className="font-body text-gray-700 italic text-lg leading-relaxed">
+                <p className="font-body text-gray-700 italic text-xl leading-relaxed">
                   &ldquo;{t.text}&rdquo;
                 </p>
                 <footer className="font-body text-tulipe-bordeaux font-semibold text-sm">
@@ -173,9 +175,9 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* CTA final */}
-      <section className="bg-tulipe-bordeaux py-16 px-4 text-center">
+      <section className="bg-tulipe-bordeaux py-20 md:py-28 px-4 text-center">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-6">
-          <h2 className="font-heading text-3xl md:text-4xl text-white">
+          <h2 className="font-heading text-3xl md:text-5xl text-white">
             Prêt pour une escapade en Alsace ?
           </h2>
           <p className="font-body text-white/80 text-lg">
@@ -184,7 +186,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </p>
           <Link
             href={`/${lang}/reservation`}
-            className="inline-block px-10 py-4 bg-tulipe-gold hover:bg-amber-500 text-white font-body font-semibold rounded-[10px] transition-all duration-200 hover:scale-105 hover:shadow-xl text-lg shadow-lg"
+            className="inline-block px-12 py-5 bg-tulipe-gold hover:bg-amber-500 text-white font-body font-semibold rounded-[10px] transition-all duration-200 hover:scale-105 hover:shadow-xl text-xl shadow-lg"
           >
             Réservez votre séjour
           </Link>

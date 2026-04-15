@@ -118,6 +118,7 @@ export default function ReservationTable({
     try {
       const res = await fetch(`/api/reservations/${id}`, {
         method: "PATCH",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });

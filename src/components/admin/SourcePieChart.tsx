@@ -106,7 +106,7 @@ export default function SourcePieChart({ data }: Props) {
             ))}
           </Pie>
           <Tooltip
-            formatter={(value: number) => [formatEuros(value), "Revenus"]}
+            formatter={(value) => [formatEuros(value as number), "Revenus"]}
             contentStyle={{
               border: "1px solid #e5e7eb",
               borderRadius: 8,

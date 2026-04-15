@@ -31,7 +31,7 @@ export default function ReservationsPage() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("/api/reservations");
+      const res = await fetch("/api/reservations", { credentials: "include" });
       if (!res.ok) throw new Error("Erreur de chargement");
       const data = await res.json();
       setReservations(data);

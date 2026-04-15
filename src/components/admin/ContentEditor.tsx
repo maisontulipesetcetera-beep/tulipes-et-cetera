@@ -41,6 +41,7 @@ export default function ContentEditor() {
     setLoading(true);
     const res = await fetch(
       `/api/pages?page=${selectedPage}&lang=${selectedLang}`,
+      { credentials: "include" },
     );
     if (res.ok) {
       const data: PageContent[] = await res.json();
@@ -62,6 +63,7 @@ export default function ContentEditor() {
     setSaving(section);
     const res = await fetch("/api/pages", {
       method: "PUT",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         page: selectedPage,
