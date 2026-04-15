@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Reservation {
+  id             String   @id @default(cuid())
+  guestName      String
+  guestEmail     String
+  guestPhone     String?
+  checkIn        DateTime
+  checkOut       DateTime
+  guests         Int      @default(2)
+  message        String?
+  /// pending | confirmed | in_progress | completed | cancelled
+  status         String   @default("pending")
+  /// direct | booking | airbnb
+  source         String   @default("direct")
+  totalAmount    Int? // cents
+  depositAmount  Int? // cents
+  depositPaid    Boolean  @default(false)
+  stripeSessionId String?
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model BlockedDate {
+  id     String   @id @default(cuid())
+  date   DateTime
+  reason String?
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  /// unread | read | replied
+  status    String   @default("unread")
+  reply     String?
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  author    String
+  content   String
+  rating    Int      @default(5)
+  /// direct | booking | airbnb | google
+  source    String   @default("direct")
+  visible   Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Photo {
+  id        String   @id @default(cuid())
+  url       String
+  alt       String?
+  page      String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model PageContent {
+  id        String   @id @default(cuid())
+  page      String
+  section   String
+  lang      String   @default("fr")
+  content   String
+  updatedAt DateTime @updatedAt
+
+  @@unique([page, section, lang])
+}
+
+model GuestbookEntry {
+  id        String   @id @default(cuid())
+  author    String
+  message   String
+  photoUrl  String?
+  visible   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Settings {
+  id                 String   @id @default("main")
+  propertyName       String   @default("Tulipes Et Cetera")
+  address            String   @default("2 Rue des Tulipes, 68640 Waldighoffen")
+  phone              String   @default("+33389400290")
+  email              String   @default("")
+  checkInTime        String   @default("16:00")
+  checkOutTime       String   @default("11:00")
+  basePrice          Int      @default(17900) // cents
+  highSeasonPrice    Int?
+  weekendPrice       Int?
+  depositPercent     Int      @default(30)
+  cancellationPolicy String?
+  bookingIcalUrl     String?
+  airbnbIcalUrl      String?
+  updatedAt          DateTime @updatedAt
+}
+
+model EmailTemplate {
+  id      String @id @default(cuid())
+  name    String @unique
+  subject String
+  body    String
+  lang    String @default("fr")
+
+  @@unique([name, lang])
+}
