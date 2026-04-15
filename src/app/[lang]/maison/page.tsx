@@ -6,17 +6,17 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "La Maison — Tulipes EtCetera",
+    title: "La Maison — Tulipes Et Cetera",
     description:
       "Découvrez notre maison de charme : salon, cuisine équipée, terrasse, jardin, poêle à bois. 3 chambres avec balnéo.",
   },
   de: {
-    title: "Das Haus — Tulipes EtCetera",
+    title: "Das Haus — Tulipes Et Cetera",
     description:
       "Entdecken Sie unser charmantes Haus: Wohnzimmer, voll ausgestattete Küche, Terrasse, Garten, Holzofen. 3 Zimmer mit Whirlpool.",
   },
   en: {
-    title: "The House — Tulipes EtCetera",
+    title: "The House — Tulipes Et Cetera",
     description:
       "Discover our charming house: living room, fully equipped kitchen, terrace, garden, wood stove. 3 rooms with spa bath.",
   },
@@ -170,7 +170,7 @@ export default function MaisonPage() {
           <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-lg">
             <Image
               src="/images/sweet-home.jpg"
-              alt="Sweet Home — Tulipes EtCetera"
+              alt="Sweet Home — Tulipes Et Cetera"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 672px"

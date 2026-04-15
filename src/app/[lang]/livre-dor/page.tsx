@@ -6,19 +6,19 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Livre d'or — Tulipes EtCetera",
+    title: "Livre d'or — Tulipes Et Cetera",
     description:
-      "Feuilletez le livre d'or de Tulipes EtCetera et laissez votre message.",
+      "Feuilletez le livre d'or de Tulipes Et Cetera et laissez votre message.",
   },
   de: {
-    title: "Gästebuch — Tulipes EtCetera",
+    title: "Gästebuch — Tulipes Et Cetera",
     description:
-      "Blättern Sie im Gästebuch von Tulipes EtCetera und hinterlassen Sie eine Nachricht.",
+      "Blättern Sie im Gästebuch von Tulipes Et Cetera und hinterlassen Sie eine Nachricht.",
   },
   en: {
-    title: "Guest Book — Tulipes EtCetera",
+    title: "Guest Book — Tulipes Et Cetera",
     description:
-      "Browse the guest book of Tulipes EtCetera and leave your message.",
+      "Browse the guest book of Tulipes Et Cetera and leave your message.",
   },
 };
 

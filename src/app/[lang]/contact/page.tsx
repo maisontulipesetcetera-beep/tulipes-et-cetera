@@ -6,17 +6,17 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Contact — Tulipes EtCetera",
+    title: "Contact — Tulipes Et Cetera",
     description:
       "2 Rue des Tulipes, 68640 Waldighoffen. Tél: +33 3 89 40 02 90",
   },
   de: {
-    title: "Kontakt — Tulipes EtCetera",
+    title: "Kontakt — Tulipes Et Cetera",
     description:
       "2 Rue des Tulipes, 68640 Waldighoffen. Tel: +33 3 89 40 02 90",
   },
   en: {
-    title: "Contact — Tulipes EtCetera",
+    title: "Contact — Tulipes Et Cetera",
     description:
       "2 Rue des Tulipes, 68640 Waldighoffen. Tel: +33 3 89 40 02 90",
   },
@@ -86,7 +86,7 @@ export default function ContactPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Localisation Tulipes EtCetera — Waldighoffen"
+                title="Localisation Tulipes Et Cetera — Waldighoffen"
               />
             </div>
 

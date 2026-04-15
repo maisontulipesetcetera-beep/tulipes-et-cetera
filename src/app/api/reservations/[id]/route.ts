@@ -87,11 +87,11 @@ export async function PATCH(
 
         await sendEmail({
           to: reservation.guestEmail,
-          subject: "Votre réservation est confirmée — Tulipes EtCetera",
+          subject: "Votre réservation est confirmée — Tulipes Et Cetera",
           html: `
             <h2>Bonne nouvelle, votre réservation est confirmée !</h2>
             <p>Bonjour ${reservation.guestName},</p>
-            <p>Nous avons le plaisir de confirmer votre séjour chez <strong>Tulipes EtCetera</strong>.</p>
+            <p>Nous avons le plaisir de confirmer votre séjour chez <strong>Tulipes Et Cetera</strong>.</p>
             <p>Pour finaliser votre réservation, veuillez régler l'acompte en cliquant sur le lien ci-dessous :</p>
             <p style="margin: 24px 0;">
               <a href="${session.url}" style="background:#2d6a4f;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">
@@ -101,7 +101,7 @@ export async function PATCH(
             <p><strong>Montant de l'acompte :</strong> ${((reservation.depositAmount ?? 0) / 100).toFixed(2)} €</p>
             <p>Ce lien est sécurisé et vous redirigera vers notre page de paiement Stripe.</p>
             <p>À très bientôt en Alsace !</p>
-            <p>— L'équipe Tulipes EtCetera</p>
+            <p>— L'équipe Tulipes Et Cetera</p>
           `,
         });
       } catch (emailErr) {

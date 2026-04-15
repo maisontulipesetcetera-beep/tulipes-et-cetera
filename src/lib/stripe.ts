@@ -17,7 +17,7 @@ export async function createCheckoutSession(reservation: {
         price_data: {
           currency: "eur",
           product_data: {
-            name: "Acompte — Tulipes EtCetera",
+            name: "Acompte — Tulipes Et Cetera",
             description: "Acompte de réservation — Cottage de Charme",
           },
           unit_amount: reservation.depositAmount,

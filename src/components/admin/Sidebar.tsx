@@ -35,7 +35,7 @@ export default function Sidebar() {
       <div className="flex items-center gap-4 px-6 py-6 border-b border-gray-100">
         <Image
           src="/images/logo.jpg"
-          alt="Tulipes EtCetera"
+          alt="Tulipes Et Cetera"
           width={52}
           height={52}
           className="rounded-full object-cover shrink-0 shadow-sm"

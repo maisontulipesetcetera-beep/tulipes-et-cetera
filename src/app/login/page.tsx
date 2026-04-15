@@ -40,7 +40,7 @@ export default function LoginPage() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-facade.jpg"
-          alt="Tulipes EtCetera"
+          alt="Tulipes Et Cetera"
           fill
           className="object-cover"
           priority
@@ -54,7 +54,7 @@ export default function LoginPage() {
         <div className="flex justify-center mb-6">
           <Image
             src="/images/logo.jpg"
-            alt="Tulipes EtCetera"
+            alt="Tulipes Et Cetera"
             width={120}
             height={120}
             className="rounded-full object-cover shadow-md"

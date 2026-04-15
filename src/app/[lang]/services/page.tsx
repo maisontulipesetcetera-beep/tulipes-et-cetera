@@ -6,17 +6,17 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Prestations — Tulipes EtCetera",
+    title: "Prestations — Tulipes Et Cetera",
     description:
       "Petit-déjeuner bio, vélos gratuits, poney, paniers pique-nique, brasero, jardin privatif.",
   },
   de: {
-    title: "Leistungen — Tulipes EtCetera",
+    title: "Leistungen — Tulipes Et Cetera",
     description:
       "Bio-Frühstück, kostenlose Fahrräder, Pony, Picknickkorb, Feuerstelle, privater Garten.",
   },
   en: {
-    title: "Services — Tulipes EtCetera",
+    title: "Services — Tulipes Et Cetera",
     description:
       "Organic breakfast, free bikes, pony, picnic baskets, fire pit, private garden.",
   },

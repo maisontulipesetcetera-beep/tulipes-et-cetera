@@ -7,17 +7,17 @@ const BASE_URL = "https://tulipes-et-cetera.fr";
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
-    title: "Réserver — Tulipes EtCetera",
+    title: "Réserver — Tulipes Et Cetera",
     description:
       "Réservez votre séjour à partir de 179€/nuit. Calendrier en temps réel, paiement sécurisé.",
   },
   de: {
-    title: "Buchen — Tulipes EtCetera",
+    title: "Buchen — Tulipes Et Cetera",
     description:
       "Buchen Sie Ihren Aufenthalt ab 179€/Nacht. Echtzeit-Kalender, sichere Zahlung.",
   },
   en: {
-    title: "Book — Tulipes EtCetera",
+    title: "Book — Tulipes Et Cetera",
     description:
       "Book your stay from €179/night. Real-time availability calendar, secure payment.",
   },
