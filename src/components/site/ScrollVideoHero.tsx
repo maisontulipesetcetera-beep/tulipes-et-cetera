@@ -1,118 +1,235 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ─── Slide config ────────────────────────────────────────────────────────────
+const SLIDES = [
+  {
+    id: "intro",
+    side: "center" as const,
+    startPct: 2,
+    endPct: 14,
+  },
+  {
+    id: "slide1",
+    side: "left" as const,
+    startPct: 14,
+    endPct: 28,
+    text: "Un écrin de douceur au fond d'une ruelle sans issue, où le temps s'arrête",
+  },
+  {
+    id: "slide2",
+    side: "right" as const,
+    startPct: 28,
+    endPct: 45,
+    text: "Trois chambres de charme, literie haut de gamme et balnéo",
+  },
+  {
+    id: "slide3",
+    side: "left" as const,
+    startPct: 45,
+    endPct: 62,
+    text: "Petit-déjeuner fait maison, kougelhopf et produits bio locaux",
+  },
+  {
+    id: "slide4",
+    side: "right" as const,
+    startPct: 62,
+    endPct: 78,
+    text: "Vous viendrez en hôte et repartirez en ami",
+  },
+  {
+    id: "cta",
+    side: "center" as const,
+    startPct: 78,
+    endPct: 100,
+  },
+] as const;
+
+// ─── Frame config ────────────────────────────────────────────────────────────
+const FRAME_CONFIG = {
+  desktop: { path: "/frames/hero-desktop/frame-", total: 144 },
+  mobile: { path: "/frames/hero-mobile/frame-", total: 144 },
+} as const;
+
+function frameSrc(cfg: { path: string; total: number }, index: number): string {
+  const n = String(index + 1).padStart(4, "0");
+  return `${cfg.path}${n}.jpg`;
+}
 
 interface ScrollVideoHeroProps {
   lang: string;
 }
 
-const slides = [
-  {
-    range: [0, 0.15],
-    position: "center",
-    supertitle: "Maison d'hôtes de charme · Sundgau · Alsace",
-    title: "Tulipes Et Cetera",
-    from: "center",
-  },
-  {
-    range: [0.15, 0.3],
-    position: "left",
-    text: "Un écrin de douceur au fond d'une ruelle sans issue",
-    from: "left",
-  },
-  {
-    range: [0.3, 0.5],
-    position: "right",
-    text: "Trois chambres de charme, literie haut de gamme, balnéo",
-    from: "right",
-  },
-  {
-    range: [0.5, 0.65],
-    position: "left",
-    text: "Petit-déjeuner fait maison, produits bio et locaux",
-    from: "left",
-  },
-  {
-    range: [0.65, 0.8],
-    position: "right",
-    text: "Vous viendrez en hôte et repartirez en ami",
-    from: "right",
-  },
-  {
-    range: [0.8, 1],
-    position: "center",
-    cta: true,
-    from: "center",
-  },
-];
-
 export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const isMobile = useRef(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const framesRef = useRef<HTMLImageElement[]>([]);
+  const currentFrameRef = useRef(0);
+  const slideEls = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
+  const [loaded, setLoaded] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0);
+
+  // ─── Draw a frame on the canvas ──────────────────────────────────────────
+  const drawFrame = useCallback((index: number) => {
+    const canvas = canvasRef.current;
+    const img = framesRef.current[index];
+    if (!canvas || !img || !img.complete) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const iw = img.naturalWidth;
+    const ih = img.naturalHeight;
+
+    const isMobile = window.innerWidth < 768;
+
+    let scale: number;
+    if (isMobile) {
+      // contain on mobile
+      scale = Math.min(cw / iw, ch / ih);
+    } else {
+      // cover on desktop (no black bars)
+      scale = Math.max(cw / iw, ch / ih);
+    }
+
+    const dw = iw * scale;
+    const dh = ih * scale;
+    const dx = (cw - dw) / 2;
+    const dy = (ch - dh) / 2;
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }, []);
+
+  // ─── Resize canvas to fill viewport ──────────────────────────────────────
+  const resizeCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawFrame(currentFrameRef.current);
+  }, [drawFrame]);
+
+  // ─── Load all frames ──────────────────────────────────────────────────────
   useEffect(() => {
-    isMobile.current = window.innerWidth < 768;
-    if (isMobile.current) return;
+    const isMobile = window.innerWidth < 768;
+    const cfg = isMobile ? FRAME_CONFIG.mobile : FRAME_CONFIG.desktop;
+    const total = cfg.total;
+    const imgs: HTMLImageElement[] = [];
+    let loaded = 0;
 
-    let gsapInstance: typeof import("gsap").gsap | null = null;
-    let ScrollTriggerInstance:
-      | typeof import("gsap/ScrollTrigger").ScrollTrigger
-      | null = null;
+    framesRef.current = imgs;
 
-    async function init() {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
-      gsapInstance = gsap;
-      ScrollTriggerInstance = ScrollTrigger;
-
-      const video = videoRef.current;
-      const container = containerRef.current;
-      if (!video || !container) return;
-
-      // Wait for video metadata to load
-      await new Promise<void>((resolve) => {
-        if (video.readyState >= 1) {
-          resolve();
-        } else {
-          video.addEventListener("loadedmetadata", () => resolve(), {
-            once: true,
-          });
+    for (let i = 0; i < total; i++) {
+      const img = new window.Image();
+      img.src = frameSrc(cfg, i);
+      img.onload = () => {
+        loaded++;
+        setLoadProgress(Math.round((loaded / total) * 100));
+        if (loaded === total) {
+          setLoaded(true);
         }
-      });
+        // Draw first frame as soon as it loads
+        if (i === 0) {
+          resizeCanvas();
+          drawFrame(0);
+        }
+      };
+      imgs.push(img);
+    }
+  }, [drawFrame, resizeCanvas]);
 
-      const duration = video.duration || 30;
+  // ─── Setup canvas resize listener ─────────────────────────────────────────
+  useEffect(() => {
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    return () => window.removeEventListener("resize", resizeCanvas);
+  }, [resizeCanvas]);
 
-      // Control video currentTime with scroll
-      ScrollTrigger.create({
+  // ─── Setup GSAP ScrollTrigger once frames are loaded ──────────────────────
+  useEffect(() => {
+    if (!loaded) return;
+
+    const container = containerRef.current;
+    const canvas = canvasRef.current;
+    if (!container || !canvas) return;
+
+    const total = FRAME_CONFIG.desktop.total; // same for both
+
+    // Draw first frame immediately
+    drawFrame(0);
+
+    // ── Frame scrub ──
+    const frameTrigger = ScrollTrigger.create({
+      trigger: container,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0,
+      onUpdate: (self) => {
+        const idx = Math.min(
+          total - 1,
+          Math.max(0, Math.round(self.progress * (total - 1))),
+        );
+        if (idx !== currentFrameRef.current) {
+          currentFrameRef.current = idx;
+          drawFrame(idx);
+        }
+      },
+    });
+
+    // ── Scroll indicator fade-out (1–8%) ──
+    const scrollIndicator = scrollIndicatorRef.current;
+    let indicatorTrigger: ScrollTrigger | null = null;
+    if (scrollIndicator) {
+      indicatorTrigger = ScrollTrigger.create({
         trigger: container,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
+        start: "1% top",
+        end: "8% top",
+        scrub: true,
         onUpdate: (self) => {
-          video.currentTime = self.progress * duration;
+          scrollIndicator.style.opacity = String(1 - self.progress);
         },
       });
+    }
 
-      // Animate each slide text panel
-      slideRefs.current.forEach((el, i) => {
-        if (!el) return;
-        const slide = slides[i];
-        const [start, end] = slide.range;
+    // ── Text slides ──
+    const textTriggers: ScrollTrigger[] = [];
 
-        const xFrom =
-          slide.from === "left" ? -60 : slide.from === "right" ? 60 : 0;
-        const yFrom = slide.from === "center" ? 30 : 0;
+    SLIDES.forEach((slide, i) => {
+      const el = slideEls.current[i];
+      if (!el) return;
 
-        // Fade in
-        ScrollTrigger.create({
+      const startPct = slide.startPct / 100;
+      const endPct = slide.endPct / 100;
+      const duration = endPct - startPct;
+      const fadeInEnd = startPct + duration * 0.35;
+      const fadeOutStart = startPct + duration * 0.65;
+
+      const xFrom =
+        slide.side === "left" ? -60 : slide.side === "right" ? 60 : 0;
+      const yFrom = slide.side === "center" ? 30 : 0;
+
+      // Initial state
+      el.style.opacity = i === 0 ? "1" : "0";
+
+      // Fade IN
+      if (i > 0) {
+        // slide 0 starts visible, skip fade-in trigger
+        const ti = ScrollTrigger.create({
           trigger: container,
-          start: `${start * 100}% top`,
-          end: `${(start + (end - start) * 0.35) * 100}% top`,
+          start: `${startPct * 100}% top`,
+          end: `${fadeInEnd * 100}% top`,
           scrub: true,
           onUpdate: (self) => {
             const p = self.progress;
@@ -120,155 +237,255 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
             el.style.transform = `translate(${xFrom * (1 - p)}px, ${yFrom * (1 - p)}px)`;
           },
         });
+        textTriggers.push(ti);
+      }
 
-        // Fade out
-        const fadeOutStart = start + (end - start) * 0.65;
-        ScrollTrigger.create({
+      // Special: intro (slide 0) fades out as soon as scroll starts (1-8%)
+      if (i === 0) {
+        const t0 = ScrollTrigger.create({
           trigger: container,
-          start: `${fadeOutStart * 100}% top`,
-          end: `${end * 100}% top`,
+          start: "1% top",
+          end: "8% top",
           scrub: true,
           onUpdate: (self) => {
             const p = 1 - self.progress;
             el.style.opacity = String(p);
-            el.style.transform = `translate(${xFrom * (1 - p) * -0.3}px, ${yFrom * (1 - p) * -0.3}px)`;
+            el.style.transform = `translateY(${-20 * self.progress}px)`;
           },
         });
-      });
-    }
+        textTriggers.push(t0);
+      }
 
-    init();
+      // Fade OUT (all except last CTA which stays until end)
+      if (i < SLIDES.length - 1) {
+        const to = ScrollTrigger.create({
+          trigger: container,
+          start: `${fadeOutStart * 100}% top`,
+          end: `${endPct * 100}% top`,
+          scrub: true,
+          onUpdate: (self) => {
+            const p = 1 - self.progress;
+            el.style.opacity = String(p);
+            el.style.transform = `translate(${xFrom * -0.3 * (1 - p)}px, ${yFrom * -0.3 * (1 - p)}px)`;
+          },
+        });
+        textTriggers.push(to);
+      }
+
+      // CTA slide: fade in at 82% and stay
+      if (slide.id === "cta") {
+        const tc = ScrollTrigger.create({
+          trigger: container,
+          start: "82% top",
+          end: "86% top",
+          scrub: true,
+          onUpdate: (self) => {
+            el.style.opacity = String(self.progress);
+            el.style.transform = `translateY(${20 * (1 - self.progress)}px)`;
+          },
+        });
+        textTriggers.push(tc);
+      }
+    });
 
     return () => {
-      if (ScrollTriggerInstance) {
-        ScrollTriggerInstance.getAll().forEach((t) => t.kill());
-      }
+      frameTrigger.kill();
+      indicatorTrigger?.kill();
+      textTriggers.forEach((t) => t.kill());
     };
-  }, []);
+  }, [loaded, drawFrame]);
 
   return (
     <>
-      {/* DESKTOP: scroll-driven container */}
+      {/* ── DESKTOP + MOBILE: scroll-driven canvas hero ── */}
       <div
         ref={containerRef}
-        className="hidden md:block relative"
-        style={{ height: "400vh" }}
+        className="relative"
+        style={{ height: "500vh" }}
+        aria-label="Hero animé scroll-driven"
       >
-        {/* Sticky video viewport */}
+        {/* Sticky viewport */}
         <div className="sticky top-0 h-screen overflow-hidden">
-          {/* Video */}
-          <video
-            ref={videoRef}
-            muted
-            playsInline
-            preload="auto"
-            poster="/images/hero-facade.jpg"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ willChange: "transform" }}
-          >
-            <source src="/images/hero-video.mp4" type="video/mp4" />
-          </video>
+          {/* Canvas — frames drawn here */}
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ display: "block" }}
+          />
+
+          {/* Poster + spinner while loading */}
+          {!loaded && (
+            <div className="absolute inset-0 z-10">
+              <Image
+                src="/images/hero-facade.jpg"
+                alt="Tulipes Et Cetera — chargement"
+                fill
+                className="object-cover"
+                priority
+              />
+              {/* Gradient overlay on poster */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
+              {/* Spinner */}
+              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+                <div className="w-10 h-10 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                <span className="font-body text-white/70 text-sm tracking-widest uppercase">
+                  {loadProgress}%
+                </span>
+              </div>
+            </div>
+          )}
 
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent pointer-events-none" />
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10 pointer-events-none"
+            aria-hidden="true"
+          />
+          {/* Bottom vignette */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"
+            aria-hidden="true"
+          />
 
-          {/* Slide text panels */}
-          {slides.map((slide, i) => {
-            const posClass =
-              slide.position === "left"
-                ? "items-start justify-end text-left"
-                : slide.position === "right"
-                  ? "items-end justify-end text-right"
-                  : "items-center justify-end text-center";
+          {/* ── Slide 0 — Intro ── */}
+          <div
+            ref={(el) => {
+              slideEls.current[0] = el;
+            }}
+            className="absolute inset-0 flex flex-col items-center justify-end pb-24 px-6 text-center pointer-events-none"
+            style={{ opacity: 1 }}
+          >
+            <span
+              className="font-body text-xs md:text-sm tracking-[0.3em] uppercase mb-3"
+              style={{
+                color: "#C8A96E",
+                textShadow: "0 2px 12px rgba(0,0,0,0.8)",
+              }}
+            >
+              Maison d&apos;hôtes de charme · Sundgau · Alsace
+            </span>
+            <h1
+              className="font-heading text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05]"
+              style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
+            >
+              Tulipes Et Cetera
+            </h1>
+          </div>
 
-            return (
-              <div
-                key={i}
-                ref={(el) => {
-                  slideRefs.current[i] = el;
-                }}
-                className={`absolute inset-0 flex flex-col px-12 md:px-20 pb-20 md:pb-28 gap-4 pointer-events-none ${posClass}`}
-                style={{ opacity: i === 0 ? 1 : 0 }}
-              >
-                {/* Slide 0: main hero */}
-                {i === 0 && (
-                  <>
-                    <span
-                      className="text-tulipe-gold text-sm md:text-base tracking-[0.3em] uppercase font-body"
-                      style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}
-                    >
-                      {slide.supertitle}
-                    </span>
-                    <h1
-                      className="font-heading text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05]"
-                      style={{ textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}
-                    >
-                      {slide.title}
-                    </h1>
-                  </>
-                )}
+          {/* ── Slide 1 — gauche ── */}
+          <div
+            ref={(el) => {
+              slideEls.current[1] = el;
+            }}
+            className="absolute inset-0 flex flex-col items-start justify-end pb-24 px-8 md:px-20 pointer-events-none"
+            style={{ opacity: 0, transform: "translateX(-60px)" }}
+          >
+            <p
+              className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl leading-snug"
+              style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
+            >
+              {SLIDES[1].text}
+            </p>
+          </div>
 
-                {/* Slides 1-4: text panels */}
-                {i >= 1 && i <= 4 && (
-                  <p
-                    className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl leading-snug"
-                    style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
-                  >
-                    {slide.text}
-                  </p>
-                )}
+          {/* ── Slide 2 — droite ── */}
+          <div
+            ref={(el) => {
+              slideEls.current[2] = el;
+            }}
+            className="absolute inset-0 flex flex-col items-end justify-end pb-24 px-8 md:px-20 pointer-events-none"
+            style={{ opacity: 0, transform: "translateX(60px)" }}
+          >
+            <p
+              className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl text-right leading-snug"
+              style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
+            >
+              {SLIDES[2].text}
+            </p>
+          </div>
 
-                {/* Slide 5: CTA */}
-                {i === 5 && (
-                  <div
-                    className="flex flex-col items-center gap-5 pointer-events-auto"
-                    style={{ opacity: 1 }}
-                  >
-                    <h2
-                      className="font-heading text-4xl md:text-5xl text-white"
-                      style={{ textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}
-                    >
-                      Réservez votre séjour
-                    </h2>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Link
-                        href={`/${lang}/reservation`}
-                        className="inline-flex items-center justify-center px-10 py-4 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg shadow-lg"
-                      >
-                        Réserver maintenant
-                      </Link>
-                      <Link
-                        href={`/${lang}/maison`}
-                        className="inline-flex items-center justify-center px-10 py-4 bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white font-body font-semibold rounded-[10px] transition-all duration-300 border border-white/30 text-lg"
-                      >
-                        Découvrir la maison
-                      </Link>
-                    </div>
-                    <div className="flex items-center gap-3 mt-1">
-                      <span className="text-tulipe-gold text-lg tracking-wider">
-                        ★★★★★
-                      </span>
-                      <span
-                        className="font-body text-white/85 text-base"
-                        style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}
-                      >
-                        9.9/10 sur Booking · 86 avis
-                      </span>
-                    </div>
-                  </div>
-                )}
+          {/* ── Slide 3 — gauche ── */}
+          <div
+            ref={(el) => {
+              slideEls.current[3] = el;
+            }}
+            className="absolute inset-0 flex flex-col items-start justify-end pb-24 px-8 md:px-20 pointer-events-none"
+            style={{ opacity: 0, transform: "translateX(-60px)" }}
+          >
+            <p
+              className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl leading-snug"
+              style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
+            >
+              {SLIDES[3].text}
+            </p>
+          </div>
+
+          {/* ── Slide 4 — droite ── */}
+          <div
+            ref={(el) => {
+              slideEls.current[4] = el;
+            }}
+            className="absolute inset-0 flex flex-col items-end justify-end pb-24 px-8 md:px-20 pointer-events-none"
+            style={{ opacity: 0, transform: "translateX(60px)" }}
+          >
+            <p
+              className="font-heading text-3xl md:text-4xl lg:text-5xl text-white max-w-xl text-right leading-snug"
+              style={{ textShadow: "0 4px 24px rgba(0,0,0,0.85)" }}
+            >
+              {SLIDES[4].text}
+            </p>
+          </div>
+
+          {/* ── Slide 5 — CTA centré ── */}
+          <div
+            ref={(el) => {
+              slideEls.current[5] = el;
+            }}
+            className="absolute inset-0 flex flex-col items-center justify-end pb-20 px-6 text-center"
+            style={{ opacity: 0, transform: "translateY(20px)" }}
+          >
+            <div className="flex flex-col items-center gap-5 pointer-events-auto">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href={`/${lang}/reservation`}
+                  className="inline-flex items-center justify-center px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg shadow-lg"
+                >
+                  Réservez votre séjour
+                </Link>
+                <Link
+                  href={`/${lang}/maison`}
+                  className="inline-flex items-center justify-center px-10 py-4 bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white font-body font-semibold rounded-[10px] transition-all duration-300 border border-white/40 text-lg"
+                >
+                  Découvrir la maison
+                </Link>
               </div>
-            );
-          })}
+              <div className="flex items-center gap-3 mt-1">
+                <span
+                  className="text-lg tracking-wider"
+                  style={{ color: "#C8A96E" }}
+                >
+                  ★★★★★
+                </span>
+                <span
+                  className="font-body text-white/85 text-base"
+                  style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}
+                >
+                  9.9/10 sur Booking · 86 avis
+                </span>
+              </div>
+            </div>
+          </div>
 
-          {/* Scroll indicator — only visible at top */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          {/* ── Scroll indicator ── */}
+          <div
+            ref={scrollIndicatorRef}
+            className="absolute bottom-7 left-1/2 -translate-x-1/2 z-20 animate-bounce pointer-events-none"
+          >
             <svg
               className="w-6 h-6 text-white/60"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -281,67 +498,33 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
         </div>
       </div>
 
-      {/* MOBILE: classic autoplay video hero */}
-      <section className="md:hidden relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/images/hero-facade.jpg"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/images/hero-video.mp4" type="video/mp4" />
-        </video>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-        <div className="relative z-10 px-6 pb-16 max-w-lg flex flex-col gap-4">
-          <span className="font-body text-xs tracking-[0.3em] uppercase text-tulipe-gold">
-            Maison d&apos;hôtes · Sundgau · Alsace
-          </span>
-          <h1
-            className="font-heading text-5xl text-white leading-tight"
-            style={{ textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}
-          >
-            Tulipes Et Cetera
-          </h1>
-          <p className="font-body text-lg text-white/90 leading-relaxed">
-            Vous viendrez en hôte et repartirez en ami.
-          </p>
-          <div className="flex flex-col gap-3 mt-2">
-            <Link
-              href={`/${lang}/reservation`}
-              className="inline-flex items-center justify-center px-8 py-4 bg-tulipe-green text-white font-body font-semibold rounded-[10px] text-lg shadow-lg"
-            >
-              Réserver votre séjour
-            </Link>
-            <Link
-              href={`/${lang}/maison`}
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/15 backdrop-blur-sm text-white font-body font-semibold rounded-[10px] border border-white/30 text-lg"
-            >
-              Découvrir la maison
-            </Link>
-          </div>
-          <div className="flex items-center gap-2 mt-1">
-            <span className="text-tulipe-gold">★★★★★</span>
-            <span className="font-body text-white/80 text-sm">
-              9.9/10 sur Booking
-            </span>
-          </div>
-        </div>
-
-        {/* Poster fallback for static display */}
-        <div className="absolute inset-0 -z-10">
+      {/* ── MOBILE fallback static hero (no JS canvas) ── */}
+      <noscript>
+        <section className="relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden">
           <Image
             src="/images/hero-facade.jpg"
-            alt="Tulipes Et Cetera"
+            alt="Tulipes Et Cetera — Maison d'hôtes de charme en Alsace"
             fill
             className="object-cover"
             priority
           />
-        </div>
-      </section>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="relative z-10 px-6 pb-16 flex flex-col gap-4">
+            <span
+              className="font-body text-xs tracking-[0.3em] uppercase"
+              style={{ color: "#C8A96E" }}
+            >
+              Maison d&apos;hôtes · Sundgau · Alsace
+            </span>
+            <h1
+              className="font-heading text-5xl text-white leading-tight"
+              style={{ textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}
+            >
+              Tulipes Et Cetera
+            </h1>
+          </div>
+        </section>
+      </noscript>
     </>
   );
 }
