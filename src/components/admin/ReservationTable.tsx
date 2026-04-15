@@ -133,6 +133,12 @@ export default function ReservationTable({
           setPaymentEmailSent(id);
           setTimeout(() => setPaymentEmailSent(null), 5000);
         }
+        // Refresh la liste
+        window.location.reload();
+      } else {
+        const err = await res.text();
+        console.error("[ReservationTable] PATCH failed:", res.status, err);
+        alert(`Erreur : ${res.status} — ${err}`);
       }
     } finally {
       setUpdating(null);
