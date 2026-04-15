@@ -72,7 +72,7 @@ export default function LivreDorPage() {
       </section>
 
       {/* Book section */}
-      <section className="py-16 px-4 bg-tulipe-cream min-h-[70vh] flex items-start justify-center">
+      <section className="py-20 md:py-28 px-4 bg-tulipe-cream min-h-[70vh] flex items-start justify-center">
         <div className="w-full max-w-3xl">
           <GuestBook />
         </div>

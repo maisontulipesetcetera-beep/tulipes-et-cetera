@@ -109,7 +109,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <ScrollVideoHero lang={lang} />
 
       {/* Features strip */}
-      <section className="bg-white py-16 md:py-24 px-4">
+      <section className="bg-white py-20 md:py-28 px-4">
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-12">
           {features.map(({ emoji, key }) => (
             <div
@@ -141,7 +141,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   src={img.src}
                   alt={img.alt}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />
               </div>

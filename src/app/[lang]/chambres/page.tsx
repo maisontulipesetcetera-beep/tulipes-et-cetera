@@ -124,12 +124,12 @@ export default async function ChambresPage({ params }: ChambresPageProps) {
       </section>
 
       {/* Chambres */}
-      <section className="py-16 px-4 bg-tulipe-cream">
+      <section className="py-20 md:py-28 px-4 bg-tulipe-cream">
         <div className="max-w-5xl mx-auto flex flex-col gap-12">
           {chambres.map((chambre, idx) => (
             <div
               key={chambre.slug}
-              className={`flex flex-col ${idx % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} gap-8 bg-white rounded-2xl overflow-hidden shadow-sm border border-tulipe-beige`}
+              className={`flex flex-col ${idx % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} gap-8 bg-white rounded-2xl overflow-hidden shadow-sm border border-tulipe-beige hover:shadow-lg transition-shadow duration-300`}
             >
               {/* Image */}
               <div className="relative md:w-2/5 aspect-[4/3] md:aspect-auto min-h-[240px]">

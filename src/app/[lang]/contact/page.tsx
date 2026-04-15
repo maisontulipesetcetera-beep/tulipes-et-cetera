@@ -72,7 +72,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map + Form */}
-      <section className="py-16 px-4 bg-tulipe-cream">
+      <section className="py-20 md:py-28 px-4 bg-tulipe-cream">
         <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-10">
           {/* Left: Map + infos */}
           <div className="lg:w-1/2 flex flex-col gap-6">

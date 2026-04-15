@@ -105,7 +105,7 @@ export default async function LangLayout({
   return (
     <html
       lang={locale}
-      className={`${playfairDisplay.variable} ${lato.variable} h-full antialiased`}
+      className={`${playfairDisplay.variable} ${lato.variable} h-full antialiased scroll-smooth`}
     >
       <head>
         <script
@@ -115,7 +115,7 @@ export default async function LangLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-tulipe-cream font-body scroll-smooth">
+      <body className="min-h-full flex flex-col bg-tulipe-cream font-body">
         <NextIntlClientProvider messages={messages}>
           <Header lang={locale} />
           <main className="flex-1">{children}</main>

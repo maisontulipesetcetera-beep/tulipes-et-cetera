@@ -216,12 +216,12 @@ export default async function AvisPage({
       </section>
 
       {/* Avis grid */}
-      <section className="py-16 px-4 bg-tulipe-cream">
+      <section className="py-20 md:py-28 px-4 bg-tulipe-cream">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {avis.map((item) => (
             <blockquote
               key={item.author}
-              className="bg-white rounded-2xl p-7 shadow-sm border border-tulipe-beige flex flex-col gap-4"
+              className="bg-white rounded-2xl p-7 shadow-sm border border-tulipe-beige flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300"
             >
               <Stars count={item.stars} />
               <p className="font-body text-gray-700 italic leading-relaxed flex-1">

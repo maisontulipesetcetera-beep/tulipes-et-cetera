@@ -112,12 +112,12 @@ export default function ServicesPage() {
       </section>
 
       {/* Grid */}
-      <section className="py-16 px-4 bg-tulipe-cream">
+      <section className="py-20 md:py-28 px-4 bg-tulipe-cream">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {prestations.map((item) => (
             <div
               key={item.title}
-              className="bg-white rounded-2xl p-8 shadow-sm border border-tulipe-beige flex flex-col gap-4 hover:shadow-md transition-shadow"
+              className="bg-white rounded-2xl p-8 shadow-sm border border-tulipe-beige flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300"
             >
               <span className="text-5xl">{item.emoji}</span>
               <h2 className="font-heading text-xl text-tulipe-blue">
@@ -143,7 +143,7 @@ export default function ServicesPage() {
                 src="/images/gallery/petit-dejeuner.jpg"
                 alt="Petit-déjeuner maison avec crêpes et jus"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-300"
+                className="object-cover hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
@@ -152,7 +152,7 @@ export default function ServicesPage() {
                 src="/images/gallery/jeux-societe.jpg"
                 alt="Jeux de société Monopoly et Scrabble"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-300"
+                className="object-cover hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
