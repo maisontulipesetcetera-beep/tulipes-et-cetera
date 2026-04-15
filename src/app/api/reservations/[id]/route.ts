@@ -79,11 +79,13 @@ export async function PATCH(
     // When status transitions to "confirmed", create Stripe checkout and email client
     if (parsed.data.status === "confirmed" && existing.status !== "confirmed") {
       try {
-        const session = await createCheckoutSession({
+        const checkoutSession = await createCheckoutSession({
           id: reservation.id,
           guestEmail: reservation.guestEmail,
           totalAmount: reservation.totalAmount ?? 0,
         });
+
+        const paymentUrl = checkoutSession?.url ?? "#";
 
         await sendEmail({
           to: reservation.guestEmail,
@@ -94,7 +96,7 @@ export async function PATCH(
             <p>Nous avons le plaisir de confirmer votre séjour chez <strong>Tulipes Et Cetera</strong>.</p>
             <p>Pour finaliser votre réservation, veuillez régler votre séjour en cliquant sur le lien ci-dessous :</p>
             <p style="margin: 24px 0;">
-              <a href="${session.url}" style="background:#2d6a4f;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">
+              <a href="${paymentUrl}" style="background:#2d6a4f;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">
                 Payer mon séjour
               </a>
             </p>
