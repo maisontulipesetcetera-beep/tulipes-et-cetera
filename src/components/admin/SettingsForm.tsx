@@ -163,12 +163,12 @@ export default function SettingsForm() {
   if (!settings) return null;
 
   // Display prices in euros (DB stores cents)
-  const basePriceEur = (settings.basePrice / 100).toFixed(2);
+  const basePriceEur = Math.round(settings.basePrice / 100).toString();
   const highSeasonEur = settings.highSeasonPrice
-    ? (settings.highSeasonPrice / 100).toFixed(2)
+    ? Math.round(settings.highSeasonPrice / 100).toString()
     : "";
   const weekendEur = settings.weekendPrice
-    ? (settings.weekendPrice / 100).toFixed(2)
+    ? Math.round(settings.weekendPrice / 100).toString()
     : "";
 
   return (
@@ -237,7 +237,7 @@ export default function SettingsForm() {
               <input
                 type="number"
                 min="0"
-                step="0.01"
+                step="1"
                 value={basePriceEur}
                 onChange={(e) =>
                   update(
@@ -252,7 +252,7 @@ export default function SettingsForm() {
               <input
                 type="number"
                 min="0"
-                step="0.01"
+                step="1"
                 value={highSeasonEur}
                 onChange={(e) =>
                   update(
@@ -270,7 +270,7 @@ export default function SettingsForm() {
               <input
                 type="number"
                 min="0"
-                step="0.01"
+                step="1"
                 value={weekendEur}
                 onChange={(e) =>
                   update(
