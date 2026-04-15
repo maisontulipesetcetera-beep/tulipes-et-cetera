@@ -124,8 +124,8 @@ export default async function AdminDashboardPage() {
 
   // CA du mois
   const caMois = reservationsMois
-    .filter((r) => ["confirmed", "completed"].includes(r.status))
-    .reduce((s, r) => s + (r.totalAmount ?? 0), 0);
+    .filter((r: any) => ["confirmed", "completed"].includes(r.status))
+    .reduce((s: number, r: any) => s + (r.totalAmount ?? 0), 0);
 
   const caMoisEuros = (caMois / 100).toLocaleString("fr-FR", {
     style: "currency",
