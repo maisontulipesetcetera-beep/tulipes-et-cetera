@@ -191,7 +191,7 @@ export default async function AdminDashboardPage() {
           </p>
         ) : (
           <div className="p-6 space-y-4">
-            {recentesRaw.map((r) => {
+            {recentesRaw.map((r: any) => {
               const statusInfo = statusLabels[r.status] ?? {
                 label: r.status,
                 className: "bg-gray-100 text-gray-700 border-gray-200",
