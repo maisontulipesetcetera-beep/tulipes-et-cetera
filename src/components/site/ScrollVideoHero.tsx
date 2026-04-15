@@ -361,7 +361,7 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
                 textShadow: "0 2px 12px rgba(0,0,0,0.8)",
               }}
             >
-              Maison d&apos;hôtes de charme · Sundgau · Alsace
+              Cottage de Charme · Sundgau · Alsace 🌷
             </span>
             <h1
               className="font-heading text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05]"

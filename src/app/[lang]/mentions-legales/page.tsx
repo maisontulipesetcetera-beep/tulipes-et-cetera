@@ -17,7 +17,7 @@ export default function MentionsLegalesPage() {
             <p className="leading-relaxed">
               <strong>Tulipes Et Cetera</strong>
               <br />
-              Maison d&apos;hôtes de charme
+              Cottage de Charme
               <br />
               2 Rue des Tulipes, 68640 Waldighoffen, France
               <br />

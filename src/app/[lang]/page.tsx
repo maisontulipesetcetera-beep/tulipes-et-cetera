@@ -163,7 +163,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 className="bg-white rounded-2xl p-10 shadow-md hover:shadow-lg border border-tulipe-beige flex flex-col gap-4 transition-shadow duration-200"
               >
                 <p className="font-body text-gray-700 italic text-xl leading-relaxed">
-                  &ldquo;{t.text}&rdquo;
+                  &ldquo;{t.text}&rdquo; 🌷
                 </p>
                 <footer className="font-body text-tulipe-bordeaux font-semibold text-sm">
                   — {t.author}
@@ -188,7 +188,7 @@ export default async function HomePage({ params }: HomePageProps) {
             href={`/${lang}/reservation`}
             className="inline-block px-12 py-5 bg-tulipe-gold hover:bg-amber-500 text-white font-body font-semibold rounded-[10px] transition-all duration-200 hover:scale-105 hover:shadow-xl text-xl shadow-lg"
           >
-            Réservez votre séjour
+            Réservez votre séjour 🌷
           </Link>
         </div>
       </section>

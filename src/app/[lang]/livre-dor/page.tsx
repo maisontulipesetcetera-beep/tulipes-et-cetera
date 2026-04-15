@@ -62,7 +62,7 @@ export default function LivreDorPage() {
       {/* Header */}
       <section className="bg-tulipe-bordeaux py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Livre d&apos;or
+          Livre d&apos;or 🌷
         </h1>
         <p className="font-body text-white/70 text-base max-w-xl mx-auto">
           Les mots de nos hôtes, pour toujours gravés dans notre mémoire.

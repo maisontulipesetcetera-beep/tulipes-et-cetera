@@ -32,7 +32,7 @@ export default function Footer({ lang }: FooterProps) {
               </span>
             </div>
             <p className="text-sm text-white/80 font-body leading-relaxed">
-              Cottage de Charme
+              Cottage de Charme 🌷
               <br />
               Alsace, France
             </p>

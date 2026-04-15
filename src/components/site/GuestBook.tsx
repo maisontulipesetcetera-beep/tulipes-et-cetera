@@ -158,7 +158,7 @@ function FormPage({ onSuccess }: FormPageProps) {
           className="mt-auto w-full py-2 bg-[#5C1A1A] hover:bg-[#7a2323] text-[#f5e6c8] text-sm font-semibold rounded-lg transition-colors disabled:opacity-60"
           style={{ fontFamily: "'Dancing Script', cursive", fontSize: "16px" }}
         >
-          {submitting ? "Envoi..." : "Signer le livre d'or ✒"}
+          {submitting ? "Envoi..." : "Signer le livre d'or 🌷"}
         </button>
       </form>
     </div>
@@ -227,27 +227,10 @@ export default function GuestBook() {
 
   function renderPageContent(pageIndex: number) {
     if (pageIndex === 0) {
-      // Cover
+      // Cover — image de fond contient déjà le texte, on affiche uniquement l'invite de navigation
       return (
-        <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-6">
-          <div className="text-6xl mb-2">📖</div>
-          <h2
-            className="text-[#f5e6c8] text-4xl leading-tight"
-            style={{ fontFamily: "'Dancing Script', cursive" }}
-          >
-            Livre d&apos;or
-          </h2>
-          <div className="w-16 h-0.5 bg-[#c5a55a] my-2" />
-          <p
-            className="text-[#e8d0a8] text-lg"
-            style={{ fontFamily: "'Dancing Script', cursive" }}
-          >
-            Tulipes Et Cetera
-          </p>
-          <p className="text-[#c5a55a]/70 text-xs mt-4 uppercase tracking-widest">
-            Waldighoffen, Alsace
-          </p>
-          <p className="text-[#c5a55a] text-sm mt-6 animate-pulse">
+        <div className="flex flex-col items-end justify-end h-full pb-4 pr-4">
+          <p className="text-[#c5a55a] text-sm animate-pulse drop-shadow-lg">
             Tournez la page →
           </p>
         </div>

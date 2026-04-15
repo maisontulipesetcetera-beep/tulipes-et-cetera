@@ -225,7 +225,7 @@ export default async function AvisPage({
             >
               <Stars count={item.stars} />
               <p className="font-body text-gray-700 italic leading-relaxed flex-1">
-                &ldquo;{item.text}&rdquo;
+                &ldquo;{item.text}&rdquo; 🌷
               </p>
               <footer className="font-body text-tulipe-bordeaux font-semibold text-sm">
                 — {item.author}
