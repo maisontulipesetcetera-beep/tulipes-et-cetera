@@ -14,7 +14,6 @@ interface Settings {
   basePrice: number;
   highSeasonPrice: number | null;
   weekendPrice: number | null;
-  depositPercent: number;
   cancellationPolicy: string | null;
   bookingIcalUrl: string | null;
   airbnbIcalUrl: string | null;
@@ -283,18 +282,6 @@ export default function SettingsForm() {
                 }
                 className={inputClass}
                 placeholder="Optionnel"
-              />
-            </Field>
-            <Field label="Acompte (%)">
-              <input
-                type="number"
-                min="0"
-                max="100"
-                value={settings.depositPercent}
-                onChange={(e) =>
-                  update("depositPercent", parseInt(e.target.value || "0"))
-                }
-                className={inputClass}
               />
             </Field>
           </div>

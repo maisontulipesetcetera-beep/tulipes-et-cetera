@@ -7,7 +7,7 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function createCheckoutSession(reservation: {
   id: string;
   guestEmail: string;
-  depositAmount: number;
+  totalAmount: number;
 }) {
   return stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -17,10 +17,10 @@ export async function createCheckoutSession(reservation: {
         price_data: {
           currency: "eur",
           product_data: {
-            name: "Acompte — Tulipes Et Cetera",
-            description: "Acompte de réservation — Cottage de Charme",
+            name: "Règlement séjour — Tulipes Et Cetera",
+            description: "Règlement intégral du séjour — Cottage de Charme",
           },
-          unit_amount: reservation.depositAmount,
+          unit_amount: reservation.totalAmount,
         },
         quantity: 1,
       },

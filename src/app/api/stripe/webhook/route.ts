@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
         html: `
           <h2>Votre réservation est confirmée !</h2>
           <p>Bonjour ${reservation.guestName},</p>
-          <p>Nous avons bien reçu votre acompte. Votre séjour est confirmé.</p>
+          <p>Nous avons bien reçu votre règlement. Votre séjour est confirmé.</p>
           <ul>
             <li><strong>Arrivée :</strong> ${reservation.checkIn.toLocaleDateString("fr-FR")}</li>
             <li><strong>Départ :</strong> ${reservation.checkOut.toLocaleDateString("fr-FR")}</li>

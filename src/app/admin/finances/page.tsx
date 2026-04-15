@@ -27,10 +27,8 @@ interface Payment {
   checkIn: string;
   checkOut: string;
   total: number;
-  deposit: number;
   depositPaid: boolean;
-  balance: number;
-  paymentStatus: "paid" | "deposit" | "pending";
+  paymentStatus: "paid" | "pending";
 }
 
 interface FinancesData {
@@ -48,12 +46,8 @@ const paymentStatusConfig: Record<
     label: "Payé",
     badgeClass: "bg-green-100 text-green-800 border-green-300",
   },
-  deposit: {
-    label: "Acompte",
-    badgeClass: "bg-orange-100 text-orange-800 border-orange-300",
-  },
   pending: {
-    label: "En attente",
+    label: "En attente de paiement",
     badgeClass: "bg-red-100 text-red-800 border-red-300",
   },
 };
@@ -247,12 +241,6 @@ export default function FinancesPage() {
                   <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wide">
                     Total
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">
-                    Acompte
-                  </th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">
-                    Solde
-                  </th>
                   <th className="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wide">
                     Statut
                   </th>
@@ -279,12 +267,6 @@ export default function FinancesPage() {
                       </td>
                       <td className="px-4 py-3 text-right font-semibold text-tulipe-forest">
                         {formatEuros(payment.total)}
-                      </td>
-                      <td className="px-4 py-3 text-right text-gray-500 hidden sm:table-cell">
-                        {formatEuros(payment.deposit)}
-                      </td>
-                      <td className="px-4 py-3 text-right text-gray-500 hidden sm:table-cell">
-                        {formatEuros(payment.balance)}
                       </td>
                       <td className="px-4 py-3 text-center">
                         <span

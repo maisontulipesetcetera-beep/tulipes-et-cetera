@@ -412,16 +412,15 @@ export default function ReservationTable({
                     </p>
                   </div>
                   <div>
-                    <p className="text-base text-gray-500">Acompte</p>
+                    <p className="text-base text-gray-500">Paiement</p>
                     <p className="text-lg font-bold text-gray-800">
-                      {formatAmount(selectedReservation.depositAmount)}{" "}
                       {selectedReservation.depositPaid ? (
                         <span className="text-green-600 text-base font-semibold">
-                          (payé)
+                          Payé
                         </span>
                       ) : (
                         <span className="text-red-500 text-base font-semibold">
-                          (non payé)
+                          En attente de paiement
                         </span>
                       )}
                     </p>

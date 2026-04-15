@@ -64,13 +64,11 @@ export async function POST(req: NextRequest) {
     // Get settings for pricing
     const settings = await db.settings.findUnique({ where: { id: "main" } });
     const basePrice = settings?.basePrice ?? 17900;
-    const depositPercent = settings?.depositPercent ?? 30;
 
     const nights = Math.ceil(
       (checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24),
     );
     const totalAmount = basePrice * nights;
-    const depositAmount = Math.round((totalAmount * depositPercent) / 100);
 
     const reservation = await db.reservation.create({
       data: {
@@ -84,7 +82,7 @@ export async function POST(req: NextRequest) {
         status: "pending",
         source: "direct",
         totalAmount,
-        depositAmount,
+        depositAmount: totalAmount,
       },
     });
 
@@ -104,7 +102,6 @@ export async function POST(req: NextRequest) {
           <p><strong>Voyageurs :</strong> ${data.guests}</p>
           <p><strong>Message :</strong> ${data.message ?? "—"}</p>
           <p><strong>Montant total :</strong> ${(totalAmount / 100).toFixed(2)} €</p>
-          <p><strong>Acompte :</strong> ${(depositAmount / 100).toFixed(2)} €</p>
         `,
       }).catch(console.error);
     }

@@ -30,9 +30,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!reservation.depositAmount) {
+    if (!reservation.totalAmount) {
       return NextResponse.json(
-        { error: "Montant acompte manquant" },
+        { error: "Montant du séjour manquant" },
         { status: 400 },
       );
     }
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     const session = await createCheckoutSession({
       id: reservation.id,
       guestEmail: reservation.guestEmail,
-      depositAmount: reservation.depositAmount,
+      totalAmount: reservation.totalAmount,
     });
 
     return NextResponse.json({ url: session.url });

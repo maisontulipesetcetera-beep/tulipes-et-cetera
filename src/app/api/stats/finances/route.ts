@@ -119,16 +119,9 @@ export async function GET() {
     // Payments table
     const payments = reservations.map((r) => {
       const total = r.totalAmount ?? 0;
-      const deposit = r.depositAmount ?? 0;
-      const balance = r.depositPaid ? total - deposit : total;
-      let paymentStatus: "paid" | "deposit" | "pending";
-      if (total > 0 && r.depositPaid && balance === 0) {
-        paymentStatus = "paid";
-      } else if (r.depositPaid) {
-        paymentStatus = "deposit";
-      } else {
-        paymentStatus = "pending";
-      }
+      const paymentStatus: "paid" | "pending" = r.depositPaid
+        ? "paid"
+        : "pending";
 
       return {
         id: r.id,
@@ -136,9 +129,7 @@ export async function GET() {
         checkIn: r.checkIn.toISOString(),
         checkOut: r.checkOut.toISOString(),
         total,
-        deposit,
         depositPaid: r.depositPaid,
-        balance,
         paymentStatus,
       };
     });
