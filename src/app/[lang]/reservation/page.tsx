@@ -71,7 +71,7 @@ export default async function ReservationPage({
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-green py-16 px-4 text-center">
+      <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Tarifs & Réservation
         </h1>
@@ -108,13 +108,13 @@ export default async function ReservationPage({
                 key={item.label}
                 className={`rounded-2xl p-8 text-center border flex flex-col gap-2 ${
                   item.highlight
-                    ? "bg-tulipe-green text-white border-tulipe-green shadow-lg"
-                    : "bg-white text-tulipe-green border-tulipe-beige shadow-sm"
+                    ? "bg-tulipe-forest text-white border-tulipe-forest shadow-lg"
+                    : "bg-white text-tulipe-forest border-tulipe-beige shadow-sm"
                 }`}
               >
                 <h2 className="font-heading text-xl">{item.label}</h2>
                 <p
-                  className={`font-heading text-5xl font-bold ${item.highlight ? "text-white" : "text-tulipe-green"}`}
+                  className={`font-heading text-5xl font-bold ${item.highlight ? "text-white" : "text-tulipe-blue"}`}
                 >
                   {item.price}
                 </p>
@@ -129,23 +129,23 @@ export default async function ReservationPage({
 
           <div className="bg-tulipe-beige rounded-xl p-6 flex flex-col gap-2 text-sm font-body text-gray-600 max-w-xl mx-auto">
             <p className="flex items-center gap-2">
-              <span className="text-tulipe-green font-bold">✓</span>{" "}
+              <span className="text-tulipe-forest font-bold">✓</span>{" "}
               Petit-déjeuner complet inclus
             </p>
             <p className="flex items-center gap-2">
-              <span className="text-tulipe-green font-bold">✓</span> Séjour
+              <span className="text-tulipe-forest font-bold">✓</span> Séjour
               minimum 2 nuits
             </p>
             <p className="flex items-center gap-2">
-              <span className="text-tulipe-green font-bold">✓</span> Linge de
+              <span className="text-tulipe-forest font-bold">✓</span> Linge de
               lit et de bain fourni
             </p>
             <p className="flex items-center gap-2">
-              <span className="text-tulipe-green font-bold">✓</span> Parking
+              <span className="text-tulipe-forest font-bold">✓</span> Parking
               gratuit sur place
             </p>
             <p className="flex items-center gap-2">
-              <span className="text-tulipe-green font-bold">✓</span> Vélos en
+              <span className="text-tulipe-forest font-bold">✓</span> Vélos en
               prêt gratuit
             </p>
           </div>
@@ -155,7 +155,7 @@ export default async function ReservationPage({
       {/* Calendrier + Formulaire de réservation */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl text-tulipe-green text-center mb-8">
+          <h2 className="font-heading text-3xl text-tulipe-blue text-center mb-8">
             Faire une demande de réservation
           </h2>
           <div className="bg-tulipe-cream rounded-2xl border border-tulipe-beige p-6 md:p-10">
@@ -165,14 +165,14 @@ export default async function ReservationPage({
             Vous pouvez aussi nous contacter directement :{" "}
             <Link
               href={`/${lang}/contact`}
-              className="text-tulipe-green underline hover:text-tulipe-green transition-colors"
+              className="text-tulipe-forest underline hover:text-tulipe-forest transition-colors"
             >
               page contact
             </Link>{" "}
             ou par téléphone au{" "}
             <a
               href="tel:+33389400290"
-              className="text-tulipe-green underline hover:text-tulipe-green transition-colors"
+              className="text-tulipe-forest underline hover:text-tulipe-forest transition-colors"
             >
               +33 3 89 40 02 90
             </a>

@@ -18,7 +18,7 @@ export default function ScrollToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Retour en haut de page"
-      className="fixed bottom-6 right-6 z-50 p-3 bg-tulipe-green text-white rounded-full shadow-lg hover:bg-tulipe-green-dark hover:scale-110 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-tulipe-gold"
+      className="fixed bottom-6 right-6 z-50 p-3 bg-tulipe-forest text-white rounded-full shadow-lg hover:bg-tulipe-forest-dark hover:scale-110 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-tulipe-gold"
     >
       <ChevronUp size={20} />
     </button>

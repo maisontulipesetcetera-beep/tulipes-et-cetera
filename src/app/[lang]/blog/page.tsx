@@ -45,7 +45,7 @@ export default function BlogPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-tulipe-green py-16 px-4 text-center">
+      <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Le Blog
         </h1>
@@ -80,7 +80,7 @@ export default function BlogPage() {
                   <span>·</span>
                   <span>{article.readTime} de lecture</span>
                 </div>
-                <h2 className="font-heading text-xl md:text-2xl text-tulipe-green">
+                <h2 className="font-heading text-xl md:text-2xl text-tulipe-blue">
                   {article.title}
                 </h2>
                 <p className="font-body text-gray-600 text-sm leading-relaxed">
@@ -88,7 +88,7 @@ export default function BlogPage() {
                 </p>
                 <button
                   type="button"
-                  className="self-start mt-1 text-sm font-body font-semibold text-tulipe-green hover:text-tulipe-green-dark transition-colors cursor-not-allowed opacity-60"
+                  className="self-start mt-1 text-sm font-body font-semibold text-tulipe-forest hover:text-tulipe-forest-dark transition-colors cursor-not-allowed opacity-60"
                   disabled
                   title="Article complet bientôt disponible"
                 >
@@ -102,7 +102,7 @@ export default function BlogPage() {
 
       {/* Newsletter placeholder */}
       <section className="py-12 px-4 bg-tulipe-beige text-center">
-        <h2 className="font-heading text-2xl text-tulipe-green mb-3">
+        <h2 className="font-heading text-2xl text-tulipe-blue mb-3">
           Restez informé
         </h2>
         <p className="font-body text-gray-600 mb-6">
@@ -113,13 +113,13 @@ export default function BlogPage() {
           <input
             type="email"
             placeholder="votre@email.fr"
-            className="flex-1 px-4 py-3 rounded-[10px] border border-tulipe-beige font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green bg-white"
+            className="flex-1 px-4 py-3 rounded-[10px] border border-tulipe-beige font-body text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest bg-white"
             disabled
           />
           <button
             type="button"
             disabled
-            className="px-6 py-3 bg-tulipe-green text-white font-body font-semibold rounded-[10px] opacity-60 cursor-not-allowed text-sm"
+            className="px-6 py-3 bg-tulipe-forest text-white font-body font-semibold rounded-[10px] opacity-60 cursor-not-allowed text-sm"
           >
             S&apos;abonner
           </button>

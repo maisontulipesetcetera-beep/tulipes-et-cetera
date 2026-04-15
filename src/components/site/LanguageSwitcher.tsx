@@ -30,8 +30,8 @@ export default function LanguageSwitcher({
           onClick={() => switchLocale(locale)}
           className={`min-h-[40px] px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors ${
             locale === currentLocale
-              ? "bg-tulipe-green text-white"
-              : "bg-white/80 text-tulipe-green border border-gray-200 hover:bg-tulipe-beige"
+              ? "bg-tulipe-forest text-white"
+              : "bg-white/80 text-tulipe-blue border border-gray-200 hover:bg-tulipe-beige"
           }`}
           aria-label={`Switch to ${localeNames[locale]}`}
           aria-current={locale === currentLocale ? "true" : undefined}

@@ -77,7 +77,7 @@ function TarifsTab() {
   }
 
   const inputClass =
-    "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green";
+    "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest";
 
   return (
     <form
@@ -133,7 +133,7 @@ function TarifsTab() {
       <button
         type="submit"
         disabled={saving}
-        className="px-5 py-2 bg-tulipe-green text-white text-sm rounded-lg hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors"
+        className="px-5 py-2 bg-tulipe-forest text-white text-sm rounded-lg hover:bg-tulipe-forest-dark disabled:opacity-50 transition-colors"
       >
         {saving ? "Sauvegarde…" : saved ? "✓ Sauvegardé" : "Sauvegarder"}
       </button>
@@ -146,7 +146,7 @@ export default function ContenuPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-heading font-bold text-tulipe-green mb-6">
+      <h1 className="text-2xl font-heading font-bold text-tulipe-blue mb-6">
         Contenu du site
       </h1>
 
@@ -158,7 +158,7 @@ export default function ContenuPage() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
               activeTab === tab.id
-                ? "bg-tulipe-green text-white"
+                ? "bg-tulipe-forest text-white"
                 : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
             }`}
           >

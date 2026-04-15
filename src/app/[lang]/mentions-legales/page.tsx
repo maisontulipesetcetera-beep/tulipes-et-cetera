@@ -1,7 +1,7 @@
 export default function MentionsLegalesPage() {
   return (
     <>
-      <section className="bg-tulipe-green py-16 px-4 text-center">
+      <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Mentions légales
         </h1>
@@ -11,7 +11,7 @@ export default function MentionsLegalesPage() {
         <div className="max-w-3xl mx-auto flex flex-col gap-10 font-body text-gray-700">
           {/* Éditeur */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-green">
+            <h2 className="font-heading text-2xl text-tulipe-blue">
               Éditeur du site
             </h2>
             <p className="leading-relaxed">
@@ -29,7 +29,7 @@ export default function MentionsLegalesPage() {
 
           {/* Hébergeur */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-green">
+            <h2 className="font-heading text-2xl text-tulipe-blue">
               Hébergeur
             </h2>
             <p className="leading-relaxed">
@@ -43,7 +43,7 @@ export default function MentionsLegalesPage() {
                 href="https://vercel.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-tulipe-green hover:underline"
+                className="text-tulipe-forest hover:underline"
               >
                 https://vercel.com
               </a>
@@ -52,7 +52,7 @@ export default function MentionsLegalesPage() {
 
           {/* Propriété intellectuelle */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-green">
+            <h2 className="font-heading text-2xl text-tulipe-blue">
               Propriété intellectuelle
             </h2>
             <p className="leading-relaxed">
@@ -66,7 +66,7 @@ export default function MentionsLegalesPage() {
 
           {/* RGPD */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-green">
+            <h2 className="font-heading text-2xl text-tulipe-blue">
               Protection des données personnelles (RGPD)
             </h2>
             <p className="leading-relaxed">
@@ -85,7 +85,7 @@ export default function MentionsLegalesPage() {
               Pour exercer vos droits, contactez-nous à :{" "}
               <a
                 href="mailto:contact@tulipes-et-cetera.fr"
-                className="text-tulipe-green hover:underline"
+                className="text-tulipe-forest hover:underline"
               >
                 contact@tulipes-et-cetera.fr
               </a>
@@ -94,7 +94,7 @@ export default function MentionsLegalesPage() {
 
           {/* Cookies */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-green">Cookies</h2>
+            <h2 className="font-heading text-2xl text-tulipe-blue">Cookies</h2>
             <p className="leading-relaxed">
               Ce site utilise des cookies techniques nécessaires à son bon
               fonctionnement (gestion de session, préférences de langue). Aucun
@@ -105,7 +105,7 @@ export default function MentionsLegalesPage() {
 
           {/* Politique d'annulation */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-green">
+            <h2 className="font-heading text-2xl text-tulipe-blue">
               Politique d&apos;annulation
             </h2>
             <div className="border-2 border-dashed border-tulipe-beige rounded-xl p-8 bg-white text-center">
@@ -118,7 +118,7 @@ export default function MentionsLegalesPage() {
 
           {/* Responsabilité */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-green">
+            <h2 className="font-heading text-2xl text-tulipe-blue">
               Limitation de responsabilité
             </h2>
             <p className="leading-relaxed">

@@ -149,8 +149,8 @@ export default function ReservationTable({
             onClick={() => setFilterStatus(value)}
             className={`px-6 py-3 rounded-xl text-lg font-semibold border-2 transition-all ${
               filterStatus === value
-                ? "bg-tulipe-green text-white border-tulipe-green shadow-sm"
-                : "bg-white text-gray-700 border-gray-200 hover:border-tulipe-green hover:text-tulipe-green"
+                ? "bg-tulipe-forest text-white border-tulipe-forest shadow-sm"
+                : "bg-white text-gray-700 border-gray-200 hover:border-tulipe-forest hover:text-tulipe-forest"
             }`}
           >
             {label}
@@ -185,7 +185,7 @@ export default function ReservationTable({
                 {/* En-tête carte */}
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
                   <div>
-                    <p className="text-2xl font-bold text-tulipe-green">
+                    <p className="text-2xl font-bold text-tulipe-forest">
                       {r.guestName}
                     </p>
                     <p className="text-lg text-gray-500 mt-1">{r.guestEmail}</p>
@@ -283,7 +283,7 @@ export default function ReservationTable({
                   {r.guestEmail && (
                     <a
                       href={`mailto:${r.guestEmail}`}
-                      className="flex items-center gap-2 px-5 py-3 bg-tulipe-green/10 text-tulipe-green text-base font-semibold rounded-xl hover:bg-tulipe-green/20 transition-colors min-h-[52px]"
+                      className="flex items-center gap-2 px-5 py-3 bg-tulipe-forest/10 text-tulipe-forest text-base font-semibold rounded-xl hover:bg-tulipe-forest/20 transition-colors min-h-[52px]"
                     >
                       <Mail size={18} strokeWidth={2} />
                       Contacter
@@ -313,7 +313,7 @@ export default function ReservationTable({
           >
             {/* En-tête modal */}
             <div className="flex items-center justify-between px-7 py-5 border-b border-gray-100">
-              <h2 className="font-heading text-2xl font-bold text-tulipe-green">
+              <h2 className="font-heading text-2xl font-bold text-tulipe-forest">
                 Fiche réservation
               </h2>
               <button
@@ -363,7 +363,7 @@ export default function ReservationTable({
                 <p className="text-base font-semibold text-gray-500 uppercase tracking-wider">
                   Client
                 </p>
-                <p className="text-xl font-bold text-tulipe-green">
+                <p className="text-xl font-bold text-tulipe-forest">
                   {selectedReservation.guestName}
                 </p>
                 <p className="text-lg text-gray-600">

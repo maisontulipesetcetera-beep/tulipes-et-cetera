@@ -52,8 +52,8 @@ export default function OccupancyGauge({ data }: Props) {
       >
         <defs>
           <linearGradient id="occupancyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#10B981" stopOpacity={0.25} />
-            <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
+            <stop offset="5%" stopColor="#2D6A4F" stopOpacity={0.25} />
+            <stop offset="95%" stopColor="#2D6A4F" stopOpacity={0} />
           </linearGradient>
         </defs>
         <CartesianGrid
@@ -87,10 +87,10 @@ export default function OccupancyGauge({ data }: Props) {
         <Area
           type="monotone"
           dataKey="rate"
-          stroke="#10B981"
+          stroke="#2D6A4F"
           strokeWidth={2}
           fill="url(#occupancyGrad)"
-          dot={{ r: 3, fill: "#10B981" }}
+          dot={{ r: 3, fill: "#2D6A4F" }}
           activeDot={{ r: 5 }}
         />
       </AreaChart>

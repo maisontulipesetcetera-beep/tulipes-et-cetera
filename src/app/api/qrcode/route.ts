@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       width: clampedSize,
       margin: 2,
       color: {
-        dark: "#1e3a8a", // tulipe-royal
+        dark: "#1e3a8a", // tulipe-blue
         light: "#fffdf7",
       },
     });

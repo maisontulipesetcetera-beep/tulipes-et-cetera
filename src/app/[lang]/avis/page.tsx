@@ -202,7 +202,7 @@ export default async function AvisPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
       />
       {/* Header */}
-      <section className="bg-tulipe-green py-16 px-4 text-center">
+      <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           Avis de nos hôtes
         </h1>
@@ -227,7 +227,7 @@ export default async function AvisPage({
               <p className="font-body text-gray-700 italic leading-relaxed flex-1">
                 &ldquo;{item.text}&rdquo; 🌷
               </p>
-              <footer className="font-body text-tulipe-green font-semibold text-sm">
+              <footer className="font-body text-tulipe-forest font-semibold text-sm">
                 — {item.author}
                 {item.origin && (
                   <span className="text-gray-400 font-normal">
@@ -258,7 +258,7 @@ export default async function AvisPage({
       {/* Livre d'or */}
       <section className="py-16 px-4 bg-tulipe-cream">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-3xl text-tulipe-green mb-4">
+          <h2 className="font-heading text-3xl text-tulipe-blue mb-4">
             Livre d&apos;or
           </h2>
           <p className="font-body text-gray-600 mb-8 text-base max-w-xl mx-auto">
@@ -267,7 +267,7 @@ export default async function AvisPage({
           </p>
           <Link
             href={`/${locale}/livre-dor`}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-colors text-base"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-tulipe-forest hover:bg-tulipe-forest-dark text-white font-body font-semibold rounded-[10px] transition-colors text-base"
           >
             📖 Ouvrir le livre d&apos;or
           </Link>

@@ -150,7 +150,7 @@ export default function MessageInbox() {
   if (loading) {
     return (
       <div className="bg-white/90 rounded-2xl flex flex-col items-center justify-center py-24 gap-4">
-        <Loader2 className="animate-spin text-tulipe-green" size={48} />
+        <Loader2 className="animate-spin text-tulipe-forest" size={48} />
         <p className="text-xl text-gray-500">Chargement des messages…</p>
       </div>
     );
@@ -180,7 +180,7 @@ export default function MessageInbox() {
           <div className="px-7 py-6 border-b border-gray-100 flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-3 mb-1">
-                <h2 className="text-2xl font-bold text-tulipe-green">
+                <h2 className="text-2xl font-bold text-tulipe-forest">
                   {selected.name}
                 </h2>
                 <span
@@ -229,7 +229,7 @@ export default function MessageInbox() {
             {/* Formulaire de réponse */}
             {replying ? (
               <form onSubmit={sendReply} className="space-y-5">
-                <p className="text-xl font-bold text-tulipe-green">
+                <p className="text-xl font-bold text-tulipe-forest">
                   📧 Écrire une réponse
                 </p>
 
@@ -239,7 +239,7 @@ export default function MessageInbox() {
                       Utiliser un modèle (facultatif)
                     </label>
                     <select
-                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-green"
+                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-forest"
                       onChange={(e) => {
                         const t = templates.find(
                           (t) => t.id === e.target.value,
@@ -267,7 +267,7 @@ export default function MessageInbox() {
                     value={replySubject}
                     onChange={(e) => setReplySubject(e.target.value)}
                     required
-                    className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-green"
+                    className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-forest"
                   />
                 </div>
 
@@ -280,7 +280,7 @@ export default function MessageInbox() {
                     onChange={(e) => setReplyBody(e.target.value)}
                     required
                     rows={7}
-                    className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-green resize-y"
+                    className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-tulipe-forest resize-y"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ export default function MessageInbox() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="flex items-center gap-3 px-7 py-4 bg-tulipe-green text-white text-xl font-bold rounded-xl hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors min-h-[60px]"
+                    className="flex items-center gap-3 px-7 py-4 bg-tulipe-forest text-white text-xl font-bold rounded-xl hover:bg-tulipe-forest-dark disabled:opacity-50 transition-colors min-h-[60px]"
                   >
                     {sending ? (
                       <Loader2 size={22} className="animate-spin" />
@@ -319,7 +319,7 @@ export default function MessageInbox() {
                   setError("");
                   setSuccess("");
                 }}
-                className="flex items-center gap-3 px-8 py-4 bg-tulipe-green text-white text-xl font-bold rounded-xl hover:bg-tulipe-green-dark transition-colors shadow-sm min-h-[60px]"
+                className="flex items-center gap-3 px-8 py-4 bg-tulipe-forest text-white text-xl font-bold rounded-xl hover:bg-tulipe-forest-dark transition-colors shadow-sm min-h-[60px]"
               >
                 📧 Répondre à ce message
               </button>
@@ -336,7 +336,7 @@ export default function MessageInbox() {
       {/* En-tête */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-7 py-5 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
-          <h2 className="text-2xl font-bold text-tulipe-green">
+          <h2 className="text-2xl font-bold text-tulipe-forest">
             Boîte de réception
           </h2>
           {unreadCount > 0 && (
@@ -364,7 +364,7 @@ export default function MessageInbox() {
               <button
                 key={contact.id}
                 onClick={() => selectContact(contact)}
-                className={`w-full text-left bg-white/95 rounded-2xl px-6 py-5 shadow-sm border-2 transition-all hover:shadow-md hover:border-tulipe-green/40 ${
+                className={`w-full text-left bg-white/95 rounded-2xl px-6 py-5 shadow-sm border-2 transition-all hover:shadow-md hover:border-tulipe-forest/40 ${
                   contact.status === "unread"
                     ? "border-orange-200"
                     : "border-gray-100"
@@ -373,7 +373,7 @@ export default function MessageInbox() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-3 mb-1">
-                      <p className="text-xl font-bold text-tulipe-green">
+                      <p className="text-xl font-bold text-tulipe-forest">
                         {contact.name}
                       </p>
                       <span
@@ -392,7 +392,7 @@ export default function MessageInbox() {
                         locale: fr,
                       })}
                     </p>
-                    <p className="text-base text-tulipe-green font-semibold mt-1">
+                    <p className="text-base text-tulipe-forest font-semibold mt-1">
                       Voir →
                     </p>
                   </div>

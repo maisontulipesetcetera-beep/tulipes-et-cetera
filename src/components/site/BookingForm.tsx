@@ -106,8 +106,8 @@ export default function BookingForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl bg-tulipe-green/10 border border-tulipe-green/30 p-8 text-center">
-        <p className="font-heading text-xl text-tulipe-green mb-2">
+      <div className="rounded-2xl bg-tulipe-forest/10 border border-tulipe-forest/30 p-8 text-center">
+        <p className="font-heading text-xl text-tulipe-forest mb-2">
           Demande envoyée !
         </p>
         <p className="font-body text-gray-600">
@@ -120,7 +120,7 @@ export default function BookingForm() {
 
   const inputCls = (error?: string) =>
     cn(
-      "w-full rounded-lg border px-4 py-2.5 font-body text-sm text-gray-800 bg-white outline-none transition-colors focus:border-tulipe-green focus:ring-2 focus:ring-tulipe-green/20",
+      "w-full rounded-lg border px-4 py-2.5 font-body text-sm text-gray-800 bg-white outline-none transition-colors focus:border-tulipe-forest focus:ring-2 focus:ring-tulipe-forest/20",
       error ? "border-red-400" : "border-gray-200",
     );
 
@@ -133,7 +133,7 @@ export default function BookingForm() {
         </p>
         <BookingCalendar onDatesSelected={handleDatesSelected} />
         {checkIn && checkOut && (
-          <p className="mt-3 text-sm text-tulipe-green font-body">
+          <p className="mt-3 text-sm text-tulipe-forest font-body">
             {format(checkIn, "d MMM yyyy", { locale: fr })} →{" "}
             {format(checkOut, "d MMM yyyy", { locale: fr })}
           </p>
@@ -247,7 +247,7 @@ export default function BookingForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-3 px-6 bg-tulipe-green hover:bg-tulipe-green-dark disabled:opacity-60 disabled:cursor-not-allowed text-white font-body font-semibold rounded-xl transition-colors"
+        className="w-full py-3 px-6 bg-tulipe-forest hover:bg-tulipe-forest-dark disabled:opacity-60 disabled:cursor-not-allowed text-white font-body font-semibold rounded-xl transition-colors"
       >
         {status === "loading" ? "Envoi en cours…" : "Envoyer la demande"}
       </button>

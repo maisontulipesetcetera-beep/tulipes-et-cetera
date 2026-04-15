@@ -77,7 +77,7 @@ export default function MaisonPage() {
   return (
     <>
       {/* Page header */}
-      <section className="bg-tulipe-green py-16 px-4 text-center">
+      <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
           La Maison
         </h1>
@@ -92,7 +92,7 @@ export default function MaisonPage() {
           <div className="flex flex-col lg:flex-row gap-12">
             {/* Text — 60% */}
             <div className="lg:w-[60%] flex flex-col gap-6">
-              <h2 className="font-heading text-3xl text-tulipe-green">
+              <h2 className="font-heading text-3xl text-tulipe-blue">
                 On me dit &ldquo;Maison de Charme&rdquo; et je le suis !
               </h2>
               <p className="font-body text-gray-700 text-lg leading-relaxed">
@@ -136,7 +136,7 @@ export default function MaisonPage() {
                     key={item}
                     className="flex items-center gap-2 font-body text-gray-700"
                   >
-                    <span className="text-tulipe-green font-bold">✓</span>
+                    <span className="text-tulipe-forest font-bold">✓</span>
                     {item}
                   </div>
                 ))}
@@ -176,7 +176,7 @@ export default function MaisonPage() {
               sizes="(max-width: 768px) 100vw, 672px"
             />
           </div>
-          <p className="font-heading text-2xl text-tulipe-green italic">
+          <p className="font-heading text-2xl text-tulipe-blue italic">
             &ldquo;Un vrai Home Sweet Home&rdquo;
           </p>
         </div>

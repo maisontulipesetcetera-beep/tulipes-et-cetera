@@ -450,13 +450,13 @@ export default function ScrollVideoHero({ lang }: ScrollVideoHeroProps) {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href={`/${lang}/reservation`}
-                  className="inline-flex items-center justify-center px-10 py-4 bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg shadow-lg"
+                  className="inline-flex items-center justify-center px-10 py-4 bg-tulipe-forest hover:bg-tulipe-forest-dark text-white font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg shadow-lg"
                 >
                   Réservez votre séjour
                 </Link>
                 <Link
                   href={`/${lang}/maison`}
-                  className="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-tulipe-royal font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg"
+                  className="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-tulipe-blue font-body font-semibold rounded-[10px] transition-all duration-300 hover:scale-105 text-lg"
                 >
                   Découvrir la maison
                 </Link>

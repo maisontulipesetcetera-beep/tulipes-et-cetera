@@ -41,7 +41,7 @@ export default function Sidebar() {
           className="rounded-full object-cover shrink-0 shadow-sm"
         />
         <div className="leading-tight">
-          <p className="font-heading text-xl font-bold text-tulipe-green">
+          <p className="font-heading text-xl font-bold text-tulipe-blue">
             Tulipes
           </p>
           <p className="font-heading text-base text-tulipe-gold">et Cetera</p>
@@ -58,13 +58,13 @@ export default function Sidebar() {
               href={href}
               className={`flex items-center gap-3 py-3.5 px-5 rounded-xl text-base font-medium transition-all ${
                 active
-                  ? "bg-tulipe-green/10 text-tulipe-green font-semibold"
+                  ? "bg-tulipe-forest/10 text-tulipe-forest font-semibold"
                   : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
               }`}
             >
               <Icon
                 size={22}
-                className={active ? "text-tulipe-green" : "text-gray-400"}
+                className={active ? "text-tulipe-forest" : "text-gray-400"}
                 strokeWidth={active ? 2.5 : 2}
               />
               <span>{label}</span>

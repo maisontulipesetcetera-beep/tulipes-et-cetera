@@ -46,7 +46,7 @@ function Field({
 }
 
 const inputClass =
-  "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green";
+  "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest";
 
 export default function SettingsForm() {
   const [settings, setSettings] = useState<Settings | null>(null);
@@ -156,7 +156,7 @@ export default function SettingsForm() {
   if (loading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader2 className="animate-spin text-tulipe-green" size={28} />
+        <Loader2 className="animate-spin text-tulipe-forest" size={28} />
       </div>
     );
   }
@@ -371,7 +371,7 @@ export default function SettingsForm() {
         <button
           type="submit"
           disabled={saving}
-          className="flex items-center gap-2 px-6 py-2.5 bg-tulipe-green text-white font-medium text-sm rounded-lg hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors"
+          className="flex items-center gap-2 px-6 py-2.5 bg-tulipe-forest text-white font-medium text-sm rounded-lg hover:bg-tulipe-forest-dark disabled:opacity-50 transition-colors"
         >
           {saving ? (
             <Loader2 size={15} className="animate-spin" />
@@ -432,7 +432,7 @@ export default function SettingsForm() {
           <button
             type="submit"
             disabled={changingPw}
-            className="flex items-center gap-2 px-4 py-2 bg-tulipe-green hover:bg-tulipe-green-dark text-white text-sm rounded-lg disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-tulipe-forest hover:bg-tulipe-forest-dark text-white text-sm rounded-lg disabled:opacity-50 transition-colors"
           >
             {changingPw && <Loader2 size={14} className="animate-spin" />}
             Modifier le mot de passe

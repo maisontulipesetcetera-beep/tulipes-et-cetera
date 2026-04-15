@@ -56,13 +56,13 @@ export default function ReservationsPage() {
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* En-tête */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-sm flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-3xl font-heading font-bold text-tulipe-green">
+        <h1 className="text-3xl font-heading font-bold text-tulipe-blue">
           📋 Réservations
         </h1>
         <button
           onClick={fetchReservations}
           disabled={loading}
-          className="flex items-center gap-2 px-6 py-3 bg-tulipe-green text-white text-lg font-semibold rounded-xl hover:bg-tulipe-green-dark transition-colors disabled:opacity-50 min-h-[52px]"
+          className="flex items-center gap-2 px-6 py-3 bg-tulipe-forest text-white text-lg font-semibold rounded-xl hover:bg-tulipe-forest-dark transition-colors disabled:opacity-50 min-h-[52px]"
         >
           {loading ? <Loader2 size={20} className="animate-spin" /> : "🔄"}{" "}
           Actualiser
@@ -72,7 +72,7 @@ export default function ReservationsPage() {
       {/* Contenu */}
       {loading ? (
         <div className="bg-white/90 rounded-2xl flex flex-col items-center justify-center py-24 gap-4">
-          <Loader2 className="animate-spin text-tulipe-green" size={48} />
+          <Loader2 className="animate-spin text-tulipe-forest" size={48} />
           <p className="text-xl text-gray-500">Chargement en cours…</p>
         </div>
       ) : error ? (
@@ -80,7 +80,7 @@ export default function ReservationsPage() {
           <p className="text-xl text-red-500">{error}</p>
           <button
             onClick={fetchReservations}
-            className="mt-6 px-6 py-3 bg-tulipe-green text-white text-lg font-semibold rounded-xl hover:bg-tulipe-green-dark transition-colors"
+            className="mt-6 px-6 py-3 bg-tulipe-forest text-white text-lg font-semibold rounded-xl hover:bg-tulipe-forest-dark transition-colors"
           >
             Réessayer
           </button>

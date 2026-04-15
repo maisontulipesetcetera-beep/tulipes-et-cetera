@@ -114,20 +114,20 @@ export default function BookingCalendar({
         <button
           onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
           disabled={isBefore(endOfMonth(subMonths(currentMonth, 1)), today)}
-          className="p-2 rounded-lg hover:bg-tulipe-green/10 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+          className="p-2 rounded-lg hover:bg-tulipe-forest/10 disabled:opacity-30 disabled:pointer-events-none transition-colors"
           aria-label="Mois précédent"
         >
-          <ChevronLeft className="size-5 text-tulipe-green" />
+          <ChevronLeft className="size-5 text-tulipe-forest" />
         </button>
-        <span className="font-heading text-lg text-tulipe-green capitalize">
+        <span className="font-heading text-lg text-tulipe-forest capitalize">
           {format(currentMonth, "MMMM yyyy", { locale: fr })}
         </span>
         <button
           onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-          className="p-2 rounded-lg hover:bg-tulipe-green/10 transition-colors"
+          className="p-2 rounded-lg hover:bg-tulipe-forest/10 transition-colors"
           aria-label="Mois suivant"
         >
-          <ChevronRight className="size-5 text-tulipe-green" />
+          <ChevronRight className="size-5 text-tulipe-forest" />
         </button>
       </div>
 
@@ -173,13 +173,13 @@ export default function BookingCalendar({
                   !past &&
                     !booked &&
                     !inSelection &&
-                    "hover:bg-tulipe-green/20 text-gray-700",
+                    "hover:bg-tulipe-forest/20 text-gray-700",
                   inSelection &&
                     !isStart &&
                     !isEnd &&
-                    "bg-tulipe-green/20 text-tulipe-green rounded-none",
+                    "bg-tulipe-forest/20 text-tulipe-forest rounded-none",
                   (isStart || isEnd) &&
-                    "bg-tulipe-green text-white font-semibold",
+                    "bg-tulipe-forest text-white font-semibold",
                   isStart && "rounded-l-lg",
                   isEnd && "rounded-r-lg",
                 )}
@@ -195,7 +195,7 @@ export default function BookingCalendar({
       {/* Legend */}
       <div className="mt-4 flex gap-4 text-xs text-gray-500 font-body">
         <span className="flex items-center gap-1.5">
-          <span className="inline-block size-3 rounded-sm bg-tulipe-green" />{" "}
+          <span className="inline-block size-3 rounded-sm bg-tulipe-forest" />{" "}
           Sélectionné
         </span>
         <span className="flex items-center gap-1.5">

@@ -63,7 +63,7 @@ export default function LoginPage() {
         </div>
 
         {/* Titles */}
-        <h1 className="font-heading text-3xl font-bold text-center text-tulipe-green mb-1">
+        <h1 className="font-heading text-3xl font-bold text-center text-tulipe-blue mb-1">
           Bienvenue
         </h1>
         <p className="font-body text-base text-center text-gray-500 mb-8">
@@ -87,7 +87,7 @@ export default function LoginPage() {
               required
               autoComplete="email"
               placeholder="vous@exemple.fr"
-              className="w-full border-2 border-gray-200 focus:border-tulipe-green rounded-xl px-4 py-4 text-base text-gray-900 outline-none transition-colors placeholder:text-gray-300"
+              className="w-full border-2 border-gray-200 focus:border-tulipe-forest rounded-xl px-4 py-4 text-base text-gray-900 outline-none transition-colors placeholder:text-gray-300"
             />
           </div>
 
@@ -108,7 +108,7 @@ export default function LoginPage() {
                 required
                 autoComplete="current-password"
                 placeholder="••••••••"
-                className="w-full border-2 border-gray-200 focus:border-tulipe-green rounded-xl px-4 py-4 pr-12 text-base text-gray-900 outline-none transition-colors placeholder:text-gray-300"
+                className="w-full border-2 border-gray-200 focus:border-tulipe-forest rounded-xl px-4 py-4 pr-12 text-base text-gray-900 outline-none transition-colors placeholder:text-gray-300"
               />
               <button
                 type="button"
@@ -136,7 +136,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-tulipe-green hover:bg-tulipe-green-dark text-white font-body font-semibold py-4 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg mt-2"
+            className="w-full bg-tulipe-forest hover:bg-tulipe-forest-dark text-white font-body font-semibold py-4 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg mt-2"
           >
             {loading ? "Connexion en cours…" : "Se connecter"}
           </button>

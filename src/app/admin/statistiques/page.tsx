@@ -30,7 +30,7 @@ const SOURCE_LABELS: Record<string, string> = {
   airbnb: "Airbnb",
 };
 
-const PIE_COLORS = ["#10B981", "#c5a55a", "#722f37", "#34D399", "#059669"];
+const PIE_COLORS = ["#2D6A4F", "#c5a55a", "#1E3A8A", "#40916C", "#1F5038"];
 
 function StatCard({
   icon: Icon,
@@ -48,11 +48,11 @@ function StatCard({
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm text-gray-500">{label}</p>
-          <p className="text-2xl font-bold text-tulipe-green mt-1">{value}</p>
+          <p className="text-2xl font-bold text-tulipe-forest mt-1">{value}</p>
           {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
         </div>
-        <div className="p-2.5 bg-tulipe-green/10 rounded-lg">
-          <Icon size={20} className="text-tulipe-green" />
+        <div className="p-2.5 bg-tulipe-forest/10 rounded-lg">
+          <Icon size={20} className="text-tulipe-forest" />
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@ export default function StatistiquesPage() {
   if (loading) {
     return (
       <div className="flex justify-center py-24">
-        <Loader2 className="animate-spin text-tulipe-green" size={32} />
+        <Loader2 className="animate-spin text-tulipe-forest" size={32} />
       </div>
     );
   }
@@ -108,7 +108,7 @@ export default function StatistiquesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-heading font-bold text-tulipe-green">
+      <h1 className="text-2xl font-heading font-bold text-tulipe-blue">
         Statistiques
       </h1>
 
@@ -175,7 +175,7 @@ export default function StatistiquesPage() {
               <Bar
                 dataKey="count"
                 name="Réservations"
-                fill="#10B981"
+                fill="#2D6A4F"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>

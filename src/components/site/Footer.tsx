@@ -14,7 +14,7 @@ export default function Footer({ lang }: FooterProps) {
   const t = useTranslations();
 
   return (
-    <footer className="bg-tulipe-green-dark text-white">
+    <footer className="bg-tulipe-blue text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Column 1: Contact info */}
@@ -28,7 +28,7 @@ export default function Footer({ lang }: FooterProps) {
                 className="rounded-md object-cover"
               />
               <span
-                className="text-xl text-white"
+                className="text-xl text-tulipe-gold"
                 style={{ fontFamily: "var(--font-script)" }}
               >
                 Tulipes EtCetera
@@ -64,7 +64,7 @@ export default function Footer({ lang }: FooterProps) {
               <Link
                 key={key}
                 href={`/${lang}${href === "/" ? "" : href}`}
-                className="text-sm text-white/80 hover:text-tulipe-sage font-body transition-colors"
+                className="text-sm text-white/80 hover:text-tulipe-forest-light font-body transition-colors"
               >
                 {t(`nav.${key}`)}
               </Link>
@@ -98,13 +98,13 @@ export default function Footer({ lang }: FooterProps) {
           <div className="flex items-center gap-4">
             <Link
               href={`/${lang}/mentions-legales`}
-              className="hover:text-tulipe-sage transition-colors"
+              className="hover:text-tulipe-forest-light transition-colors"
             >
               {t("footer.legal")}
             </Link>
             <Link
               href={`/${lang}/confidentialite`}
-              className="hover:text-tulipe-sage transition-colors"
+              className="hover:text-tulipe-forest-light transition-colors"
             >
               {t("footer.privacy")}
             </Link>

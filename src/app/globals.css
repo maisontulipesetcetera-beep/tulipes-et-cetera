@@ -11,17 +11,19 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-geist-sans);
 
-  /* Tulipes EtCetera brand colors */
-  --color-tulipe-green: #10b981;
-  --color-tulipe-green-dark: #059669;
-  --color-tulipe-green-light: #34d399;
-  --color-tulipe-sage: #6ee7b7;
-  --color-tulipe-royal: #1e3a8a;
-  --color-tulipe-royal-dark: #172e73;
+  /* Tulipes EtCetera brand colors — palette tétrade Noble Cottage */
+  --color-tulipe-blue: #1e3a8a;
+  --color-tulipe-blue-dark: #172e73;
+  --color-tulipe-blue-light: #3b5cb8;
+  --color-tulipe-forest: #2d6a4f;
+  --color-tulipe-forest-dark: #1f5038;
+  --color-tulipe-forest-light: #40916c;
+  --color-tulipe-gold: #c5a55a;
+  --color-tulipe-gold-light: #d4bc7e;
+  --color-tulipe-terra: #c17b5f;
+  --color-tulipe-terra-light: #d9a68e;
   --color-tulipe-beige: #faf8f5;
   --color-tulipe-cream: #fff8f0;
-  --color-tulipe-bordeaux: #722f37;
-  --color-tulipe-gold: #c5a55a;
 
   /* Tulipes fonts */
   --font-heading: "Playfair Display", serif;

@@ -146,7 +146,7 @@ export default function PhotoManager() {
           <select
             value={selectedPage}
             onChange={(e) => setSelectedPage(e.target.value)}
-            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
+            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest"
           >
             {PAGES.map((p) => (
               <option key={p.value} value={p.value}>
@@ -168,7 +168,7 @@ export default function PhotoManager() {
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}
-            className="flex items-center gap-2 px-4 py-2 bg-tulipe-green text-white text-sm rounded-lg hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-tulipe-forest text-white text-sm rounded-lg hover:bg-tulipe-forest-dark disabled:opacity-50 transition-colors"
           >
             {uploading ? (
               <Loader2 size={14} className="animate-spin" />
@@ -188,7 +188,7 @@ export default function PhotoManager() {
 
       {loading ? (
         <div className="flex justify-center py-12">
-          <Loader2 className="animate-spin text-tulipe-green" size={28} />
+          <Loader2 className="animate-spin text-tulipe-forest" size={28} />
         </div>
       ) : photos.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-gray-400 bg-white rounded-xl border border-dashed border-gray-200">
@@ -196,7 +196,7 @@ export default function PhotoManager() {
           <p className="text-sm">Aucune photo pour cette page</p>
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="mt-3 text-sm text-tulipe-green hover:underline"
+            className="mt-3 text-sm text-tulipe-forest hover:underline"
           >
             Ajouter des photos
           </button>

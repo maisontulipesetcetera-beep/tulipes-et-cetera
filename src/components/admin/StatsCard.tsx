@@ -11,22 +11,22 @@ const colorClasses = {
   green: {
     circleBg: "bg-green-100",
     iconColor: "text-green-700",
-    value: "text-tulipe-green",
+    value: "text-tulipe-forest",
   },
   blue: {
     circleBg: "bg-blue-100",
     iconColor: "text-blue-700",
-    value: "text-tulipe-green",
+    value: "text-tulipe-forest",
   },
   orange: {
     circleBg: "bg-orange-100",
     iconColor: "text-orange-700",
-    value: "text-tulipe-green",
+    value: "text-tulipe-forest",
   },
   gold: {
     circleBg: "bg-amber-100",
     iconColor: "text-amber-700",
-    value: "text-tulipe-green",
+    value: "text-tulipe-forest",
   },
 };
 

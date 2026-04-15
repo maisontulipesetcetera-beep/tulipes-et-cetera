@@ -99,7 +99,7 @@ export default function ContentEditor() {
           <select
             value={selectedPage}
             onChange={(e) => setSelectedPage(e.target.value)}
-            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
+            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest"
           >
             {PAGES.map((p) => (
               <option key={p.value} value={p.value}>
@@ -113,7 +113,7 @@ export default function ContentEditor() {
           <select
             value={selectedLang}
             onChange={(e) => setSelectedLang(e.target.value)}
-            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green"
+            className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest"
           >
             {LANGS.map((l) => (
               <option key={l.value} value={l.value}>
@@ -126,7 +126,7 @@ export default function ContentEditor() {
 
       {loading ? (
         <div className="flex justify-center py-12">
-          <Loader2 className="animate-spin text-tulipe-green" size={28} />
+          <Loader2 className="animate-spin text-tulipe-forest" size={28} />
         </div>
       ) : (
         <div className="space-y-4">
@@ -142,7 +142,7 @@ export default function ContentEditor() {
                 <button
                   onClick={() => saveSection(section)}
                   disabled={saving === section}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-tulipe-green text-white text-xs rounded-lg hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-tulipe-forest text-white text-xs rounded-lg hover:bg-tulipe-forest-dark disabled:opacity-50 transition-colors"
                 >
                   {saving === section ? (
                     <Loader2 size={12} className="animate-spin" />
@@ -164,7 +164,7 @@ export default function ContentEditor() {
                 rows={
                   section.includes("description") || section === "hero" ? 4 : 2
                 }
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green resize-y"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest resize-y"
                 placeholder={`Contenu pour "${section}" en ${selectedLang}…`}
               />
             </div>

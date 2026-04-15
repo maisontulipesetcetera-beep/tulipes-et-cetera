@@ -31,7 +31,7 @@ const SOURCE_LABELS: Record<string, string> = {
 };
 
 const inputClass =
-  "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green";
+  "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest";
 
 export default function ReviewManager() {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -153,7 +153,7 @@ export default function ReviewManager() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <Loader2 className="animate-spin text-tulipe-green" size={28} />
+        <Loader2 className="animate-spin text-tulipe-forest" size={28} />
       </div>
     );
   }
@@ -163,7 +163,7 @@ export default function ReviewManager() {
       <div className="flex justify-end">
         <button
           onClick={() => setShowForm((v) => !v)}
-          className="flex items-center gap-2 px-4 py-2 bg-tulipe-green text-white text-sm rounded-lg hover:bg-tulipe-green-dark transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-tulipe-forest text-white text-sm rounded-lg hover:bg-tulipe-forest-dark transition-colors"
         >
           <Plus size={15} />
           Ajouter un avis
@@ -236,7 +236,7 @@ export default function ReviewManager() {
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 bg-tulipe-green text-white text-sm rounded-lg hover:bg-tulipe-green-dark disabled:opacity-50 transition-colors"
+              className="px-4 py-2 bg-tulipe-forest text-white text-sm rounded-lg hover:bg-tulipe-forest-dark disabled:opacity-50 transition-colors"
             >
               {submitting ? "Ajout…" : "Ajouter"}
             </button>

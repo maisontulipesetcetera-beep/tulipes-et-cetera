@@ -29,17 +29,17 @@ export default function MobileBottomNav() {
             href={href}
             className={`flex flex-col items-center justify-center gap-1 flex-1 py-3 transition-colors ${
               active
-                ? "text-tulipe-green bg-tulipe-green/10"
-                : "text-gray-500 hover:text-tulipe-green"
+                ? "text-tulipe-forest bg-tulipe-forest/10"
+                : "text-gray-500 hover:text-tulipe-forest"
             }`}
           >
             <Icon
               size={22}
-              className={active ? "text-tulipe-green" : "text-gray-400"}
+              className={active ? "text-tulipe-forest" : "text-gray-400"}
               strokeWidth={active ? 2.5 : 2}
             />
             <span
-              className={`text-xs font-semibold ${active ? "text-tulipe-green" : "text-gray-500"}`}
+              className={`text-xs font-semibold ${active ? "text-tulipe-forest" : "text-gray-500"}`}
             >
               {label}
             </span>

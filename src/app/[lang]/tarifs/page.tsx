@@ -16,13 +16,13 @@ export default async function TarifsPage({
   return (
     <div className="min-h-screen bg-tulipe-cream py-16 px-4">
       <div className="max-w-3xl mx-auto">
-        <h1 className="font-heading text-4xl md:text-5xl text-tulipe-green mb-4 text-center">
+        <h1 className="font-heading text-4xl md:text-5xl text-tulipe-blue mb-4 text-center">
           {t("title")}
         </h1>
 
         <p className="font-body text-center text-gray-600 mb-2">
           {t("priceFrom")}{" "}
-          <span className="font-semibold text-tulipe-green text-lg">
+          <span className="font-semibold text-tulipe-forest text-lg">
             {(basePrice / 100).toFixed(0)} €
           </span>{" "}
           / nuit

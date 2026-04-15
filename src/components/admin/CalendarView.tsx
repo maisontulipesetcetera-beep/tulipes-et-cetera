@@ -242,7 +242,7 @@ export default function CalendarView() {
           >
             <ChevronLeft size={18} />
           </button>
-          <h2 className="text-lg font-semibold text-tulipe-green min-w-[180px] text-center">
+          <h2 className="text-lg font-semibold text-tulipe-forest min-w-[180px] text-center">
             {MONTH_NAMES[month]} {year}
           </h2>
           <button
@@ -322,7 +322,7 @@ export default function CalendarView() {
                       !day.isCurrentMonth
                         ? "text-gray-300"
                         : isToday
-                          ? "bg-tulipe-green text-white w-5 h-5 rounded-full flex items-center justify-center"
+                          ? "bg-tulipe-forest text-white w-5 h-5 rounded-full flex items-center justify-center"
                           : "text-gray-700"
                     }`}
                   >
@@ -420,7 +420,7 @@ export default function CalendarView() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-tulipe-green">Réservation</h3>
+              <h3 className="font-semibold text-tulipe-forest">Réservation</h3>
               <button
                 onClick={() => setSelectedReservation(null)}
                 className="p-1 rounded hover:bg-gray-100"
@@ -486,7 +486,7 @@ export default function CalendarView() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-tulipe-green">
+              <h3 className="font-semibold text-tulipe-forest">
                 Bloquer des dates
               </h3>
               <button
@@ -505,7 +505,7 @@ export default function CalendarView() {
                   type="date"
                   value={blockStart}
                   onChange={(e) => setBlockStart(e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green/30"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest/30"
                 />
               </div>
               <div>
@@ -517,7 +517,7 @@ export default function CalendarView() {
                   value={blockEnd}
                   onChange={(e) => setBlockEnd(e.target.value)}
                   min={blockStart}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green/30"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest/30"
                 />
               </div>
               <div>
@@ -529,7 +529,7 @@ export default function CalendarView() {
                   value={blockReason}
                   onChange={(e) => setBlockReason(e.target.value)}
                   placeholder="Ex : travaux, usage personnel…"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-green/30"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-tulipe-forest/30"
                 />
               </div>
               <button

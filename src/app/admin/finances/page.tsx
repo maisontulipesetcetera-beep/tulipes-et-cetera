@@ -98,7 +98,7 @@ export default function FinancesPage() {
   if (loading) {
     return (
       <div className="flex justify-center py-24">
-        <Loader2 className="animate-spin text-tulipe-green" size={32} />
+        <Loader2 className="animate-spin text-tulipe-forest" size={32} />
       </div>
     );
   }
@@ -123,7 +123,7 @@ export default function FinancesPage() {
     <div className="space-y-6 max-w-6xl mx-auto">
       {/* En-tête */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-sm">
-        <h1 className="text-3xl font-heading font-bold text-tulipe-green">
+        <h1 className="text-3xl font-heading font-bold text-tulipe-blue">
           💰 Finances
         </h1>
       </div>
@@ -135,7 +135,7 @@ export default function FinancesPage() {
             <Euro size={20} className="text-green-700" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-tulipe-green">
+            <p className="text-2xl font-bold text-tulipe-forest">
               {formatEuros(totalRevenue)}
             </p>
             <p className="text-sm text-gray-500 mt-1">Revenus (12 mois)</p>
@@ -146,7 +146,7 @@ export default function FinancesPage() {
             <TrendingUp size={20} className="text-blue-700" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-tulipe-green">
+            <p className="text-2xl font-bold text-tulipe-forest">
               {avgOccupancy}%
             </p>
             <p className="text-sm text-gray-500 mt-1">
@@ -159,7 +159,7 @@ export default function FinancesPage() {
             <Calendar size={20} className="text-amber-700" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-tulipe-green">
+            <p className="text-2xl font-bold text-tulipe-forest">
               {data.payments.length}
             </p>
             <p className="text-sm text-gray-500 mt-1">Réservations (12 mois)</p>
@@ -170,7 +170,7 @@ export default function FinancesPage() {
             <CreditCard size={20} className="text-red-700" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-tulipe-green">
+            <p className="text-2xl font-bold text-tulipe-forest">
               {pendingCount}
             </p>
             <p className="text-sm text-gray-500 mt-1">Paiements en attente</p>
@@ -268,7 +268,7 @@ export default function FinancesPage() {
                       key={payment.id}
                       className="hover:bg-gray-50 transition-colors"
                     >
-                      <td className="px-4 py-3 font-medium text-tulipe-green">
+                      <td className="px-4 py-3 font-medium text-tulipe-forest">
                         {payment.guestName}
                       </td>
                       <td className="px-4 py-3 text-gray-500 hidden md:table-cell">
@@ -277,7 +277,7 @@ export default function FinancesPage() {
                       <td className="px-4 py-3 text-gray-500 hidden md:table-cell">
                         {formatDate(payment.checkOut)}
                       </td>
-                      <td className="px-4 py-3 text-right font-semibold text-tulipe-green">
+                      <td className="px-4 py-3 text-right font-semibold text-tulipe-forest">
                         {formatEuros(payment.total)}
                       </td>
                       <td className="px-4 py-3 text-right text-gray-500 hidden sm:table-cell">

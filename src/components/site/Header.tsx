@@ -79,7 +79,7 @@ export default function Header({ lang }: HeaderProps) {
             />
             <span
               className={`font-heading text-lg hidden sm:block leading-tight transition-colors duration-300 ${
-                scrolled ? "text-tulipe-green" : "text-white"
+                scrolled ? "text-tulipe-blue" : "text-white"
               }`}
             >
               Tulipes
@@ -99,10 +99,10 @@ export default function Header({ lang }: HeaderProps) {
                 className={`px-2 xl:px-3 py-1.5 text-sm font-body rounded transition-colors whitespace-nowrap ${
                   isActive(navHrefs[key])
                     ? scrolled
-                      ? "text-tulipe-green font-semibold border-b-2 border-tulipe-green"
+                      ? "text-tulipe-forest font-semibold border-b-2 border-tulipe-forest"
                       : "text-white font-semibold border-b-2 border-white"
                     : scrolled
-                      ? "text-gray-700 hover:text-tulipe-green"
+                      ? "text-gray-700 hover:text-tulipe-forest"
                       : "text-white/90 hover:text-white"
                 }`}
               >
@@ -117,7 +117,7 @@ export default function Header({ lang }: HeaderProps) {
             <button
               className={`lg:hidden p-2 rounded-md transition-colors ${
                 scrolled
-                  ? "text-tulipe-green hover:bg-tulipe-beige"
+                  ? "text-tulipe-forest hover:bg-tulipe-beige"
                   : "text-white hover:bg-white/20"
               }`}
               onClick={() => setMobileOpen((v) => !v)}
@@ -139,8 +139,8 @@ export default function Header({ lang }: HeaderProps) {
               href={`/${lang}${navHrefs[key] === "/" ? "" : navHrefs[key]}`}
               className={`px-3 py-2.5 rounded text-sm font-body transition-colors ${
                 isActive(navHrefs[key])
-                  ? "text-tulipe-green font-semibold bg-tulipe-beige"
-                  : "text-gray-700 hover:text-tulipe-green hover:bg-tulipe-beige"
+                  ? "text-tulipe-forest font-semibold bg-tulipe-beige"
+                  : "text-gray-700 hover:text-tulipe-forest hover:bg-tulipe-beige"
               }`}
               onClick={() => setMobileOpen(false)}
             >
