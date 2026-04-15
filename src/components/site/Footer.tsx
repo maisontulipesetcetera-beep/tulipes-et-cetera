@@ -40,10 +40,10 @@ export default function Footer({ lang }: FooterProps) {
               Alsace, France
             </p>
             <p className="text-sm text-white/80 font-body">
-              📞 +33 (0)3 XX XX XX XX
+              📞 06 86 43 65 78
             </p>
             <p className="text-sm text-white/80 font-body">
-              ✉️ contact@tulipes-et-cetera.fr
+              ✉️ maison.tulipes.etcetera@gmail.com
             </p>
           </div>
 

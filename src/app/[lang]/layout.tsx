@@ -63,7 +63,7 @@ const schemaOrgLodgingBusiness = {
     latitude: 47.4589,
     longitude: 7.3186,
   },
-  telephone: "+33389400290",
+  telephone: "+33686436578",
   priceRange: "€€",
   starRating: { "@type": "Rating", ratingValue: "3" },
   aggregateRating: {

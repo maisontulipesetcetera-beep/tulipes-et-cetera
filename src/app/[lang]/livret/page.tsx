@@ -166,10 +166,10 @@ export default async function LivretPage() {
               {t("help_title")}
             </p>
             <a
-              href="tel:+33389400290"
+              href="tel:+33686436578"
               className="font-body font-semibold text-tulipe-forest text-lg hover:underline"
             >
-              +33 3 89 40 02 90
+              06 86 43 65 78
             </a>
             <p className="font-body text-xs text-gray-400">{t("help_hours")}</p>
           </div>

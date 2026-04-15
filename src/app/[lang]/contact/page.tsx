@@ -9,17 +9,17 @@ const metaByLocale: Record<Locale, { title: string; description: string }> = {
   fr: {
     title: "Contact — Tulipes Et Cetera",
     description:
-      "2 Rue des Tulipes, 68640 Waldighoffen. Tél: +33 3 89 40 02 90",
+      "2 Rue des Tulipes, 68640 Waldighoffen. Tél: 06 86 43 65 78",
   },
   de: {
     title: "Kontakt — Tulipes Et Cetera",
     description:
-      "2 Rue des Tulipes, 68640 Waldighoffen. Tel: +33 3 89 40 02 90",
+      "2 Rue des Tulipes, 68640 Waldighoffen. Tel: 06 86 43 65 78",
   },
   en: {
     title: "Contact — Tulipes Et Cetera",
     description:
-      "2 Rue des Tulipes, 68640 Waldighoffen. Tel: +33 3 89 40 02 90",
+      "2 Rue des Tulipes, 68640 Waldighoffen. Tel: 06 86 43 65 78",
   },
 };
 
@@ -117,19 +117,19 @@ export default async function ContactPage({
                 <p className="flex items-center gap-3">
                   <span className="text-tulipe-forest text-base">📞</span>
                   <a
-                    href="tel:+33389400290"
+                    href="tel:+33686436578"
                     className="hover:text-tulipe-forest transition-colors"
                   >
-                    +33 3 89 40 02 90
+                    06 86 43 65 78
                   </a>
                 </p>
                 <p className="flex items-center gap-3">
                   <span className="text-tulipe-forest text-base">✉️</span>
                   <a
-                    href="mailto:contact@tulipes-et-cetera.fr"
+                    href="mailto:maison.tulipes.etcetera@gmail.com"
                     className="hover:text-tulipe-forest transition-colors"
                   >
-                    contact@tulipes-et-cetera.fr
+                    maison.tulipes.etcetera@gmail.com
                   </a>
                 </p>
                 <p className="flex items-center gap-3">

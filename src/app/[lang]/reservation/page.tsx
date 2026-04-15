@@ -168,10 +168,10 @@ export default async function ReservationPage({
             </Link>{" "}
             {t("contact_or")}{" "}
             <a
-              href="tel:+33389400290"
+              href="tel:+33686436578"
               className="text-tulipe-forest underline hover:text-tulipe-forest transition-colors"
             >
-              +33 3 89 40 02 90
+              06 86 43 65 78
             </a>
           </p>
         </div>

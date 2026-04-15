@@ -32,9 +32,9 @@ export default async function MentionsLegalesPage({
               <br />
               2 Rue des Tulipes, 68640 Waldighoffen, France
               <br />
-              Téléphone : +33 3 89 40 02 90
+              Téléphone : 06 86 43 65 78
               <br />
-              E-mail : contact@tulipes-et-cetera.fr
+              E-mail : maison.tulipes.etcetera@gmail.com
             </p>
           </div>
 
@@ -79,10 +79,10 @@ export default async function MentionsLegalesPage({
             <p className="leading-relaxed">
               {t("rgpd_text3")}{" "}
               <a
-                href="mailto:contact@tulipes-et-cetera.fr"
+                href="mailto:maison.tulipes.etcetera@gmail.com"
                 className="text-tulipe-forest hover:underline"
               >
-                contact@tulipes-et-cetera.fr
+                maison.tulipes.etcetera@gmail.com
               </a>
             </p>
           </div>
