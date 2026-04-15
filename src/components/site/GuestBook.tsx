@@ -532,6 +532,18 @@ export default function GuestBook() {
           ← Précédent
         </button>
 
+        {/* Bouton accès direct au formulaire */}
+        {currentPage !== lastPage && (
+          <button
+            onClick={() => {
+              if (!isAnimating) setCurrentPage(lastPage);
+            }}
+            className="px-4 py-2 rounded bg-tulipe-gold hover:bg-tulipe-gold-light text-white text-sm font-semibold transition-all cursor-pointer"
+          >
+            ✍️ Laisser un message
+          </button>
+        )}
+
         {/* Page indicator dots */}
         <div className="flex items-center gap-1.5">
           {Array.from({ length: totalPages }).map((_, i) => (

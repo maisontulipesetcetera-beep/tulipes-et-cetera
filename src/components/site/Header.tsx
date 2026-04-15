@@ -78,15 +78,12 @@ export default function Header({ lang }: HeaderProps) {
               priority
             />
             <span
-              className={`font-heading text-lg hidden sm:block leading-tight transition-colors duration-300 ${
-                scrolled ? "text-tulipe-blue" : "text-white"
+              className={`hidden sm:block text-xl md:text-2xl transition-colors duration-300 ${
+                scrolled ? "text-tulipe-gold" : "text-white"
               }`}
+              style={{ fontFamily: "var(--font-script)" }}
             >
-              Tulipes
-              <br />
-              <span className={scrolled ? "text-tulipe-gold" : "text-white/80"}>
-                et Cetera
-              </span>
+              Tulipes EtCetera
             </span>
           </Link>
 
