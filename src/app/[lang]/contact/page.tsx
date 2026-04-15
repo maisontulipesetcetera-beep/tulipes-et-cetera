@@ -79,7 +79,7 @@ export default function ContactPage() {
             {/* Google Maps embed */}
             <div className="rounded-2xl overflow-hidden shadow-md aspect-[4/3] w-full">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2676.5!2d7.3186!3d47.4589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDI3JzMyLjAiTiA3wrAxOScwNy4wIkU!5e0!3m2!1sfr!2sfr!4v1700000000000"
+                src="https://www.google.com/maps?q=2+Rue+des+Tulipes,+68640+Waldighoffen,+France&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
