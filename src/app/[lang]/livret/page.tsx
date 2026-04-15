@@ -1,15 +1,43 @@
+import { getTranslations } from "next-intl/server";
+
 const LIVRET_URL = "https://tulipes-et-cetera.fr/fr/livret";
 
-export default function LivretPage() {
+export default async function LivretPage() {
+  const t = await getTranslations("livret");
+
+  const equipements = [
+    t("eq1"),
+    t("eq2"),
+    t("eq3"),
+    t("eq4"),
+    t("eq5"),
+    t("eq6"),
+    t("eq7"),
+  ];
+
+  const restaurants = [t("r1"), t("r2"), t("r3")];
+
+  const activites = [t("a1"), t("a2"), t("a3"), t("a4"), t("a5")];
+
+  const urgences = [
+    { label: t("emergency_samu"), number: "15" },
+    { label: t("emergency_police"), number: "17" },
+    { label: t("emergency_pompiers"), number: "18" },
+    { label: t("emergency_eu"), number: "112" },
+  ];
+
   return (
     <>
       {/* Header sobre */}
       <section className="bg-tulipe-cream py-12 px-4 text-center border-b border-tulipe-beige">
         <h1 className="font-heading text-3xl md:text-4xl text-tulipe-blue mb-2">
-          Livret d&apos;accueil 🌷
+          {t("page_title")}
         </h1>
         <p className="font-body text-gray-500 text-sm">
-          Tulipes Et Cetera — Waldighoffen
+          <span style={{ fontFamily: "var(--font-script)" }}>
+            Tulipes Et Cetera
+          </span>{" "}
+          — Waldighoffen
         </p>
       </section>
 
@@ -18,17 +46,17 @@ export default function LivretPage() {
           {/* Wifi */}
           <div className="flex flex-col gap-3 p-6 rounded-xl bg-tulipe-cream border border-tulipe-beige">
             <h2 className="font-heading text-xl text-tulipe-blue flex items-center gap-2">
-              <span>📶</span> Connexion Wifi
+              <span>📶</span> {t("wifi_title")}
             </h2>
             <div className="font-body text-sm text-gray-700 flex flex-col gap-1.5">
               <p>
-                <strong>Réseau :</strong>{" "}
+                <strong>{t("wifi_network")} :</strong>{" "}
                 <span className="font-mono bg-white px-2 py-0.5 rounded border border-gray-200">
                   TulipesEtCetera_WiFi
                 </span>
               </p>
               <p>
-                <strong>Mot de passe :</strong>{" "}
+                <strong>{t("wifi_password")} :</strong>{" "}
                 <span className="font-mono bg-white px-2 py-0.5 rounded border border-gray-200">
                   [à compléter]
                 </span>
@@ -42,18 +70,10 @@ export default function LivretPage() {
           {/* Équipements */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-xl text-tulipe-blue flex items-center gap-2">
-              <span>🏠</span> Équipements
+              <span>🏠</span> {t("equipment_title")}
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-2">
-              {[
-                "Cuisine équipée : plaques, four, micro-ondes, réfrigérateur, cafetière",
-                "Machine à laver (lessive fournie)",
-                "TV connectée (Netflix, YouTube…) — télécommande sur le meuble",
-                "Poêle à bois — bûches disponibles dans le cellier",
-                "Baignoire balnéo — mode d'emploi affiché dans la salle de bains",
-                "Vélos disponibles dans le garage — casques inclus",
-                "Chargeur voiture électrique — prise type 2 côté jardin",
-              ].map((item) => (
+              {equipements.map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <span className="text-tulipe-forest mt-0.5 shrink-0">✓</span>
                   {item}
@@ -65,24 +85,22 @@ export default function LivretPage() {
           {/* Poubelles / tri */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-xl text-tulipe-blue flex items-center gap-2">
-              <span>♻️</span> Tri des déchets
+              <span>♻️</span> {t("waste_title")}
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-1.5">
               <li>
-                <strong className="text-yellow-600">Jaune</strong> — Emballages,
-                cartons, plastiques, métal
+                <strong className="text-yellow-600">{t("waste_yellow")}</strong>{" "}
+                — {t("waste_yellow_desc")}
               </li>
               <li>
-                <strong className="text-green-600">Vert</strong> — Verre (bacs
-                devant le portail)
+                <strong className="text-green-600">{t("waste_green")}</strong> —{" "}
+                {t("waste_green_desc")}
               </li>
               <li>
-                <strong className="text-gray-600">Gris</strong> — Ordures
-                ménagères non recyclables
+                <strong className="text-gray-600">{t("waste_grey")}</strong> —{" "}
+                {t("waste_grey_desc")}
               </li>
-              <li className="text-gray-500 mt-1">
-                Collecte : mardi matin — bacs à sortir la veille au soir
-              </li>
+              <li className="text-gray-500 mt-1">{t("waste_collection")}</li>
             </ul>
           </div>
 
@@ -92,15 +110,10 @@ export default function LivretPage() {
           {/* Numéros d'urgence */}
           <div className="flex flex-col gap-3 p-6 rounded-xl bg-red-50 border border-red-100">
             <h2 className="font-heading text-xl text-red-700 flex items-center gap-2">
-              <span>🚨</span> Numéros d&apos;urgence
+              <span>🚨</span> {t("emergency_title")}
             </h2>
             <div className="grid grid-cols-2 gap-3">
-              {[
-                { label: "SAMU", number: "15" },
-                { label: "Police", number: "17" },
-                { label: "Pompiers", number: "18" },
-                { label: "Urgences européen", number: "112" },
-              ].map((item) => (
+              {urgences.map((item) => (
                 <a
                   key={item.label}
                   href={`tel:${item.number}`}
@@ -120,14 +133,10 @@ export default function LivretPage() {
           {/* Restaurants recommandés */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-xl text-tulipe-blue flex items-center gap-2">
-              <span>🍽️</span> Restaurants recommandés
+              <span>🍽️</span> {t("restaurants_title")}
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-2">
-              {[
-                "À la Carpe Frite — Sierentz (spécialité carpe frite, 10 min)",
-                "Auberge du Sundgau — Ferrette (cuisine alsacienne traditionnelle, 15 min)",
-                "Restaurant de la Couronne — Altkirch (brasserie, 12 min)",
-              ].map((r) => (
+              {restaurants.map((r) => (
                 <li key={r} className="flex items-start gap-2">
                   <span className="text-tulipe-gold shrink-0">★</span>
                   {r}
@@ -139,16 +148,10 @@ export default function LivretPage() {
           {/* Activités */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-xl text-tulipe-blue flex items-center gap-2">
-              <span>🗺️</span> Activités à proximité
+              <span>🗺️</span> {t("activities_title")}
             </h2>
             <ul className="font-body text-sm text-gray-700 flex flex-col gap-2">
-              {[
-                "Ferrette & château — village médiéval (15 min à vélo)",
-                "Parc Animalier de Landskron — Huningue (25 min en voiture)",
-                "Bâle (Suisse) — musées, shopping, vieille ville (20 min en voiture)",
-                "Sentier des étangs du Sundgau — départ à 500m de la maison",
-                "Route des Vins d'Alsace — Guebwiller (30 min en voiture)",
-              ].map((a) => (
+              {activites.map((a) => (
                 <li key={a} className="flex items-start gap-2">
                   <span className="text-tulipe-forest shrink-0">→</span>
                   {a}
@@ -160,7 +163,7 @@ export default function LivretPage() {
           {/* Contact hôtes */}
           <div className="flex flex-col gap-2 p-6 rounded-xl bg-tulipe-cream border border-tulipe-beige text-center">
             <p className="font-heading text-lg text-tulipe-blue">
-              Une question ? Besoin d&apos;aide ?
+              {t("help_title")}
             </p>
             <a
               href="tel:+33389400290"
@@ -168,19 +171,15 @@ export default function LivretPage() {
             >
               +33 3 89 40 02 90
             </a>
-            <p className="font-body text-xs text-gray-400">
-              Nous sommes disponibles de 8h à 21h
-            </p>
+            <p className="font-body text-xs text-gray-400">{t("help_hours")}</p>
           </div>
 
           {/* QR Code — à imprimer */}
           <div className="flex flex-col gap-4 p-6 rounded-xl bg-tulipe-cream border border-tulipe-beige text-center items-center">
             <h2 className="font-heading text-xl text-tulipe-blue flex items-center gap-2">
-              <span>📲</span> Accès rapide au livret
+              <span>📲</span> {t("qr_title")}
             </h2>
-            <p className="font-body text-sm text-gray-500">
-              Scannez ce QR code pour accéder au livret depuis votre smartphone
-            </p>
+            <p className="font-body text-sm text-gray-500">{t("qr_text")}</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/api/qrcode?url=${encodeURIComponent(LIVRET_URL)}&size=220`}

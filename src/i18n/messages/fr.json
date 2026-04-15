@@ -282,6 +282,10 @@
     "form_error": "Une erreur est survenue. Veuillez réessayer.",
     "network_error": "Erreur réseau"
   },
+  "blog": {
+    "page_title": "Le Blog 🌷",
+    "page_subtitle": "Recettes, découvertes et conseils de séjour en Alsace"
+  },
   "footer": {
     "legal": "Mentions légales",
     "privacy": "Confidentialité",

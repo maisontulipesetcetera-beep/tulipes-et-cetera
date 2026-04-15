@@ -282,6 +282,10 @@
     "form_error": "An error occurred. Please try again.",
     "network_error": "Network error"
   },
+  "blog": {
+    "page_title": "The Blog 🌷",
+    "page_subtitle": "Recipes, discoveries and travel tips for Alsace"
+  },
   "footer": {
     "legal": "Legal notice",
     "privacy": "Privacy policy",

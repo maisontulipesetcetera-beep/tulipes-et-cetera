@@ -1,9 +1,18 @@
-export default function MentionsLegalesPage() {
+import { getTranslations } from "next-intl/server";
+
+export default async function MentionsLegalesPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  await params;
+  const t = await getTranslations("mentions");
+
   return (
     <>
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Mentions Légales 🌷
+          {t("page_title")}
         </h1>
       </section>
 
@@ -12,10 +21,12 @@ export default function MentionsLegalesPage() {
           {/* Éditeur */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-2xl text-tulipe-blue">
-              Éditeur du site
+              {t("editor_title")}
             </h2>
             <p className="leading-relaxed">
-              <strong>Tulipes Et Cetera</strong>
+              <strong style={{ fontFamily: "var(--font-script)" }}>
+                Tulipes Et Cetera
+              </strong>
               <br />
               Cottage de Charme
               <br />
@@ -30,7 +41,7 @@ export default function MentionsLegalesPage() {
           {/* Hébergeur */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-2xl text-tulipe-blue">
-              Hébergeur
+              {t("host_title")}
             </h2>
             <p className="leading-relaxed">
               <strong>Vercel Inc.</strong>
@@ -53,36 +64,20 @@ export default function MentionsLegalesPage() {
           {/* Propriété intellectuelle */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-2xl text-tulipe-blue">
-              Propriété intellectuelle
+              {t("ip_title")}
             </h2>
-            <p className="leading-relaxed">
-              L&apos;ensemble du contenu de ce site (textes, images,
-              photographies, illustrations) est la propriété exclusive de
-              Tulipes Et Cetera, sauf mention contraire. Toute reproduction,
-              représentation ou diffusion, en tout ou partie, est interdite sans
-              autorisation préalable écrite de l&apos;éditeur.
-            </p>
+            <p className="leading-relaxed">{t("ip_text")}</p>
           </div>
 
           {/* RGPD */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-2xl text-tulipe-blue">
-              Protection des données personnelles (RGPD)
+              {t("rgpd_title")}
             </h2>
+            <p className="leading-relaxed">{t("rgpd_text1")}</p>
+            <p className="leading-relaxed">{t("rgpd_text2")}</p>
             <p className="leading-relaxed">
-              Conformément au Règlement Général sur la Protection des Données
-              (RGPD) et à la loi Informatique et Libertés, vous disposez
-              d&apos;un droit d&apos;accès, de rectification, de suppression et
-              de portabilité de vos données personnelles.
-            </p>
-            <p className="leading-relaxed">
-              Les données collectées via les formulaires de ce site (nom,
-              e-mail, message) sont utilisées uniquement pour répondre à vos
-              demandes et ne sont pas transmises à des tiers sans votre
-              consentement.
-            </p>
-            <p className="leading-relaxed">
-              Pour exercer vos droits, contactez-nous à :{" "}
+              {t("rgpd_text3")}{" "}
               <a
                 href="mailto:contact@tulipes-et-cetera.fr"
                 className="text-tulipe-forest hover:underline"
@@ -94,46 +89,32 @@ export default function MentionsLegalesPage() {
 
           {/* Cookies */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-heading text-2xl text-tulipe-blue">Cookies</h2>
-            <p className="leading-relaxed">
-              Ce site utilise des cookies techniques nécessaires à son bon
-              fonctionnement (gestion de session, préférences de langue). Aucun
-              cookie publicitaire ou de traçage tiers n&apos;est déposé sans
-              votre consentement.
-            </p>
+            <h2 className="font-heading text-2xl text-tulipe-blue">
+              {t("cookies_title")}
+            </h2>
+            <p className="leading-relaxed">{t("cookies_text")}</p>
           </div>
 
           {/* Politique d'annulation */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-2xl text-tulipe-blue">
-              Politique d&apos;annulation
+              {t("cancel_title")}
             </h2>
             <div className="border-2 border-dashed border-tulipe-beige rounded-xl p-8 bg-white text-center">
-              <p className="text-gray-400">
-                Politique d&apos;annulation — à compléter lors de
-                l&apos;ouverture des réservations
-              </p>
+              <p className="text-gray-400">{t("cancel_placeholder")}</p>
             </div>
           </div>
 
           {/* Responsabilité */}
           <div className="flex flex-col gap-3">
             <h2 className="font-heading text-2xl text-tulipe-blue">
-              Limitation de responsabilité
+              {t("liability_title")}
             </h2>
-            <p className="leading-relaxed">
-              Tulipes Et Cetera s&apos;efforce d&apos;assurer l&apos;exactitude
-              et la mise à jour des informations diffusées sur ce site, et se
-              réserve le droit de corriger le contenu à tout moment sans
-              préavis. Tulipes Et Cetera décline toute responsabilité pour les
-              dommages directs ou indirects pouvant résulter de l&apos;accès au
-              site ou de l&apos;utilisation des informations qu&apos;il
-              contient.
-            </p>
+            <p className="leading-relaxed">{t("liability_text")}</p>
           </div>
 
           <p className="text-sm text-gray-400 border-t border-tulipe-beige pt-6">
-            Dernière mise à jour : avril 2026
+            {t("last_update")}
           </p>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 const articles = [
   {
@@ -41,16 +42,23 @@ function formatDate(dateStr: string) {
   });
 }
 
-export default function BlogPage() {
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  await params;
+  const t = await getTranslations("blog");
+
   return (
     <>
       {/* Header */}
       <section className="bg-tulipe-blue py-16 px-4 text-center">
         <h1 className="font-heading text-4xl md:text-5xl text-white mb-4">
-          Le Blog 🌷
+          {t("page_title")}
         </h1>
         <p className="font-body text-white/80 text-lg max-w-xl mx-auto">
-          Recettes, découvertes et conseils de séjour en Alsace
+          {t("page_subtitle")}
         </p>
       </section>
 

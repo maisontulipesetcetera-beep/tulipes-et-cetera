@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
-import { format } from "date-fns";
+import { format, differenceInCalendarDays } from "date-fns";
 import { fr } from "date-fns/locale";
 import BookingCalendar from "./BookingCalendar";
 import { cn } from "@/lib/utils";
@@ -20,6 +20,7 @@ type BookingFields = z.infer<typeof BookingSchema>;
 export default function BookingForm() {
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
+  const [basePrice, setBasePrice] = useState<number | null>(null);
   const [fields, setFields] = useState<BookingFields>({
     guestName: "",
     guestEmail: "",
@@ -35,6 +36,19 @@ export default function BookingForm() {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [serverError, setServerError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/prices")
+      .then((r) => r.json())
+      .then((data) => {
+        if (typeof data.basePrice === "number") {
+          setBasePrice(data.basePrice);
+        }
+      })
+      .catch(() => {
+        // fallback silently — recap won't show price
+      });
+  }, []);
 
   const handleDatesSelected = (ci: Date, co: Date) => {
     setCheckIn(ci);
@@ -138,6 +152,30 @@ export default function BookingForm() {
             {format(checkOut, "d MMM yyyy", { locale: fr })}
           </p>
         )}
+
+        {/* Price recap */}
+        {checkIn &&
+          checkOut &&
+          basePrice !== null &&
+          (() => {
+            const nights = differenceInCalendarDays(checkOut, checkIn);
+            if (nights <= 0) return null;
+            const pricePerNight = Math.round(basePrice / 100);
+            const total = nights * pricePerNight;
+            return (
+              <div className="mt-4 rounded-xl bg-tulipe-forest/10 border border-tulipe-forest/25 px-5 py-4 flex items-center justify-between gap-4">
+                <div className="font-body text-sm text-gray-700">
+                  <span className="font-semibold text-tulipe-blue">
+                    {nights} nuit{nights > 1 ? "s" : ""}
+                  </span>{" "}
+                  × {pricePerNight}€
+                </div>
+                <div className="font-heading text-xl text-tulipe-forest font-bold">
+                  {total}€ TTC
+                </div>
+              </div>
+            );
+          })()}
       </div>
 
       {/* Honeypot — hidden from real users */}

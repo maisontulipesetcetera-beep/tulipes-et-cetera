@@ -282,6 +282,10 @@
     "form_error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
     "network_error": "Netzwerkfehler"
   },
+  "blog": {
+    "page_title": "Der Blog 🌷",
+    "page_subtitle": "Rezepte, Entdeckungen und Reisetipps für das Elsass"
+  },
   "footer": {
     "legal": "Impressum",
     "privacy": "Datenschutz",
