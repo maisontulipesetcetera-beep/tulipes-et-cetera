@@ -106,6 +106,7 @@ export async function PATCH(
         const paymentUrl = checkoutSession?.url ?? "#";
         console.log("[PATCH] Sending email to", reservation.guestEmail);
 
+        // Envoyer au client
         await sendEmail({
           to: reservation.guestEmail,
           subject: "Votre réservation est confirmée — Tulipes Et Cetera",
@@ -120,11 +121,33 @@ export async function PATCH(
               </a>
             </p>
             <p><strong>Montant du séjour :</strong> ${((reservation.totalAmount ?? 0) / 100).toFixed(2)} €</p>
-            <p>Ce lien est sécurisé et vous redirigera vers notre page de paiement Stripe.</p>
-            <p>À très bientôt en Alsace !</p>
+            <p>À très bientôt en Alsace ! 🌷</p>
             <p>— L'équipe Tulipes Et Cetera</p>
           `,
+        }).catch((e) => console.error("[email client]", e?.message));
+
+        // Envoyer AUSSI à la propriétaire avec le lien de paiement
+        const settings = await db.settings.findUnique({
+          where: { id: "main" },
         });
+        if (settings?.email) {
+          await sendEmail({
+            to: settings.email,
+            subject: `Réservation confirmée — Lien de paiement pour ${reservation.guestName}`,
+            html: `
+              <h2>Réservation confirmée ✅</h2>
+              <p><strong>Client :</strong> ${reservation.guestName} (${reservation.guestEmail})</p>
+              <p><strong>Montant :</strong> ${((reservation.totalAmount ?? 0) / 100).toFixed(2)} €</p>
+              <p><strong>Lien de paiement à transmettre au client :</strong></p>
+              <p style="margin: 16px 0;">
+                <a href="${paymentUrl}" style="background:#2d6a4f;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">
+                  Lien de paiement
+                </a>
+              </p>
+              <p>Transmettez ce lien au client par email ou message. 🌷</p>
+            `,
+          }).catch((e) => console.error("[email owner]", e?.message));
+        }
       } catch (emailErr: any) {
         console.error(
           "[PATCH /api/reservations/[id]] Stripe/email error:",
