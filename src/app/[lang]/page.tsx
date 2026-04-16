@@ -50,14 +50,14 @@ export async function generateMetadata({
       title,
       description,
       url: `${BASE_URL}/${locale}`,
-      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      images: [{ url: `${BASE_URL}/images/logo.jpg` }],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`${BASE_URL}/images/hero-facade.jpg`],
+      images: [`${BASE_URL}/images/logo.jpg`],
     },
   };
 }

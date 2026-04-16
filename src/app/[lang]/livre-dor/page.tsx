@@ -46,7 +46,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${BASE_URL}/${locale}/livre-dor`,
-      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      images: [{ url: `${BASE_URL}/images/logo.jpg` }],
       type: "website",
     },
   };

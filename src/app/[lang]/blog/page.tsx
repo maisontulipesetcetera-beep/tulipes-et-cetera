@@ -7,7 +7,7 @@ const articles = [
     title: "Les incontournables du Sundgau",
     excerpt:
       "Entre étangs miroitants, villages médiévaux et cigognes, le Sundgau est une région qui se mérite. Voici notre sélection des lieux à ne manquer sous aucun prétexte lors de votre séjour à Waldighoffen.",
-    image: "/images/hero-facade.jpg",
+    image: "/images/logo.jpg",
     imageAlt: "Paysage du Sundgau alsacien",
     date: "2026-03-15",
     readTime: "5 min",

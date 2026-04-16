@@ -47,14 +47,14 @@ export async function generateMetadata({
       title,
       description,
       url: `${BASE_URL}/${locale}/decouvrir`,
-      images: [{ url: `${BASE_URL}/images/hero-facade.jpg` }],
+      images: [{ url: `${BASE_URL}/images/logo.jpg` }],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`${BASE_URL}/images/hero-facade.jpg`],
+      images: [`${BASE_URL}/images/logo.jpg`],
     },
   };
 }
@@ -63,7 +63,7 @@ const sectionsData = [
   {
     titleKey: "sundgau_title" as const,
     descKey: "sundgau_desc" as const,
-    image: "/images/hero-facade.jpg",
+    image: "/images/logo.jpg",
     imageAlt: "Paysage alsacien au coucher de soleil",
     features: ["sundgau_f1", "sundgau_f2", "sundgau_f3", "sundgau_f4"] as const,
   },
@@ -101,7 +101,7 @@ export default async function DecouvrirPage({
       {/* Hero avec overlay */}
       <section className="relative h-[50vh] min-h-[360px] flex items-end overflow-hidden">
         <Image
-          src="/images/hero-facade.jpg"
+          src="/images/logo.jpg"
           alt="Découvrir l'Alsace et le Sundgau"
           fill
           className="object-cover"

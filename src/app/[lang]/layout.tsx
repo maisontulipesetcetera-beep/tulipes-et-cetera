@@ -79,7 +79,7 @@ const schemaOrgLodgingBusiness = {
     { "@type": "LocationFeatureSpecification", name: "Garden" },
     { "@type": "LocationFeatureSpecification", name: "Free Bicycles" },
   ],
-  image: "https://tulipes-et-cetera.fr/images/hero-facade.jpg",
+  image: "https://tulipes-et-cetera.fr/images/logo.jpg",
   url: "https://tulipes-et-cetera.fr",
   availableLanguage: ["French", "German", "English"],
   checkinTime: "16:00",
