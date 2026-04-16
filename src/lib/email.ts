@@ -18,7 +18,7 @@ export async function sendEmail({
     return null;
   }
   return resend.emails.send({
-    from: "Tulipes Et Cetera <onboarding@resend.dev>",
+    from: "Tulipes Et Cetera <noreply@tulipes-etcetera.fr>",
     to,
     subject,
     html,
