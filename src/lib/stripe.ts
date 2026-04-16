@@ -32,8 +32,8 @@ export async function createCheckoutSession(reservation: {
       },
     ],
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_URL}/fr/tarifs?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_URL}/fr/tarifs?cancelled=true`,
+    success_url: `${process.env.NEXT_PUBLIC_URL || process.env.NEXTAUTH_URL || "https://tulipes-etcetera.fr"}/fr/tarifs?success=true`,
+    cancel_url: `${process.env.NEXT_PUBLIC_URL || process.env.NEXTAUTH_URL || "https://tulipes-etcetera.fr"}/fr/tarifs?cancelled=true`,
     metadata: { reservationId: reservation.id },
   });
 }
